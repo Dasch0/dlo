@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import random
 import string
 from pathlib import Path
+import json
 
 def parse_battle_report(file_path):
     with open(file_path) as fp:
@@ -43,7 +44,7 @@ def update_database_and_teams(teams_data, database, model, histogram):
         for player in players:
             player_id = player['player_id']
             steam_name = player['steam_name']
-            
+
             if player_id not in database:
                 print(f"Found new player: {steam_name} {player_id}")
                 database[player_id] = {
@@ -257,6 +258,7 @@ def simulate_games(database, model, histogram, num_games=500):
                 "player": True
             }
             histogram[p['steam_name']] = {}
+            
     
     for game_idx in range(num_games):
         teams_data, winner = generate_simulated_game(special_players, random_players)
@@ -267,7 +269,41 @@ def simulate_games(database, model, histogram, num_games=500):
             
         process_match_result(winner, updated_teams, model, database)
         update_histogram(histogram, database, game_idx)
-        
+
+def load_rank_adjustments(file_path='rank_adjustments.json'):
+    """Load manual rating adjustments from JSON file"""
+    try:
+        with open(file_path, 'r') as f:
+            adjustments = json.load(f)
+        return adjustments
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        print(f"Error: Invalid JSON in {file_path}")
+        return []
+
+def apply_manual_adjustments(model, database, adjustments):
+    """Apply manual rating adjustments to players"""
+    for adj in adjustments:
+        steam_id = adj['steam_id']
+        if steam_id in database:
+            # Preserve original rating
+            original = database[steam_id]['rating_data']
+            
+            # Create new rating with adjustment
+            adjusted_rating = model.rating(
+                mu=original.mu + adj['mu_adjustment'],
+                sigma=original.sigma
+            )
+            
+            # Update database
+            database[steam_id]['rating_data'] = adjusted_rating
+            print(f"Adjusted {adj['steam_name']} ({steam_id}): "
+                  f"μ {original.mu:.2f} → {adjusted_rating.mu:.2f} "
+                  f"({adj['mu_adjustment']:+.2f}) - {adj['reason_for_adjustment']}")
+        else:
+            print(f"Warning: Player {adj['steam_name']} ({steam_id}) not found") 
+
 def main():
     model = PlackettLuce(balance=False, limit_sigma=False)
     database = {}
@@ -285,6 +321,12 @@ def main():
         
         process_match_result(winner, updated_teams, model, database)
         update_histogram(histogram, database, index)
+
+    # Apply manual adjustments
+    adjustments = load_rank_adjustments()
+    if adjustments:
+        print("\nApplying manual adjustments:")
+        apply_manual_adjustments(model, database, adjustments)
     
     render_leaderboard(database)
 
