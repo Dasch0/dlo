@@ -8,6 +8,7 @@ import random
 import string
 from pathlib import Path
 import json
+import html
 
 def parse_battle_report(file_path):
     with open(file_path) as fp:
@@ -24,8 +25,8 @@ def parse_battle_report(file_path):
         players = []
         
         for player_element in team_element.findall('./Players/*'):
-            player_name = player_element.find('PlayerName').text
-            player_id = player_element.find('AccountId').find('Value').text
+            player_name = html.escape(player_element.find('PlayerName').text)
+            player_id = html.escape(player_element.find('AccountId').find('Value').text)
             players.append({'player_id': player_id, 'steam_name': player_name})
         
         teams_data[team_id] = players
