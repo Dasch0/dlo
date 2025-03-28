@@ -269,7 +269,7 @@ def simulate_games(database, model, histogram, num_games=500):
         update_histogram(histogram, database, game_idx)
         
 def main():
-    model = PlackettLuce(balance=False, limit_sigma=True)
+    model = PlackettLuce(balance=False, limit_sigma=False)
     database = {}
     histogram = {}
     
