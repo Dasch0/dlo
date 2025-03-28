@@ -32,7 +32,7 @@ def parse_battle_report(file_path):
     winner = root.find('WinningTeam').text
     return teams_data, winner
 
-def update_database_and_teams(teams_data, database, model, histogram, add_synthetic_players=False):
+def update_database_and_teams(teams_data, database, model, histogram):
     updated_teams = {}
     
     for team_id, players in teams_data.items():
@@ -49,30 +49,14 @@ def update_database_and_teams(teams_data, database, model, histogram, add_synthe
                 database[player_id] = {
                     "steam_name": steam_name,
                     "rating_data": model.rating(name=player_id),
-                    "player": True
+                    "player": True,
+                    "games_played": 0
                 }
                 if steam_name not in histogram:
                     histogram[steam_name] = {}
-            
+            database[player_id]['games_played'] = database[player_id]['games_played'] + 1
             team_players.append(database[player_id]['rating_data'])
             team_ids.append(player_id)
-
-        # Only add synthetic players if enabled
-        if add_synthetic_players:
-            unique_combinations = set(map(frozenset, itertools.combinations(set(team_ids), 2)))
-            
-            for combo in unique_combinations:
-                if combo not in database:
-                    names = [database[pid]['steam_name'] for pid in combo]
-                    name_string = ''.join(names)
-                    print(f"Created synthetic player: {name_string}")
-                    database[combo] = {
-                        "steam_name": name_string,
-                        "rating_data": model.rating(mu=25.0, sigma = 25.0 / 3.0, name=combo),
-                        "player": False
-                    }
-                
-                team_players.append(database[combo]['rating_data'])
         
         updated_teams[team_id] = team_players
     
@@ -109,9 +93,10 @@ def render_leaderboard(database, output_html=True):
     
     print("\nLEADERBOARD:")
     for p in leaderboard:
-        print(f"{p['steam_name']:20} mu = {p['rating_data'].mu:6.2f} "
-              f"sigma = {p['rating_data'].sigma:6.2f} "
-              f"ordinal = {p['rating_data'].ordinal():6.2f}")
+        print(f"{p['steam_name']:20} DLO = {p['rating_data'].ordinal():6.2f} "
+                f"games_played = {p['games_played']} "
+              f"mu = {p['rating_data'].mu:6.2f} "
+              f"sigma = {p['rating_data'].sigma:6.2f}")
 
     if output_html:
         html_content = f'''
@@ -162,14 +147,15 @@ def render_leaderboard(database, output_html=True):
             <tr>
                 <th>Rank</th>
                 <th>Player</th>
+                <th>DLO</th>
+                <th>Games Played</th>
                 <th>Mu (μ)</th>
                 <th>Sigma (σ)</th>
-                <th>DLO</th>
             </tr>
         </thead>
         <tbody>
             {"".join(
-                f'<tr><td>{i+1}</td><td>{p["steam_name"]}</td><td>{p["rating_data"].mu:0.2f}</td><td>{p["rating_data"].sigma:0.2f}</td><td>{p["rating_data"].ordinal():0.2f}</td></tr>'
+                f'<tr><td>{i+1}</td><td>{p["steam_name"]}</td><td>{p["rating_data"].ordinal():0.2f}</td><td>{p["games_played"]}</td><td>{p["rating_data"].mu:0.2f}</td><td>{p["rating_data"].sigma:0.2f}</td></tr>'
                 for i, p in enumerate(leaderboard)
             )}
         </tbody>
