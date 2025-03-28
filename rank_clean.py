@@ -154,6 +154,7 @@ def render_leaderboard(database, output_html=True):
     <div class="header">
         <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
+        <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
     </div>
     
     <table>
