@@ -133,7 +133,6 @@ def render_leaderboard(database, output_html=True):
             margin-bottom: 1rem;
             padding-bottom: 1rem;
         }}
-        <img src="dlo.webp" alt="Logo" width="150">
         table {{
             width: 100%;
             border-collapse: collapse;
@@ -153,7 +152,7 @@ def render_leaderboard(database, output_html=True):
 </head>
 <body>
     <div class="header">
-        <div class="logo">DLO</div>
+        <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
     </div>
     
