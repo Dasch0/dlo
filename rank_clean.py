@@ -164,7 +164,7 @@ def render_leaderboard(database, output_html=True):
                 <th>Player</th>
                 <th>Mu (μ)</th>
                 <th>Sigma (σ)</th>
-                <th>Ordinal</th>
+                <th>DLO</th>
             </tr>
         </thead>
         <tbody>
