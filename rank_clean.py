@@ -229,12 +229,12 @@ def render_leaderboard(
 </head>
 <body>
     <div class="header">
-        <img src="../dlo.webp" alt="Logo" width="150">
+        <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
         <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
     </div>
     
-    <table>
+//    <table>
         <thead>
             <tr>
                 <th>Rank</th>
@@ -468,6 +468,7 @@ def apply_manual_adjustments(
             original = database[steam_id]['rating_data']
             
             adjusted_rating = model.rating(
+                name = original.name,
                 mu=original.mu + adj['mu_adjustment'],
                 sigma=original.sigma
             )
