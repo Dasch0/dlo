@@ -1,4 +1,5 @@
 from openskill.models import PlackettLuce
+import os
 import xml.etree.ElementTree as ET
 import glob
 import itertools
@@ -310,7 +311,8 @@ def main():
     database = {}
     histogram = {}
     
-    battle_reports = glob.glob("/srv/BattleReports/*.xml")
+    battle_reports = sorted(Path("/srv/BattleReports").iterdir(), key=os.path.getmtime)
+    print(battle_reports)
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
         teams_data, winner = parse_battle_report(file)
