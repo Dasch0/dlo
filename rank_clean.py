@@ -234,7 +234,7 @@ def render_leaderboard(
         <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
     </div>
     
-//    <table>
+    <table>
         <thead>
             <tr>
                 <th>Rank</th>
