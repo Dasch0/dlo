@@ -1,4 +1,6 @@
-from openskill.models import PlackettLuce
+from openskill.models import PlackettLuce, PlackettLuceRating
+from typing import TypedDict, Any, Dict, List, Tuple, Optional
+from datetime import datetime
 import os
 import xml.etree.ElementTree as ET
 import glob
@@ -11,7 +13,22 @@ from pathlib import Path
 import json
 import html
 
-def parse_battle_report(file_path):
+# Define type aliases and custom types
+class PlayerInfo(TypedDict):
+    player_id: str
+    steam_name: str
+
+class PlayerData(TypedDict):
+    steam_name: str
+    rating_data: PlackettLuceRating
+    player: bool
+    games_played: int
+    wins: int
+    history: List[Tuple[datetime, float]]  # Track (timestamp, ordinal) for each game
+
+HistogramType = Dict[str, Dict[int, float]]
+
+def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], str]:
     with open(file_path) as fp:
         xml_string = fp.read()
         last_gt_index = xml_string.rfind('>')
@@ -19,30 +36,41 @@ def parse_battle_report(file_path):
             xml_string = xml_string[:last_gt_index + 1]
         tree = ET.ElementTree(ET.fromstring(xml_string))
     root = tree.getroot()
-    teams_data = {}
+    teams_data: Dict[str, List[PlayerInfo]] = {}
     
     for team_element in root.findall('./Teams/*'):
-        team_id = team_element.find('TeamID').text
-        players = []
+        team_id_element = team_element.find('TeamID')
+        team_id = team_id_element.text if team_id_element is not None else ''
+        players: List[PlayerInfo] = []
         
         for player_element in team_element.findall('./Players/*'):
-            player_name = html.escape(player_element.find('PlayerName').text)
-            player_id = html.escape(player_element.find('AccountId').find('Value').text)
-            players.append({'player_id': player_id, 'steam_name': player_name})
+            player_name_element = player_element.find('PlayerName')
+            account_id_element = player_element.find('AccountId/Value')
+            
+            player_name = html.escape(player_name_element.text) if player_name_element is not None else ''
+            player_id = html.escape(account_id_element.text) if account_id_element is not None else ''
+            
+            players.append({
+                'player_id': player_id,
+                'steam_name': player_name
+            })
         
         teams_data[team_id] = players
     
-    winner = root.find('WinningTeam').text
+    winner_element = root.find('WinningTeam')
+    winner = winner_element.text if winner_element is not None else ''
     return teams_data, winner
 
-def update_database_and_teams(teams_data, database, model, histogram):
-    updated_teams = {}
+def update_database_and_teams(
+    teams_data: Dict[str, List[PlayerInfo]],
+    database: Dict[str, PlayerData],
+    model: PlackettLuce,
+) -> Dict[str, List[PlackettLuceRating]]:
+    updated_teams: Dict[str, List[PlackettLuceRating]] = {}
     
     for team_id, players in teams_data.items():
-        team_players = []
-        team_ids = []
+        team_players: List[PlackettLuceRating] = []
         
-        # Process real players
         for player in players:
             player_id = player['player_id']
             steam_name = player['steam_name']
@@ -53,19 +81,24 @@ def update_database_and_teams(teams_data, database, model, histogram):
                     "steam_name": steam_name,
                     "rating_data": model.rating(name=player_id),
                     "player": True,
-                    "games_played": 0
+                    "games_played": 0,
+                    "wins": 0,
+                    "history": []  # Initialize empty history
                 }
-                if steam_name not in histogram:
-                    histogram[steam_name] = {}
-            database[player_id]['games_played'] = database[player_id]['games_played'] + 1
+            database[player_id]['games_played'] += 1
             team_players.append(database[player_id]['rating_data'])
-            team_ids.append(player_id)
         
         updated_teams[team_id] = team_players
     
     return updated_teams
 
-def process_match_result(winner, updated_teams, model, database):
+def process_match_result(
+    winner: str,
+    updated_teams: Dict[str, List[PlackettLuceRating]],
+    model: PlackettLuce,
+    database: Dict[str, PlayerData],
+    game_time: datetime
+) -> None:
     teams = updated_teams.copy()
     
     try:
@@ -75,20 +108,44 @@ def process_match_result(winner, updated_teams, model, database):
         print("Invalid team structure for match processing")
         return
 
+    all_participants = []
+    for player_rating in winner_team + other_team:
+        player_id = player_rating.name
+        database[player_id]['history'].append((
+            game_time,
+            database[player_id]['rating_data'].ordinal()
+        ))
+        all_participants.append(player_id)
+
     rated_teams = model.rate([winner_team, other_team])
     
     for team in rated_teams:
         for player in team:
-            database[player.name]['rating_data'] = player
+            player_id = player.name
+            database[player_id]['rating_data'] = player
+            database[player_id]['history'][-1] = (
+                game_time,
+                player.ordinal()
+            )
 
-def update_histogram(histogram, database, game_index):
+    for player_rating in winner_team:
+        player_id = player_rating.name
+        database[player_id]['wins'] += 1
+
+def update_histogram(
+    histogram: HistogramType,
+    database: Dict[str, PlayerData],
+    game_index: int
+) -> None:
     for player_id, data in database.items():
         if data['player']:
-            steam_name = data['steam_name']
-            histogram[steam_name][game_index] = data['rating_data'].ordinal()
+            # Changed to use player_id as key
+            histogram[player_id][game_index] = data['rating_data'].ordinal()
 
-# Modified render function
-def render_leaderboard(database, output_html=True):
+def render_leaderboard(
+    database: Dict[str, PlayerData],
+    output_html: bool = True
+) -> None:
     """Display sorted leaderboard and generate static HTML"""
     leaderboard = sorted(database.values(), 
                         key=lambda d: d["rating_data"].ordinal(), 
@@ -97,11 +154,17 @@ def render_leaderboard(database, output_html=True):
     print("\nLEADERBOARD:")
     for p in leaderboard:
         print(f"{p['steam_name']:20} DLO = {p['rating_data'].ordinal():6.2f} "
-                f"games_played = {p['games_played']} "
-              f"mu = {p['rating_data'].mu:6.2f} "
-              f"sigma = {p['rating_data'].sigma:6.2f}")
+              f"Matches: {p['games_played']}")
 
     if output_html:
+        player_dir = Path('docs/player')
+        player_dir.mkdir(exist_ok=True, parents=True)
+        
+        # Generate individual player pages
+        for player_id, data in database.items():
+            render_player_page(player_id, data)        
+
+        # Main leaderboard HTML
         html_content = f'''
 <!DOCTYPE html>
 <html lang="en">
@@ -136,11 +199,13 @@ def render_leaderboard(database, output_html=True):
         tr:nth-child(even) {{
             background-color: #f9f9f9;
         }}
+        a {{ color: #0066cc; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="dlo.webp" alt="Logo" width="150">
+        <img src="../dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
         <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
     </div>
@@ -151,14 +216,15 @@ def render_leaderboard(database, output_html=True):
                 <th>Rank</th>
                 <th>Player</th>
                 <th>DLO</th>
-                <th>Games Played</th>
-                <th>Mu (μ)</th>
-                <th>Sigma (σ)</th>
+                <th>Matches Played</th>
             </tr>
         </thead>
         <tbody>
             {"".join(
-                f'<tr><td>{i+1}</td><td>{p["steam_name"]}</td><td>{p["rating_data"].ordinal():0.2f}</td><td>{p["games_played"]}</td><td>{p["rating_data"].mu:0.2f}</td><td>{p["rating_data"].sigma:0.2f}</td></tr>'
+                f'<tr><td>{i+1}</td>'
+                f'<td><a href="player/{p["rating_data"].name}.html">{p["steam_name"]}</a></td>'
+                f'<td>{p["rating_data"].ordinal():0.2f}</td>'
+                f'<td>{p["games_played"]}</td></tr>'
                 for i, p in enumerate(leaderboard)
             )}
         </tbody>
@@ -168,111 +234,146 @@ def render_leaderboard(database, output_html=True):
         '''
 
         output_path = Path('docs/index.html')
-        output_path.parent.mkdir(exist_ok=True, parents=True)
         output_path.write_text(html_content)
         print(f"\nGenerated static site at: {output_path.absolute()}")
 
-def plot_histogram(histogram):
-    df = pd.DataFrame(histogram)
-    plt.figure(figsize=(12, 6))
-    df.plot(kind='line')
-    plt.title('Ordinals over games played Balance = False')
-    plt.xlabel('Games')
-    plt.ylabel('Ordinal')
-    plt.grid(True)
-    plt.legend(bbox_to_anchor=(1.0, 1), loc='upper left')
-    plt.show()
-
-def generate_random_players(num_players):
-    players = []
-    for _ in range(num_players):
-        player_id = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
-        steam_name = ''.join(random.choices(string.ascii_uppercase, k=8))
-        players.append({'player_id': player_id, 'steam_name': steam_name})
-    return players
-
-def create_special_players(num = 4):
-    return [
-        {'player_id': f'special_{i}', 'steam_name': f'Special_{i}'}
-        for i in range(num)
-    ]
-
-def generate_simulated_game(special_players, random_players, stack_rate=0.8, special_win_prob=.95):
-    random_player_selection = random.sample(random_players, 8)
-    special_player_selection = random.sample(special_players, 8)
-    if random.random() < stack_rate:
-        special_team = {
-            'team_id': 'TeamA',
-            'players': special_player_selection[0:4]
-        }
-        teamA_giga = True
-    else:
-        special_team = {
-            'team_id': 'TeamA',
-            'players': random_player_selection[0:4]
-        }
-        teamA_giga = False
-        
-    if random.random() < stack_rate:
-        opponent_team = {
-            'team_id': 'TeamB',
-            'players': random_player_selection[4:8] 
-        }
-        teamB_giga = False
-    else:
-        opponent_team = {
-            'team_id': 'TeamB',
-            'players': special_player_selection[4:8] 
-        }
-        teamB_giga = True
-
-    print("DEBUG_______")
-    print(len(special_team['players']))
-    print(len(opponent_team['players']))
-
-    if teamA_giga and teamB_giga:
-        winrate = 0.5
-    elif teamA_giga and not teamB_giga:
-        winrate = 0.8
-    elif not teamA_giga and teamB_giga:
-        winrate = 0.2
-    else:
-        winrate = 0.5
+def render_player_page(
+    player_id: str,
+    player_data: PlayerData
+) -> None:
+    """Generate individual player page with stats and history graph"""
+    img_dir = Path('docs/player/images')
+    img_dir.mkdir(exist_ok=True, parents=True)
     
-    winner = special_team['team_id'] if random.random() < winrate else opponent_team['team_id']
+    # Generate DLO history plot
+    plot_path = img_dir / f'{player_id}_history.webp'
+    generate_dlo_plot(player_data, plot_path)
     
-    teams_data = {
-        special_team['team_id']: special_team['players'],
-        opponent_team['team_id']: opponent_team['players']
+    # Calculate stats
+    total_games = player_data['games_played']
+    losses = total_games - player_data['wins']
+    win_rate = player_data['wins'] / total_games if total_games > 0 else 0
+    
+    html_content = f'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{player_data['steam_name']} - Player Stats</title>
+    <style>
+        body {{ 
+            font-family: monospace;
+            margin: 2rem;
+            background-color: white;
+            color: black;
+        }}
+        .header {{
+            border-bottom: 2px solid black;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }}
+        .stats-table {{
+            margin: 2rem 0;
+            border-collapse: collapse;
+            width: 100%;
+        }}
+        .stats-table td, .stats-table th {{
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+        }}
+        .stats-table th {{
+            background-color: #f5f5f5;
+            width: 30%;
+        }}
+        img {{
+            max-width: 800px;
+            margin: 2rem 0;
+        }}
+        a {{ color: #0066cc; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../dlo.webp" alt="Logo" width="150">
+        <h1>{player_data['steam_name']} - Player Statistics</h1>
+        <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
+        | <a href="../index.html">Back to Leaderboard</a>
+    </div>
+
+    <table class="stats-table">
+        <tr>
+            <th>Steam Name</th>
+            <td>{player_data['steam_name']}</td>
+        </tr>
+        <tr>
+            <th>Player ID</th>
+            <td>{player_id}</td>
+        </tr>
+        <tr>
+            <th>Wins/Losses</th>
+            <td>{player_data['wins']} / {losses} ({win_rate:.1%})</td>
+        </tr>
+        <tr>
+            <th>Current DLO</th>
+            <td>{player_data['rating_data'].ordinal():.2f}</td>
+        </tr>
+        <tr>
+            <th>Mu (μ)</th>
+            <td>{player_data['rating_data'].mu:.2f}</td>
+        </tr>
+        <tr>
+            <th>Sigma (σ)</th>
+            <td>{player_data['rating_data'].sigma:.2f}</td>
+        </tr>
+    </table>
+
+    <h2>DLO History</h2>
+    <img src="images/{player_id}_history.webp" alt="DLO history graph">
+</body>
+</html>
+    '''
+
+    output_path = Path(f'docs/player/{player_id}.html')
+    output_path.write_text(html_content)
+
+def generate_dlo_plot(
+    player_data: PlayerData,
+    output_path: Path
+) -> None:
+    """Generate and save DLO history plot for a player with optimized compression"""
+    history = player_data['history']
+    if not history:
+        return
+
+    plt.figure(figsize=(10, 5), dpi=80)  # Smaller dimensions and lower DPI
+    plt.rcParams['savefig.facecolor'] = 'white'  # Remove transparent background
+    
+    # Unzip timestamps and values
+    times, ordinals = zip(*sorted(history, key=lambda x: x[0]))
+    
+    plt.plot(times, ordinals, marker='o', linestyle='-', markersize=4)
+    plt.title(f'DLO Rating History - {player_data["steam_name"]}')
+    plt.xlabel('Date')
+    plt.ylabel('DLO Rating')
+    plt.grid(True, alpha=0.5)  # Lighter grid lines
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    # Save with optimized JPEG settings (can also use WebP for better compression)
+    save_kwargs = {
+        'dpi': 80,
+        'format': 'webp'
     }
     
-    return teams_data, winner
-
-def simulate_games(database, model, histogram, num_games=500):
-    special_players = create_special_players(16)
-    random_players = generate_random_players(50)
+    output_path = output_path.with_suffix('.webp')
+    save_kwargs['format'] = 'webp'
     
-    for p in special_players:
-        if p['player_id'] not in database:
-            database[p['player_id']] = {
-                "steam_name": p['steam_name'],
-                "rating_data": model.rating(name=p['player_id']),
-                "player": True
-            }
-            histogram[p['steam_name']] = {}
-            
-    
-    for game_idx in range(num_games):
-        teams_data, winner = generate_simulated_game(special_players, random_players)
-        updated_teams = update_database_and_teams(teams_data, database, model, histogram)
-        
-        if winner not in updated_teams:
-            continue  # Skip invalid games
-            
-        process_match_result(winner, updated_teams, model, database)
-        update_histogram(histogram, database, game_idx)
+    plt.savefig(output_path, **save_kwargs)
+    plt.close()
 
-def load_rank_adjustments(file_path='rank_adjustments.json'):
+def load_rank_adjustments(file_path: str = 'rank_adjustments.json') -> List[Dict[str, Any]]:
     """Load manual rating adjustments from JSON file"""
     try:
         with open(file_path, 'r') as f:
@@ -284,7 +385,11 @@ def load_rank_adjustments(file_path='rank_adjustments.json'):
         print(f"Error: Invalid JSON in {file_path}")
         return []
 
-def apply_manual_adjustments(model, database, adjustments):
+def apply_manual_adjustments(
+    model: PlackettLuce,
+    database: Dict[str, PlayerData],
+    adjustments: List[Dict[str, Any]]
+) -> None:
     """Apply manual rating adjustments to players"""
     for adj in adjustments:
         steam_id = adj['steam_id']
@@ -304,26 +409,27 @@ def apply_manual_adjustments(model, database, adjustments):
                   f"μ {original.mu:.2f} → {adjusted_rating.mu:.2f} "
                   f"({adj['mu_adjustment']:+.2f}) - {adj['reason_for_adjustment']}")
         else:
-            print(f"Warning: Player {adj['steam_name']} ({steam_id}) not found") 
+            print(f"Warning: Player {adj['steam_name']} ({steam_id}) not found")
 
-def main():
-    model = PlackettLuce(balance=False, limit_sigma=False)
-    database = {}
-    histogram = {}
+def main() -> None:
+    model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
+    database: Dict[str, PlayerData] = {}
     
     battle_reports = sorted(Path("/srv/BattleReports").iterdir(), key=os.path.getmtime)
     print(battle_reports)
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
+        # Get match timestamp from file creation time
+        game_time = datetime.fromtimestamp(file.stat().st_ctime)
+        
         teams_data, winner = parse_battle_report(file)
-        updated_teams = update_database_and_teams(teams_data, database, model, histogram)
+        updated_teams = update_database_and_teams(teams_data, database, model)
         
         if winner not in updated_teams:
             print(f"ERROR: No valid winner in {file}")
             continue
         
-        process_match_result(winner, updated_teams, model, database)
-        update_histogram(histogram, database, index)
+        process_match_result(winner, updated_teams, model, database, game_time)
 
     # Apply manual adjustments
     adjustments = load_rank_adjustments()
