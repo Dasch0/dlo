@@ -18,7 +18,6 @@ class PlayerInfo(TypedDict):
     player_id: str
     steam_name: str
 
-# Add to PlayerData TypedDict
 class PlayerData(TypedDict):
     steam_name: str
     rating_data: PlackettLuceRating
@@ -294,16 +293,13 @@ def render_player_page(
     img_dir = Path('docs/player/images')
     img_dir.mkdir(exist_ok=True, parents=True)
     
-    # Generate DLO history plot
     plot_path = img_dir / f'{player_id}_history.webp'
     generate_dlo_plot(player_data, plot_path)
     
-    # Calculate stats
     total_games = player_data['games_played']
     losses = total_games - player_data['wins']
     win_rate = player_data['wins'] / total_games if total_games > 0 else 0
 
-    # Calculate best friends
     best_friends = get_best_friends(player_data, database)
     best_friends_html = []
     for idx, friend in enumerate(best_friends, 1):
@@ -427,7 +423,6 @@ def generate_dlo_plot(
     plt.figure(figsize=(10, 5), dpi=80)  # Smaller dimensions and lower DPI
     plt.rcParams['savefig.facecolor'] = 'white'  # Remove transparent background
     
-    # Unzip timestamps and values
     times, ordinals = zip(*sorted(history, key=lambda x: x[0]))
     
     plt.plot(times, ordinals, marker='o', linestyle='-', markersize=4)
@@ -438,7 +433,6 @@ def generate_dlo_plot(
     plt.xticks(rotation=45)
     plt.tight_layout()
     
-    # Save with optimized JPEG settings (can also use WebP for better compression)
     save_kwargs = {
         'dpi': 80,
         'format': 'webp'
@@ -471,16 +465,13 @@ def apply_manual_adjustments(
     for adj in adjustments:
         steam_id = adj['steam_id']
         if steam_id in database:
-            # Preserve original rating
             original = database[steam_id]['rating_data']
             
-            # Create new rating with adjustment
             adjusted_rating = model.rating(
                 mu=original.mu + adj['mu_adjustment'],
                 sigma=original.sigma
             )
             
-            # Update database
             database[steam_id]['rating_data'] = adjusted_rating
             print(f"Adjusted {adj['steam_name']} ({steam_id}): "
                   f"μ {original.mu:.2f} → {adjusted_rating.mu:.2f} "
