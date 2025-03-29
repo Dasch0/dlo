@@ -18,13 +18,15 @@ class PlayerInfo(TypedDict):
     player_id: str
     steam_name: str
 
+# Add to PlayerData TypedDict
 class PlayerData(TypedDict):
     steam_name: str
     rating_data: PlackettLuceRating
     player: bool
     games_played: int
     wins: int
-    history: List[Tuple[datetime, float]]  # Track (timestamp, ordinal) for each game
+    history: List[Tuple[datetime, float]]
+    teammates: Dict[str, Dict[str, int]]
 
 HistogramType = Dict[str, Dict[int, float]]
 
@@ -83,7 +85,8 @@ def update_database_and_teams(
                     "player": True,
                     "games_played": 0,
                     "wins": 0,
-                    "history": []  # Initialize empty history
+                    "history": [],
+                    "teammates": {}
                 }
             database[player_id]['games_played'] += 1
             team_players.append(database[player_id]['rating_data'])
@@ -132,6 +135,28 @@ def process_match_result(
         player_id = player_rating.name
         database[player_id]['wins'] += 1
 
+    winning_team_ids = [p.name for p in winner_team]
+    losing_team_ids = [p.name for p in other_team]
+
+    # Update teammate stats for winners
+    for player_id in winning_team_ids:
+        for teammate_id in winning_team_ids:
+            if player_id != teammate_id:
+                db = database[player_id]['teammates']
+                if teammate_id not in db:
+                    db[teammate_id] = {"games": 0, "wins": 0}
+                db[teammate_id]["games"] += 1
+                db[teammate_id]["wins"] += 1
+
+    # Update teammate stats for losers
+    for player_id in losing_team_ids:
+        for teammate_id in losing_team_ids:
+            if player_id != teammate_id:
+                db = database[player_id]['teammates']
+                if teammate_id not in db:
+                    db[teammate_id] = {"games": 0, "wins": 0}
+                db[teammate_id]["games"] += 1
+
 def update_histogram(
     histogram: HistogramType,
     database: Dict[str, PlayerData],
@@ -162,7 +187,7 @@ def render_leaderboard(
         
         # Generate individual player pages
         for player_id, data in database.items():
-            render_player_page(player_id, data)        
+            render_player_page(player_id, data, database)
 
         # Main leaderboard HTML
         html_content = f'''
@@ -237,9 +262,33 @@ def render_leaderboard(
         output_path.write_text(html_content)
         print(f"\nGenerated static site at: {output_path.absolute()}")
 
+def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
+    teammates = []
+    for teammate_id, stats in player_data['teammates'].items():
+        # Skip teammates with zero wins
+        if stats['wins'] == 0:
+            continue
+            
+        if teammate_id in database:
+            win_rate = stats['wins'] / stats['games']
+            teammates.append({
+                'id': teammate_id,
+                'name': database[teammate_id]['steam_name'],
+                'games': stats['games'],
+                'wins': stats['wins'],
+                'win_rate': win_rate
+            })
+    
+    # Sort by win rate (descending), then games played (descending)
+    sorted_teammates = sorted(teammates, 
+                            key=lambda x: (-x['win_rate'], -x['games']))
+    
+    return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
+
 def render_player_page(
     player_id: str,
-    player_data: PlayerData
+    player_data: PlayerData,
+    database: Dict[str, PlayerData]
 ) -> None:
     """Generate individual player page with stats and history graph"""
     img_dir = Path('docs/player/images')
@@ -253,6 +302,19 @@ def render_player_page(
     total_games = player_data['games_played']
     losses = total_games - player_data['wins']
     win_rate = player_data['wins'] / total_games if total_games > 0 else 0
+
+    # Calculate best friends
+    best_friends = get_best_friends(player_data, database)
+    best_friends_html = []
+    for idx, friend in enumerate(best_friends, 1):
+        best_friends_html.append(
+            f'<tr>'
+            f'<td>{idx}</td>'
+            f'<td><a href="{friend["id"]}.html">{friend["name"]}</a></td>'
+            f'<td>{friend["win_rate"]:.1%}</td>'
+            f'<td>{friend["wins"]}/{friend["games"]}</td>'
+            f'</tr>'
+        )
     
     html_content = f'''
 <!DOCTYPE html>
@@ -327,6 +389,21 @@ def render_player_page(
             <th>Sigma (σ)</th>
             <td>{player_data['rating_data'].sigma:.2f}</td>
         </tr>
+    </table>
+
+    <h2>Top Teammates</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Teammate</th>
+                <th>Win Rate</th>
+                <th>Record</th>
+            </tr>
+        </thead>
+        <tbody>
+            {"".join(best_friends_html)}
+        </tbody>
     </table>
 
     <h2>DLO History</h2>
