@@ -280,7 +280,7 @@ def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -
     
     # Sort by win rate (descending), then games played (descending)
     sorted_teammates = sorted(teammates, 
-                            key=lambda x: (-x['win_rate'], -x['games']))
+                            key=lambda x: (-x['wins'], -x['win_rate']))
     
     return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
 
