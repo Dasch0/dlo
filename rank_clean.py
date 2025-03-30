@@ -5,13 +5,13 @@ import os
 import xml.etree.ElementTree as ET
 import glob
 import itertools
-import pandas as pd
-import matplotlib.pyplot as plt
 import random
 import string
 from pathlib import Path
 import json
 import html
+import plotly.express as px
+import plotly.io as pio
 
 # Define type aliases and custom types
 class PlayerInfo(TypedDict):
@@ -290,11 +290,12 @@ def render_player_page(
     database: Dict[str, PlayerData]
 ) -> None:
     """Generate individual player page with stats and history graph"""
-    img_dir = Path('docs/player/images')
-    img_dir.mkdir(exist_ok=True, parents=True)
+    plot_dir = Path('docs/player/images')
+    plot_dir.mkdir(exist_ok=True, parents=True)
     
-    plot_path = img_dir / f'{player_id}_history.webp'
-    generate_dlo_plot(player_data, plot_path)
+    #plot_path = img_dir / f'{player_id}_history.webp'
+    plot_path = plot_dir / f'{player_id}_history.html'
+    generate_dlo_plot2(player_data, plot_path)
     
     total_games = player_data['games_played']
     losses = total_games - player_data['wins']
@@ -402,47 +403,74 @@ def render_player_page(
         </tbody>
     </table>
 
-    <h2>DLO History</h2>
-    <img src="images/{player_id}_history.webp" alt="DLO history graph">
-</body>
+    <div class="plot-container">
+        {open(plot_path).read()}
+    </div>
 </html>
     '''
 
     output_path = Path(f'docs/player/{player_id}.html')
     output_path.write_text(html_content)
 
-def generate_dlo_plot(
+def generate_dlo_plot2(
     player_data: PlayerData,
     output_path: Path
 ) -> None:
-    """Generate and save DLO history plot for a player with optimized compression"""
     history = player_data['history']
     if not history:
         return
 
-    plt.figure(figsize=(10, 5), dpi=80)  # Smaller dimensions and lower DPI
-    plt.rcParams['savefig.facecolor'] = 'white'  # Remove transparent background
-    
+    # Prepare data
     times, ordinals = zip(*sorted(history, key=lambda x: x[0]))
     
-    plt.plot(times, ordinals, marker='o', linestyle='-', markersize=4)
-    plt.title(f'DLO Rating History - {player_data["steam_name"]}')
-    plt.xlabel('Date')
-    plt.ylabel('DLO Rating')
-    plt.grid(True, alpha=0.5)  # Lighter grid lines
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+    # Create figure
+    fig = px.line(
+        x=times,
+        y=ordinals,
+        markers=True,
+        labels={'x': 'Date', 'y': 'DLO'},
+        title=f'DLO Rating History - {player_data["steam_name"]}'
+    )
     
-    save_kwargs = {
-        'dpi': 80,
-        'format': 'webp'
-    }
+    # Customize layout
+    fig.update_layout(
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_family='monospace',
+        hovermode='x unified',
+        margin=dict(l=40, r=40, t=60, b=40),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='lightgray',
+            tickformat='%Y-%m-%d'
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='lightgray'
+        ),
+        hoverlabel=dict(
+            bgcolor='white',
+            font_size=12,
+            font_family='monospace'
+        )
+    )
     
-    output_path = output_path.with_suffix('.webp')
-    save_kwargs['format'] = 'webp'
+    # Customize line and markers
+    fig.update_traces(
+        line=dict(color='#1f77b4', width=2),
+        marker=dict(size=6, color='#1f77b4'),
+        hovertemplate='<b>%{x|%Y-%m-%d}</b><br>DLO: %{y:.2f}<extra></extra>'
+    )
     
-    plt.savefig(output_path, **save_kwargs)
-    plt.close()
+    # Save as standalone HTML
+    pio.write_html(
+        fig,
+        file=output_path,
+        full_html=False,
+        include_plotlyjs='cdn',
+        default_width='100%',
+        default_height='400px'
+    )
 
 def load_rank_adjustments(file_path: str = 'rank_adjustments.json') -> List[Dict[str, Any]]:
     """Load manual rating adjustments from JSON file"""
