@@ -511,13 +511,14 @@ def apply_manual_adjustments(
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     database: Dict[str, PlayerData] = {}
-    
-    battle_reports = sorted(Path("/srv/BattleReports").iterdir(), key=os.path.getmtime)
-    print(battle_reports)
+    br_date_format = "%Y-%m-%d %H:%M:%S"
+    battle_reports = sorted(
+        Path("/srv/BattleReports").iterdir(),
+        key=lambda p: datetime.strptime(p.with_suffix('').stem, br_date_format)
+    )
+
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
-        # Get match timestamp from file creation time
-        br_date_format = "%Y-%m-%d %H:%M:%S"
         game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
         
         teams_data, winner = parse_battle_report(file)
