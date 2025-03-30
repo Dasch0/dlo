@@ -6,34 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DLO Leaderboard</title>
     <style>
-        body { 
+        body {
             font-family: monospace;
             margin: 2rem;
-            background-color: white;
-            color: black;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
         }
         .header {
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid #3a3a3a;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border: 1px solid #3a3a3a;
             text-align: left;
         }
         th {
-            background-color: #f5f5f5;
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
         }
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #262626;
         }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        tr:hover {
+            background-color: #363636;
+            transition: background-color 0.2s ease;
+        }
+        a {
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        h1 {
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }
     </style>
 </head>
 <body>

@@ -197,34 +197,54 @@ def render_leaderboard(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DLO Leaderboard</title>
     <style>
-        body {{ 
+        body {{
             font-family: monospace;
             margin: 2rem;
-            background-color: white;
-            color: black;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
         }}
         .header {{
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid #3a3a3a;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
         }}
         table {{
             width: 100%;
             border-collapse: collapse;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
         }}
         th, td {{
-            padding: 0.5rem;
-            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border: 1px solid #3a3a3a;
             text-align: left;
         }}
         th {{
-            background-color: #f5f5f5;
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
         }}
         tr:nth-child(even) {{
-            background-color: #f9f9f9;
+            background-color: #262626;
         }}
-        a {{ color: #0066cc; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
+        tr:hover {{
+            background-color: #363636;
+            transition: background-color 0.2s ease;
+        }}
+        a {{
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }}
+        a:hover {{
+            color: #00ffff;
+            text-decoration: underline;
+        }}
+        h1 {{
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }}
     </style>
 </head>
 <body>
@@ -295,7 +315,7 @@ def render_player_page(
     
     #plot_path = img_dir / f'{player_id}_history.webp'
     plot_path = plot_dir / f'{player_id}_history.html'
-    generate_dlo_plot2(player_data, plot_path)
+    generate_dlo_plot(player_data, plot_path)
     
     total_games = player_data['games_played']
     losses = total_games - player_data['wins']
@@ -324,11 +344,11 @@ def render_player_page(
         body {{ 
             font-family: monospace;
             margin: 2rem;
-            background-color: white;
-            color: black;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
         }}
         .header {{
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid #3a3a3a;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
         }}
@@ -336,21 +356,51 @@ def render_player_page(
             margin: 2rem 0;
             border-collapse: collapse;
             width: 100%;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
         }}
         .stats-table td, .stats-table th {{
-            padding: 0.75rem;
-            border: 1px solid #ddd;
+            padding: 1rem;
+            border: 1px solid #3a3a3a;
         }}
         .stats-table th {{
-            background-color: #f5f5f5;
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
             width: 30%;
+        }}
+        .stats-table tr:nth-child(even) {{
+            background-color: #262626;
+        }}
+        .stats-table tr:hover {{
+            background-color: #363636;
+            transition: background-color 0.2s ease;
         }}
         img {{
             max-width: 800px;
             margin: 2rem 0;
+            border-radius: 4px;
         }}
-        a {{ color: #0066cc; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
+        a {{
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }}
+        a:hover {{
+            color: #00ffff;
+            text-decoration: underline;
+        }}
+        h1, h2 {{
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }}
+        .plot-container {{
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }}
     </style>
 </head>
 <body>
@@ -412,7 +462,7 @@ def render_player_page(
     output_path = Path(f'docs/player/{player_id}.html')
     output_path.write_text(html_content)
 
-def generate_dlo_plot2(
+def generate_dlo_plot(
     player_data: PlayerData,
     output_path: Path
 ) -> None:
@@ -420,10 +470,8 @@ def generate_dlo_plot2(
     if not history:
         return
 
-    # Prepare data
     times, ordinals = zip(*sorted(history, key=lambda x: x[0]))
     
-    # Create figure
     fig = px.line(
         x=times,
         y=ordinals,
@@ -432,37 +480,51 @@ def generate_dlo_plot2(
         title=f'DLO Rating History - {player_data["steam_name"]}'
     )
     
-    # Customize layout
     fig.update_layout(
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font_family='monospace',
+        plot_bgcolor='#2d2d2d',
+        paper_bgcolor='#1a1a1a',
+        font=dict(
+            family='monospace',
+            color='#e0e0e0'
+        ),
+        title=dict(
+            font=dict(
+                color='#ffffff'
+            )
+        ),
         hovermode='x unified',
         margin=dict(l=40, r=40, t=60, b=40),
         xaxis=dict(
             showgrid=True,
-            gridcolor='lightgray',
-            tickformat='%Y-%m-%d'
+            gridcolor='#3a3a3a',
+            tickfont=dict(color='#e0e0e0'),
+            tickformat='%Y-%m-%d',
+            linecolor='#3a3a3a'
         ),
         yaxis=dict(
             showgrid=True,
-            gridcolor='lightgray'
+            gridcolor='#3a3a3a',
+            tickfont=dict(color='#e0e0e0'),
+            linecolor='#3a3a3a'
         ),
         hoverlabel=dict(
-            bgcolor='white',
+            bgcolor='#333333',
             font_size=12,
-            font_family='monospace'
+            font_family='monospace',
+            font_color='#e0e0e0'
         )
     )
     
-    # Customize line and markers
     fig.update_traces(
-        line=dict(color='#1f77b4', width=2),
-        marker=dict(size=6, color='#1f77b4'),
-        hovertemplate='<b>%{x|%Y-%m-%d}</b><br>DLO: %{y:.2f}<extra></extra>'
+        line=dict(color='#00ccff', width=2),
+        marker=dict(size=6, color='#00ccff'),
+        hovertemplate=(
+            '<span style="color:#e0e0e0">'
+            '<b>%{x|%Y-%m-%d}</b><br>DLO: %{y:.2f}'
+            '</span><extra></extra>'
+        )
     )
     
-    # Save as standalone HTML
     pio.write_html(
         fig,
         file=output_path,
