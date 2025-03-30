@@ -517,7 +517,8 @@ def main() -> None:
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
         # Get match timestamp from file creation time
-        game_time = datetime.fromtimestamp(file.stat().st_ctime)
+        br_date_format = "%Y-%m-%d %H:%M:%S"
+        game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
         
         teams_data, winner = parse_battle_report(file)
         updated_teams = update_database_and_teams(teams_data, database, model)
