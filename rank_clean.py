@@ -152,7 +152,7 @@ def update_database_and_teams(
                 if team_id == winner:
                     database[player_id]['ans_wins'] += 1
             if player['faction'] == 'OSP':
-                database[player_id]['ans_games'] += 1
+                database[player_id]['osp_games'] += 1
                 if team_id == winner:
                     database[player_id]['osp_wins'] += 1
 
@@ -358,6 +358,7 @@ def render_player_page(
     database: Dict[str, PlayerData]
 ) -> None:
     """Generate individual player page with stats and history graph"""
+
     plot_dir = Path('docs/player/images')
     plot_dir.mkdir(exist_ok=True, parents=True)
     
