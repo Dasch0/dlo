@@ -19,6 +19,7 @@ from plotly.subplots import make_subplots
 class PlayerInfo(TypedDict):
     player_id: str
     steam_name: str
+    faction: str
 
 class PlayerData(TypedDict):
     steam_name: str
@@ -26,12 +27,35 @@ class PlayerData(TypedDict):
     player: bool
     games_played: int
     wins: int
+    ans_games: int
+    ans_wins: int
+    osp_games: int
+    osp_wins: int
     history: List[Tuple[datetime, float]]
     teammates: Dict[str, Dict[str, int]]
 
 HistogramType = Dict[str, Dict[int, float]]
 
+
 def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], str]:
+    ANS_HULLKEYS = [
+        'Stock/Sprinter Corvette',
+        'Stock/Raines Frigate',
+        'Stock/Keystone Destroyer',
+        'Stock/Vauxhall Light Cruiser',
+        'Stock/Axford Heavy Cruiser',
+        'Stock/Solomon Battleship',
+        'Stock/Levy Escort Carrier']
+
+    OSP_HULLKEYS = [
+        'Stock/Shuttle',
+        'Stock/Tugboat',
+        'Stock/Journeyman',
+        'Stock/Monitor',
+        'Stock/Ocello Cruiser',
+        'Stock/Bulk Hauler',
+        'Stock/Moorline']
+
     with open(file_path) as fp:
         xml_string = fp.read()
         last_gt_index = xml_string.rfind('>')
@@ -45,30 +69,52 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
         team_id_element = team_element.find('TeamID')
         team_id = team_id_element.text if team_id_element is not None else ''
         players: List[PlayerInfo] = []
+
+        team_faction = ''
         
         for player_element in team_element.findall('./Players/*'):
             player_name_element = player_element.find('PlayerName')
             account_id_element = player_element.find('AccountId/Value')
-            
+
             player_name = html.escape(player_name_element.text) if player_name_element is not None else ''
             player_id = html.escape(account_id_element.text) if account_id_element is not None else ''
+
+            # find out if the player was ANS or OSP. This then updates the team_faction which gets applied after all players are parsed
+            # This ensures even if one player DCs and loses all ships, we still report their original faction correctly
+            player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
+            is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
+            is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
+
+            if is_player_ANS and team_faction != 'OSP':
+                team_faction = 'ANS'
+            elif is_player_OSP and team_faction != 'ANS':
+                team_faction = 'OSP'
+            else:
+                team_faction = ''
             
             players.append({
                 'player_id': player_id,
-                'steam_name': player_name
+                'steam_name': player_name,
+                'faction': '',
             })
+
+        # double check team faction at the end to catch any players who had zero ships in the battle report
+        for p in players:
+            p['faction'] = team_faction
         
         teams_data[team_id] = players
-    
+
     winner_element = root.find('WinningTeam')
     winner = winner_element.text if winner_element is not None else ''
     return teams_data, winner
 
 def update_database_and_teams(
     teams_data: Dict[str, List[PlayerInfo]],
+    winner: str,
     database: Dict[str, PlayerData],
     model: PlackettLuce,
 ) -> Dict[str, List[PlackettLuceRating]]:
+    """updates database with all non DLO info, and returns lists of rating objects for later DLO scoring"""
     updated_teams: Dict[str, List[PlackettLuceRating]] = {}
     
     for team_id, players in teams_data.items():
@@ -86,14 +132,42 @@ def update_database_and_teams(
                     "player": True,
                     "games_played": 0,
                     "wins": 0,
+                    "ans_games": 0,
+                    "ans_wins": 0,
+                    "osp_games": 0, 
+                    "osp_wins": 0, 
                     "history": [],
                     "teammates": {}
                 }
-            database[player_id]['games_played'] += 1
             team_players.append(database[player_id]['rating_data'])
-        
-        updated_teams[team_id] = team_players
-    
+
+            # update total games played and wins
+            database[player_id]['games_played'] += 1
+            if team_id == winner:
+                database[player_id]['wins'] += 1
+
+            # update faction games played and wins
+            if player['faction'] == 'ANS':
+                database[player_id]['ans_games'] += 1
+                if team_id == winner:
+                    database[player_id]['ans_wins'] += 1
+            if player['faction'] == 'OSP':
+                database[player_id]['ans_games'] += 1
+                if team_id == winner:
+                    database[player_id]['osp_wins'] += 1
+
+            for teammate in players:
+                teammate_id = teammate['player_id']
+                if player_id == teammate_id:
+                    continue
+                db = database[player_id]['teammates']
+                if teammate_id not in iter(db):
+                    db[teammate_id] = {"games": 0, "wins": 0}
+                db[teammate_id]["games"] += 1
+                if team_id == winner:
+                    db[teammate_id]["wins"] += 1
+        updated_teams[team_id] = team_players 
+
     return updated_teams
 
 def process_match_result(
@@ -104,13 +178,9 @@ def process_match_result(
     game_time: datetime
 ) -> None:
     teams = updated_teams.copy()
-    
-    try:
-        winner_team = teams.pop(winner)
-        other_team = teams[next(iter(teams))]
-    except KeyError:
-        print("Invalid team structure for match processing")
-        return
+   
+    winner_team = teams.pop(winner)
+    other_team = teams[next(iter(teams))]
 
     all_participants = []
     for player_rating in winner_team + other_team:
@@ -132,31 +202,6 @@ def process_match_result(
                 player.ordinal()
             )
 
-    for player_rating in winner_team:
-        player_id = player_rating.name
-        database[player_id]['wins'] += 1
-
-    winning_team_ids = [p.name for p in winner_team]
-    losing_team_ids = [p.name for p in other_team]
-
-    # Update teammate stats for winners
-    for player_id in winning_team_ids:
-        for teammate_id in winning_team_ids:
-            if player_id != teammate_id:
-                db = database[player_id]['teammates']
-                if teammate_id not in db:
-                    db[teammate_id] = {"games": 0, "wins": 0}
-                db[teammate_id]["games"] += 1
-                db[teammate_id]["wins"] += 1
-
-    # Update teammate stats for losers
-    for player_id in losing_team_ids:
-        for teammate_id in losing_team_ids:
-            if player_id != teammate_id:
-                db = database[player_id]['teammates']
-                if teammate_id not in db:
-                    db[teammate_id] = {"games": 0, "wins": 0}
-                db[teammate_id]["games"] += 1
 
 def update_histogram(
     histogram: HistogramType,
@@ -324,6 +369,12 @@ def render_player_page(
     losses = total_games - player_data['wins']
     win_rate = player_data['wins'] / total_games if total_games > 0 else 0
 
+    ans_losses = player_data['ans_games'] - player_data['ans_wins']
+    ans_win_rate = player_data['wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
+
+    osp_losses = player_data['osp_games'] - player_data['osp_wins']
+    osp_win_rate = player_data['wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
+
     best_friends = get_best_friends(player_data, database)
     best_friends_html = []
     for idx, friend in enumerate(best_friends, 1):
@@ -438,6 +489,14 @@ def render_player_page(
         <tr>
             <th>Sigma (σ)</th>
             <td>{player_data['rating_data'].sigma:.2f}</td>
+        </tr>
+        <tr>
+            <th>ANS Wins/Losses</th>
+            <td>{player_data['ans_wins']} / {ans_losses} ({ans_win_rate:.1%})</td>
+        </tr>
+        <tr>
+            <th>OSP Wins/Losses</th>
+            <td>{player_data['osp_wins']} / {osp_losses} ({osp_win_rate:.1%})</td>
         </tr>
     </table>
 
@@ -668,12 +727,11 @@ def main() -> None:
         game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
         
         teams_data, winner = parse_battle_report(file)
-        updated_teams = update_database_and_teams(teams_data, database, model)
-        
-        if winner not in updated_teams:
+        if winner not in teams_data:
             print(f"ERROR: No valid winner in {file}")
             continue
         
+        updated_teams = update_database_and_teams(teams_data, winner, database, model)
         process_match_result(winner, updated_teams, model, database, game_time)
 
     # Apply manual adjustments
