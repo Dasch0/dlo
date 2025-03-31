@@ -151,7 +151,6 @@ def update_database_and_teams(
                 database[player_id]['wins'] += 1
 
             # update faction games played and wins
-            print(player)
             assert(player['faction'] in ['ANS', 'OSP'])
             if player['faction'] == 'ANS':
                 database[player_id]['ans_games'] += 1
@@ -378,6 +377,8 @@ def render_player_page(
 
     ans_losses = player_data['ans_games'] - player_data['ans_wins']
     ans_win_rate = player_data['ans_wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
+
+    print("DEBUG:", player_data['steam_name'], "wins", player_data['ans_wins'], "losses", ans_losses, "games", player_data['ans_games'], "winrate", ans_win_rate)
 
     osp_losses = player_data['osp_games'] - player_data['osp_wins']
     osp_win_rate = player_data['osp_wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
