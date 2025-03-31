@@ -12,6 +12,8 @@ import json
 import html
 import plotly.express as px
 import plotly.io as pio
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 # Define type aliases and custom types
 class PlayerInfo(TypedDict):
@@ -251,7 +253,8 @@ def render_leaderboard(
     <div class="header">
         <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
-        <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
+        <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
+        | <a href="rank_distribution.html">DLO Rank Distributions</a>
     </div>
     
     <table>
@@ -462,6 +465,87 @@ def render_player_page(
     output_path = Path(f'docs/player/{player_id}.html')
     output_path.write_text(html_content)
 
+def plot_rank_distribution(database: Dict[str, PlayerData], output_path: Path) -> None:
+    ordinals = [p['rating_data'].ordinal() for p in database.values() if p['player']]
+    
+    if not ordinals:
+        print("No player data available for rank distribution")
+        return
+
+    fig = go.Figure()
+    
+    fig.add_trace(
+        go.Histogram(
+            x=ordinals,
+            name='Players',
+            nbinsx=50,
+            marker_color='#2ecc71',
+            opacity=0.85,
+    )
+        )
+
+    mean_val = sum(ordinals) / len(ordinals)
+    median_val = sorted(ordinals)[len(ordinals)//2]
+
+    fig.add_vline(
+        x=mean_val, 
+        line=dict(color='#e74c3c', width=2, dash='dash'),
+        annotation=dict(text=f"Mean: {mean_val:.1f}", 
+                       font=dict(color='#e74c3c'))
+    )
+    fig.add_vline(
+        x=median_val, 
+        line=dict(color='#3498db', width=2, dash='dash'),
+        annotation=dict(text=f"Median: {median_val:.1f}", 
+                       font=dict(color='#3498db'))
+    )
+
+    fig.update_layout(
+        title='Player Rank Distribution',
+        xaxis_title='DLO Rating',
+        yaxis_title='Player Count',
+        plot_bgcolor='#2d2d2d',
+        paper_bgcolor='#1a1a1a',
+        font=dict(
+            family='monospace',
+            color='#e0e0e0',
+            size=14
+        ),
+        title_font_size=18,
+        hovermode='x unified',
+        margin=dict(l=60, r=30, t=80, b=60),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='#3a3a3a',
+            tickfont=dict(color='#e0e0e0'),
+            linecolor='#3a3a3a',
+            zeroline=False
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='#3a3a3a',
+            tickfont=dict(color='#e0e0e0'),
+            linecolor='#3a3a3a',
+            zeroline=False
+        ),
+        hoverlabel=dict(
+            bgcolor='#333333',
+            font_size=12,
+            font_family='monospace'
+        ),
+        legend=dict(
+            bgcolor='#2d2d2d',
+            font=dict(color='#e0e0e0')
+        )
+    )
+
+    fig.write_html(
+        output_path,
+        include_plotlyjs='cdn',
+        full_html=True,
+        config={'displayModeBar': False}  # Cleaner display
+    )
+
 def generate_dlo_plot(
     player_data: PlayerData,
     output_path: Path
@@ -598,6 +682,7 @@ def main() -> None:
         print("\nApplying manual adjustments:")
         apply_manual_adjustments(model, database, adjustments)
     
+    plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)
 
 if __name__ == "__main__":
