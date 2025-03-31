@@ -51,10 +51,10 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
         'Stock/Shuttle',
         'Stock/Tugboat',
         'Stock/Journeyman',
-        'Stock/Monitor',
+        'Stock/Bulk Feeder',
         'Stock/Ocello Cruiser',
         'Stock/Bulk Hauler',
-        'Stock/Moorline']
+        'Stock/Container Hauler']
 
     with open(file_path) as fp:
         xml_string = fp.read()
@@ -84,24 +84,28 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
             player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
             is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
             is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
+            print(player_id)
+            print(player_name)
+            for hk in player_hullkeys:
+                print(hk.text)
 
             if is_player_ANS and team_faction != 'OSP':
                 team_faction = 'ANS'
-            elif is_player_OSP and team_faction != 'ANS':
+            if is_player_OSP and team_faction != 'ANS':
                 team_faction = 'OSP'
-            else:
-                team_faction = ''
             
             players.append({
                 'player_id': player_id,
                 'steam_name': player_name,
-                'faction': '',
             })
 
-        # double check team faction at the end to catch any players who had zero ships in the battle report
+        # assign team faction at the end to catch any players who had zero ships in the battle report
         for p in players:
             p['faction'] = team_faction
         
+        for p in players:
+            assert p['faction'] in ['ANS', 'OSP']
+
         teams_data[team_id] = players
 
     winner_element = root.find('WinningTeam')
@@ -147,6 +151,8 @@ def update_database_and_teams(
                 database[player_id]['wins'] += 1
 
             # update faction games played and wins
+            print(player)
+            assert(player['faction'] in ['ANS', 'OSP'])
             if player['faction'] == 'ANS':
                 database[player_id]['ans_games'] += 1
                 if team_id == winner:
@@ -371,10 +377,10 @@ def render_player_page(
     win_rate = player_data['wins'] / total_games if total_games > 0 else 0
 
     ans_losses = player_data['ans_games'] - player_data['ans_wins']
-    ans_win_rate = player_data['wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
+    ans_win_rate = player_data['ans_wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
 
     osp_losses = player_data['osp_games'] - player_data['osp_wins']
-    osp_win_rate = player_data['wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
+    osp_win_rate = player_data['osp_wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
 
     best_friends = get_best_friends(player_data, database)
     best_friends_html = []
