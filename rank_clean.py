@@ -37,7 +37,7 @@ class PlayerData(TypedDict):
 HistogramType = Dict[str, Dict[int, float]]
 
 
-def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], str]:
+def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInfo]], str]:
     ANS_HULLKEYS = [
         'Stock/Sprinter Corvette',
         'Stock/Raines Frigate',
@@ -63,6 +63,14 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
             xml_string = xml_string[:last_gt_index + 1]
         tree = ET.ElementTree(ET.fromstring(xml_string))
     root = tree.getroot()
+
+    # validate basic params about game. if start timestamp is 0 game didn't start. If game duration is super long or super short something probably went wrong
+    if int(root.find('GameStartTimestamp').text) == 0 or int(root.find('GameDuration').text) > 7000 or int(root.find('GameDuration').text) < 200 or not bool(root.find('GameFinished').text):
+        return False, {}, ''
+
+    print("HEY")
+    print(int(root.find('GameDuration').text))
+
     teams_data: Dict[str, List[PlayerInfo]] = {}
     
     for team_element in root.findall('./Teams/*'):
@@ -84,10 +92,6 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
             player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
             is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
             is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
-            print(player_id)
-            print(player_name)
-            for hk in player_hullkeys:
-                print(hk.text)
 
             if is_player_ANS and team_faction != 'OSP':
                 team_faction = 'ANS'
@@ -110,7 +114,7 @@ def parse_battle_report(file_path: Path) -> Tuple[Dict[str, List[PlayerInfo]], s
 
     winner_element = root.find('WinningTeam')
     winner = winner_element.text if winner_element is not None else ''
-    return teams_data, winner
+    return True, teams_data, winner
 
 def update_database_and_teams(
     teams_data: Dict[str, List[PlayerInfo]],
@@ -120,7 +124,7 @@ def update_database_and_teams(
 ) -> Dict[str, List[PlackettLuceRating]]:
     """updates database with all non DLO info, and returns lists of rating objects for later DLO scoring"""
     updated_teams: Dict[str, List[PlackettLuceRating]] = {}
-    
+
     for team_id, players in teams_data.items():
         team_players: List[PlackettLuceRating] = []
         
@@ -377,8 +381,6 @@ def render_player_page(
 
     ans_losses = player_data['ans_games'] - player_data['ans_wins']
     ans_win_rate = player_data['ans_wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
-
-    print("DEBUG:", player_data['steam_name'], "wins", player_data['ans_wins'], "losses", ans_losses, "games", player_data['ans_games'], "winrate", ans_win_rate)
 
     osp_losses = player_data['osp_games'] - player_data['osp_wins']
     osp_win_rate = player_data['osp_wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
@@ -734,9 +736,9 @@ def main() -> None:
         print(f"\nPROCESSING FILE: {file}")
         game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
         
-        teams_data, winner = parse_battle_report(file)
-        if winner not in teams_data:
-            print(f"ERROR: No valid winner in {file}")
+        valid, teams_data, winner = parse_battle_report(file)
+        if not valid or winner not in teams_data:
+            print(f"ERROR: invalid report found at {file}")
             continue
         
         updated_teams = update_database_and_teams(teams_data, winner, database, model)
