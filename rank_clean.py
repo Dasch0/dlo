@@ -54,7 +54,8 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         'Stock/Bulk Feeder',
         'Stock/Ocello Cruiser',
         'Stock/Bulk Hauler',
-        'Stock/Container Hauler']
+        'Stock/Container Hauler',
+        'Stock/Container Hauler Refit']
 
     with open(file_path) as fp:
         xml_string = fp.read()
@@ -67,9 +68,6 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
     # validate basic params about game. if start timestamp is 0 game didn't start. If game duration is super long or super short something probably went wrong
     if int(root.find('GameStartTimestamp').text) == 0 or int(root.find('GameDuration').text) > 7000 or int(root.find('GameDuration').text) < 200 or not bool(root.find('GameFinished').text):
         return False, {}, ''
-
-    print("HEY")
-    print(int(root.find('GameDuration').text))
 
     teams_data: Dict[str, List[PlayerInfo]] = {}
     
@@ -106,7 +104,7 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         # assign team faction at the end to catch any players who had zero ships in the battle report
         for p in players:
             p['faction'] = team_faction
-        
+       
         for p in players:
             assert p['faction'] in ['ANS', 'OSP']
 
@@ -191,19 +189,44 @@ def process_match_result(
     winner_team = teams.pop(winner)
     other_team = teams[next(iter(teams))]
 
-    all_participants = []
     for player_rating in winner_team + other_team:
         player_id = player_rating.name
         database[player_id]['history'].append((
             game_time,
             database[player_id]['rating_data'].ordinal()
         ))
-        all_participants.append(player_id)
+
+    # add synthetic players to balance team sizes
+    largest_team = max(len(winner_team), len(other_team))
+
+    if len(winner_team) < largest_team:
+        average_mu = sum([p.mu for p in winner_team]) / len(winner_team)
+        average_sigma = sum([p.sigma for p in winner_team]) / len(winner_team)
+
+        for i in range(0, largest_team - len(winner_team)):
+            winner_team.append(model.rating(
+                name = "TEST_PLAYER",
+                mu=average_mu,
+                sigma=average_sigma
+            ))
+
+    if len(other_team) < largest_team:
+        average_mu = sum([p.mu for p in other_team]) / len(other_team)
+        average_sigma = sum([p.sigma for p in other_team]) / len(other_team)
+
+        for i in range(0, largest_team - len(other_team)):
+            other_team.append(model.rating(
+                name = "TEST_PLAYER",
+                mu=average_mu,
+                sigma=average_sigma
+            ))
 
     rated_teams = model.rate([winner_team, other_team])
     
     for team in rated_teams:
         for player in team:
+            if player.name == 'TEST_PLAYER':
+                continue
             player_id = player.name
             database[player_id]['rating_data'] = player
             database[player_id]['history'][-1] = (
