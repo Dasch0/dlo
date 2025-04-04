@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoodooFan - Player Stats</title>
+    <style>
+        body { 
+            font-family: monospace;
+            margin: 2rem;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .header {
+            border-bottom: 2px solid #3a3a3a;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+        .stats-table {
+            margin: 2rem 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stats-table td, .stats-table th {
+            padding: 1rem;
+            border: 1px solid #3a3a3a;
+        }
+        .stats-table th {
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
+            width: 30%;
+        }
+        .stats-table tr:nth-child(even) {
+            background-color: #262626;
+        }
+        .stats-table tr:hover {
+            background-color: #363636;
+            transition: background-color 0.2s ease;
+        }
+        img {
+            max-width: 800px;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        a {
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        h1, h2 {
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }
+        .plot-container {
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../dlo.webp" alt="Logo" width="150">
+        <h1>VoodooFan - Player Statistics</h1>
+        <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
+        | <a href="../index.html">Back to Leaderboard</a>
+    </div>
+
+    <table class="stats-table">
+        <tr>
+            <th>Steam Name</th>
+            <td>VoodooFan</td>
+        </tr>
+        <tr>
+            <th>Player ID</th>
+            <td>76561197960277551</td>
+        </tr>
+        <tr>
+            <th>Wins/Losses</th>
+            <td>1 / 0 (100.0%)</td>
+        </tr>
+        <tr>
+            <th>Current DLO</th>
+            <td>1.82</td>
+        </tr>
+        <tr>
+            <th>Mu (μ)</th>
+            <td>26.57</td>
+        </tr>
+        <tr>
+            <th>Sigma (σ)</th>
+            <td>8.25</td>
+        </tr>
+        <tr>
+            <th>ANS Wins/Losses</th>
+            <td>0 / 0 (0.0%)</td>
+        </tr>
+        <tr>
+            <th>OSP Wins/Losses</th>
+            <td>1 / 0 (100.0%)</td>
+        </tr>
+    </table>
+
+    <h2>Top Teammates</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Teammate</th>
+                <th>Win Rate</th>
+                <th>Record</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><a href="76561198103011248.html">George Monster</a></td><td>100.0%</td><td>1/1</td></tr><tr><td>2</td><td><a href="76561199838322790.html">HollowHeresy</a></td><td>100.0%</td><td>1/1</td></tr><tr><td>3</td><td><a href="76561198822264018.html">PBstar27</a></td><td>100.0%</td><td>1/1</td></tr>
+        </tbody>
+    </table>
+
+    <div class="plot-container">
+        <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>                <div id="f2a7c746-6f8d-4019-b003-adc1270b1782" class="plotly-graph-div" style="height:400px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f2a7c746-6f8d-4019-b003-adc1270b1782")) {                    Plotly.newPlot(                        "f2a7c746-6f8d-4019-b003-adc1270b1782",                        [{"hovertemplate":"\u003cspan style=\"color:#e0e0e0\"\u003e\u003cb\u003e%{x|%Y-%m-%d}\u003c\u002fb\u003e\u003cbr\u003eDLO: %{y:.2f}\u003c\u002fspan\u003e\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","line":{"color":"#00ccff","dash":"solid","width":2},"marker":{"symbol":"circle","color":"#00ccff","size":6},"mode":"lines+markers","name":"","orientation":"v","showlegend":false,"x":["2025-04-04T20:00:37.000000000"],"xaxis":"x","y":{"dtype":"f8","bdata":"wInAOSom\u002fT8="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Date"},"tickfont":{"color":"#e0e0e0"},"showgrid":true,"gridcolor":"#3a3a3a","tickformat":"%Y-%m-%d","linecolor":"#3a3a3a"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"DLO"},"tickfont":{"color":"#e0e0e0"},"showgrid":true,"gridcolor":"#3a3a3a","linecolor":"#3a3a3a"},"legend":{"tracegroupgap":0},"title":{"text":"DLO Rating History - VoodooFan","font":{"color":"#ffffff"}},"font":{"family":"monospace","color":"#e0e0e0"},"margin":{"l":40,"r":40,"t":60,"b":40},"hoverlabel":{"font":{"size":12,"family":"monospace","color":"#e0e0e0"},"bgcolor":"#333333"},"plot_bgcolor":"#2d2d2d","paper_bgcolor":"#1a1a1a","hovermode":"x unified"},                        {"responsive": true}                    )                };            </script>        </div>
+    </div>
+</html>
+    
