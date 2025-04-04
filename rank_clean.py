@@ -52,6 +52,7 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         'Stock/Tugboat',
         'Stock/Journeyman',
         'Stock/Bulk Feeder',
+        'Stock/Ore Carrier',
         'Stock/Ocello Cruiser',
         'Stock/Bulk Hauler',
         'Stock/Container Hauler',
@@ -88,6 +89,9 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
             # find out if the player was ANS or OSP. This then updates the team_faction which gets applied after all players are parsed
             # This ensures even if one player DCs and loses all ships, we still report their original faction correctly
             player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
+            print(player_name)
+            for hk in player_hullkeys:
+                print(hk.text)
             is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
             is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
 
@@ -103,6 +107,7 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
 
         # assign team faction at the end to catch any players who had zero ships in the battle report
         for p in players:
+            print(p)
             p['faction'] = team_faction
        
         for p in players:
@@ -341,6 +346,7 @@ def render_leaderboard(
                 <th>Player</th>
                 <th>DLO</th>
                 <th>Matches Played</th>
+                <th>μ ± σ</th>
             </tr>
         </thead>
         <tbody>
@@ -348,7 +354,8 @@ def render_leaderboard(
                 f'<tr><td>{i+1}</td>'
                 f'<td><a href="player/{p["rating_data"].name}.html">{p["steam_name"]}</a></td>'
                 f'<td>{p["rating_data"].ordinal():0.2f}</td>'
-                f'<td>{p["games_played"]}</td></tr>'
+                f'<td>{p["games_played"]}</td>'
+                f'<td>{p["rating_data"].mu} ± {p["rating_data"].sigma}</td></tr>'
                 for i, p in enumerate(leaderboard)
             )}
         </tbody>
