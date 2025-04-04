@@ -355,7 +355,7 @@ def render_leaderboard(
                 f'<td><a href="player/{p["rating_data"].name}.html">{p["steam_name"]}</a></td>'
                 f'<td>{p["rating_data"].ordinal():0.2f}</td>'
                 f'<td>{p["games_played"]}</td>'
-                f'<td>{p["rating_data"].mu} ± {p["rating_data"].sigma}</td></tr>'
+                f'<td>{p["rating_data"].mu:0.2F} ± {p["rating_data"].sigma:0.2f}</td></tr>'
                 for i, p in enumerate(leaderboard)
             )}
         </tbody>
