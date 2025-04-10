@@ -71,6 +71,7 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         return False, {}, ''
 
     teams_data: Dict[str, List[PlayerInfo]] = {}
+
     
     for team_element in root.findall('./Teams/*'):
         team_id_element = team_element.find('TeamID')
@@ -104,6 +105,12 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
                 'player_id': player_id,
                 'steam_name': player_name,
             })
+
+            for hk in player_hullkeys:
+                players.append({
+                    'player_id': html.escape(hk.text).replace(" ", "_").replace('/',''),
+                    'steam_name': html.escape(hk.text).replace(" ", "_").replace('/','')
+                })
 
         # assign team faction at the end to catch any players who had zero ships in the battle report
         for p in players:
@@ -190,7 +197,7 @@ def process_match_result(
     game_time: datetime
 ) -> None:
     teams = updated_teams.copy()
-   
+
     winner_team = teams.pop(winner)
     other_team = teams[next(iter(teams))]
 
@@ -201,7 +208,7 @@ def process_match_result(
             database[player_id]['rating_data'].ordinal()
         ))
 
-    # add synthetic players to balance team sizes
+    # add synthetic players to balance team sizes, since OpenSkill doesn't normalize team mu or sigma
     largest_team = max(len(winner_team), len(other_team))
 
     if len(winner_team) < largest_team:
@@ -256,12 +263,12 @@ def render_leaderboard(
 ) -> None:
     """Display sorted leaderboard and generate static HTML"""
     leaderboard = sorted(database.values(), 
-                        key=lambda d: d["rating_data"].ordinal(), 
+                        key=lambda d: d["rating_data"].mu, 
                         reverse=True)
     
     print("\nLEADERBOARD:")
     for p in leaderboard:
-        print(f"{p['steam_name']:20} DLO = {p['rating_data'].ordinal():6.2f} "
+        print(f"{p['steam_name']:20} DLO(mu) = {p['rating_data'].mu:6.2f} "
               f"Matches: {p['games_played']}")
 
     if output_html:
@@ -344,7 +351,7 @@ def render_leaderboard(
             <tr>
                 <th>Rank</th>
                 <th>Player</th>
-                <th>DLO</th>
+                <th>Mean skill (μ)</th>
                 <th>Matches Played</th>
                 <th>μ ± σ</th>
             </tr>
@@ -353,7 +360,7 @@ def render_leaderboard(
             {"".join(
                 f'<tr><td>{i+1}</td>'
                 f'<td><a href="player/{p["rating_data"].name}.html">{p["steam_name"]}</a></td>'
-                f'<td>{p["rating_data"].ordinal():0.2f}</td>'
+                f'<td>{p["rating_data"].mu:0.2f}</td>'
                 f'<td>{p["games_played"]}</td>'
                 f'<td>{p["rating_data"].mu:0.2F} ± {p["rating_data"].sigma:0.2f}</td></tr>'
                 for i, p in enumerate(leaderboard)
@@ -651,6 +658,7 @@ def generate_dlo_plot(
 ) -> None:
     history = player_data['history']
     if not history:
+        print("no history for", player_data)
         return
 
     times, ordinals = zip(*sorted(history, key=lambda x: x[0]))
@@ -753,6 +761,7 @@ def apply_manual_adjustments(
         else:
             print(f"Warning: Player {adj['steam_name']} ({steam_id}) not found")
 
+
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     database: Dict[str, PlayerData] = {}
@@ -782,6 +791,12 @@ def main() -> None:
     
     plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)
+
+    #print cl data
+    print('BUFF BB INDEX:')
+    print('games:', cl_games)
+    print('wins:', cl_wins)
+    print('winrate:', cl_wins / cl_games)
 
 if __name__ == "__main__":
     main()
