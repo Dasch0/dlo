@@ -396,7 +396,7 @@ def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -
     sorted_teammates = sorted(teammates, 
                             key=lambda x: (-x['wins'], -x['win_rate']))
     
-    return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
+    return sorted_teammates[:15]  # Return top 3 (or fewer if less available)
 
 def render_player_page(
     player_id: str,
@@ -791,12 +791,6 @@ def main() -> None:
     
     plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)
-
-    #print cl data
-    print('BUFF BB INDEX:')
-    print('games:', cl_games)
-    print('wins:', cl_wins)
-    print('winrate:', cl_wins / cl_games)
 
 if __name__ == "__main__":
     main()
