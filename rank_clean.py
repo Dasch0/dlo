@@ -771,6 +771,9 @@ def main() -> None:
         key=lambda p: datetime.strptime(p.with_suffix('').stem, br_date_format)
     )
 
+    osp_wins = 0;
+    osp_games = 0;
+
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
         game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
@@ -779,9 +782,18 @@ def main() -> None:
         if not valid or winner not in teams_data:
             print(f"ERROR: invalid report found at {file}")
             continue
-        
+       
+        osp_games += 1
+        if winner == 'TeamB':
+            osp_wins += 1
         updated_teams = update_database_and_teams(teams_data, winner, database, model)
         process_match_result(winner, updated_teams, model, database, game_time)
+
+    print("I am dlo, destroyer of balcon:")
+    print("osp wins:", osp_wins)
+    print("osp games:", osp_games)
+    print("osp win_rate:", osp_wins/osp_games)
+
 
     # Apply manual adjustments
     adjustments = load_rank_adjustments()
