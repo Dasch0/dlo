@@ -1014,7 +1014,7 @@ def render_match_details(match_data: MatchData) -> None:
         <div class="team">
             <h2>{winning_team == "TeamA" and "Winning Team" or "Losing Team"}</h2>
             {"".join(
-            f'<div class="player">'f'<h3><a href="docs/player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
+            f'<div class="player">'f'<h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
             f'Fleet: '
             f'</div>'
                 for player in teams["TeamA"]
@@ -1025,8 +1025,7 @@ def render_match_details(match_data: MatchData) -> None:
         <div class="team">
             <h2>{winning_team == "TeamB" and "Winning Team" or "Losing Team"}</h2>
             {"".join(
-                f'<div class="player">'
-                f'<h3>{player["steam_name"]} ({player["faction"]})</h3>'
+                f'<div class="player">'f'<h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
                 f'Fleet: '
                 f'</div>'
                 for player in teams["TeamB"]
