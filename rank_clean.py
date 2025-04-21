@@ -885,7 +885,7 @@ def render_match_history(
         </thead>
         <tbody>
             {"".join(
-                f'<tr><td><a href="player/{str(m["time"])}.html">{str(m["time"])}</a></td>'
+                f'<tr><td><a href="match/{match_data["time"].strftime("%Y%m%d_%H%M%S")}.html">{str(m["time"])}</a></td>'
                 f'<td>{m["avg_dlo"]:0.2f}</td>'
                 f'<td>{m["match_quality"]:0.2f}</td></tr>'
                 for m in sorted_match_history
