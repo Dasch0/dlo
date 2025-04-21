@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Details - 2025-03-29 01:27:37.118254</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 2rem;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .header {
+            border-bottom: 2px solid #3a3a3a;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+        a {
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        h1, h2 {
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }
+        
+        /* Match details specific styles */
+        .match-info {
+            margin-bottom: 2rem;
+        }
+        .teams {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .team {
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #3a3a3a;
+        }
+        .player {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #262626;
+            border-radius: 4px;
+        }
+        .fleet-image {
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            cursor: zoom-in;
+        }
+        .fleet-image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fleet-image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #e0e0e0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Match Details - 2025-03-29 01:27:37.118254</h1>
+        <a href="../index.html">Player Leaderboard</a> 
+        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="../match_history.html">Match History</a>
+    </div>
+
+    <div class="match-info">
+        <h2>Match Statistics</h2>
+        <p>Average DLO: 0.80</p>
+        <p>Match Quality: 0.06</p>
+        <p>Winning Team: TeamB</p>
+        <h3>Map: [Map Not Recorded]</h3>
+    </div>
+
+    <div class="teams">
+        <!-- Team A -->
+        <div class="team">
+            <h2>Losing Team</h2>
+            <div class="player"><h3><a href="docs/player/76561198390895563.html">Black Bat A8T (ANS)</a></h3>Fleet: </div><div class="player"><h3><a href="docs/player/76561199238744504.html">Duke of Stars (ANS)</a></h3>Fleet: </div><div class="player"><h3><a href="docs/player/76561198324280078.html">flynn (ANS)</a></h3>Fleet: </div><div class="player"><h3><a href="docs/player/76561198439522328.html">Scrubus (ANS)</a></h3>Fleet: </div>
+        </div>
+
+        <!-- Team B -->
+        <div class="team">
+            <h2>Winning Team</h2>
+            <div class="player"><h3>HEAVEN BASED (OSP)</h3>Fleet: </div><div class="player"><h3>HELL CRINGE (OSP)</h3>Fleet: </div><div class="player"><h3>WzSnipes (OSP)</h3>Fleet: </div><div class="player"><h3>Xenophon of Athens (OSP)</h3>Fleet: </div>
+        </div>
+    </div>
+
+    <!-- Fleet Image Modal -->
+    <div id="fleetImageModal" class="fleet-image-modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <script>
+        function openImageModal(img) {
+            document.getElementById("fleetImageModal").style.display = "flex";
+            document.getElementById("modalImage").src = img.src;
+        }
+        
+        function closeImageModal() {
+            document.getElementById("fleetImageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

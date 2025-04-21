@@ -64,6 +64,7 @@ def collect_fleet_files():
             print("WARN: fleet not in whitelist", fleet_file_path.name)
             continue
 
+
 def parse_battle_report(file_path: Path) -> MatchData:
     ANS_HULLKEYS = [
         'Stock/Sprinter Corvette',
@@ -552,9 +553,9 @@ def render_player_page(
         <img src="../dlo.webp" alt="Logo" width="150">
         <h1>{player_data['steam_name']} - Player Statistics</h1>
         <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
-        | <a href="index.html">Player Leaderboard</a>
-        | <a href="rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="match_history.html">Match History</a>
+        | <a href="../index.html">Player Leaderboard</a>
+        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="../match_history.html">Match History</a>
     </div>
 
     <table class="stats-table">
@@ -770,6 +771,29 @@ def generate_dlo_plot(
     )
 
 
+def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
+    teammates = []
+    for teammate_id, stats in player_data['teammates'].items():
+        # Skip teammates with zero wins
+        if stats['wins'] == 0:
+            continue
+            
+        if teammate_id in database:
+            win_rate = stats['wins'] / stats['games']
+            teammates.append({
+                'id': teammate_id,
+                'name': database[teammate_id]['steam_name'],
+                'games': stats['games'],
+                'wins': stats['wins'],
+                'win_rate': win_rate
+            })
+    
+    # Sort by win rate (descending), then games played (descending)
+    sorted_teammates = sorted(teammates, 
+                            key=lambda x: (-x['wins'], -x['win_rate']))
+    
+    return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
+
 def render_match_history(
     match_history: List[MatchData],
 ) -> None:
@@ -777,6 +801,10 @@ def render_match_history(
     sorted_match_history = sorted(match_history, 
                         key=lambda d: d["time"], 
                         reverse=True)
+
+    # Generate individual match pages
+    for match_data in sorted_match_history:
+        render_match_details(match_data)
     
     # match history HTML
     html_content = f'''
@@ -872,28 +900,164 @@ def render_match_history(
     output_path.write_text(html_content)
     print(f"\nGenerated match history")
 
-def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
-    teammates = []
-    for teammate_id, stats in player_data['teammates'].items():
-        # Skip teammates with zero wins
-        if stats['wins'] == 0:
-            continue
-            
-        if teammate_id in database:
-            win_rate = stats['wins'] / stats['games']
-            teammates.append({
-                'id': teammate_id,
-                'name': database[teammate_id]['steam_name'],
-                'games': stats['games'],
-                'wins': stats['wins'],
-                'win_rate': win_rate
-            })
+def render_match_details(match_data: MatchData) -> None:
+    """Generate an HTML page with detailed match information"""
+    teams = match_data["teams"]
+    winning_team = match_data["winning_team"]
     
-    # Sort by win rate (descending), then games played (descending)
-    sorted_teammates = sorted(teammates, 
-                            key=lambda x: (-x['wins'], -x['win_rate']))
-    
-    return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
+    html_content = f'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Details - {match_data["time"]}</title>
+    <style>
+        body {{
+            font-family: monospace;
+            margin: 2rem;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }}
+        .header {{
+            border-bottom: 2px solid #3a3a3a;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }}
+        a {{
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }}
+        a:hover {{
+            color: #00ffff;
+            text-decoration: underline;
+        }}
+        h1, h2 {{
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }}
+        
+        /* Match details specific styles */
+        .match-info {{
+            margin-bottom: 2rem;
+        }}
+        .teams {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }}
+        .team {{
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #3a3a3a;
+        }}
+        .player {{
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #262626;
+            border-radius: 4px;
+        }}
+        .fleet-image {{
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            cursor: zoom-in;
+        }}
+        .fleet-image-modal {{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }}
+        .fleet-image-modal img {{
+            max-width: 90%;
+            max-height: 90%;
+            height: auto;
+            border-radius: 4px;
+        }}
+        .close {{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #e0e0e0;
+            cursor: pointer;
+        }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Match Details - {match_data["time"]}</h1>
+        <a href="../index.html">Player Leaderboard</a> 
+        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="../match_history.html">Match History</a>
+    </div>
+
+    <div class="match-info">
+        <h2>Match Statistics</h2>
+        <p>Average DLO: {match_data["avg_dlo"]:0.2f}</p>
+        <p>Match Quality: {match_data["match_quality"]:0.2f}</p>
+        <p>Winning Team: {winning_team}</p>
+        <h3>Map: [Map Not Recorded]</h3>
+    </div>
+
+    <div class="teams">
+        <!-- Team A -->
+        <div class="team">
+            <h2>{winning_team == "TeamA" and "Winning Team" or "Losing Team"}</h2>
+            {"".join(
+            f'<div class="player">'f'<h3><a href="docs/player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
+            f'Fleet: '
+            f'</div>'
+                for player in teams["TeamA"]
+            )}
+        </div>
+
+        <!-- Team B -->
+        <div class="team">
+            <h2>{winning_team == "TeamB" and "Winning Team" or "Losing Team"}</h2>
+            {"".join(
+                f'<div class="player">'
+                f'<h3>{player["steam_name"]} ({player["faction"]})</h3>'
+                f'Fleet: '
+                f'</div>'
+                for player in teams["TeamB"]
+            )}
+        </div>
+    </div>
+
+    <!-- Fleet Image Modal -->
+    <div id="fleetImageModal" class="fleet-image-modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <script>
+        function openImageModal(img) {{
+            document.getElementById("fleetImageModal").style.display = "flex";
+            document.getElementById("modalImage").src = img.src;
+        }}
+        
+        function closeImageModal() {{
+            document.getElementById("fleetImageModal").style.display = "none";
+        }}
+    </script>
+</body>
+</html>
+'''
+
+    output_path = Path(f'docs/match/{match_data["time"].strftime("%Y%m%d_%H%M%S")}.html')
+    output_path.parent.mkdir(exist_ok=True)
+    output_path.write_text(html_content)
+    print(f"Generated match details for {match_data['time']}")
 
 def load_rank_adjustments(file_path: str = 'rank_adjustments.json') -> List[Dict[str, Any]]:
     """Load manual rating adjustments from JSON file"""
