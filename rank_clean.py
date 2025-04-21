@@ -1,6 +1,7 @@
 from openskill.models import PlackettLuce, PlackettLuceRating
 from typing import TypedDict, Any, Dict, List, Tuple, Optional
 from datetime import datetime
+import shutil
 import os
 import xml.etree.ElementTree as ET
 import glob
@@ -15,11 +16,11 @@ import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# Define type aliases and custom types
 class PlayerInfo(TypedDict):
     player_id: str
     steam_name: str
     faction: str
+    fleet_file_path: Path
 
 class PlayerData(TypedDict):
     steam_name: str
@@ -34,10 +35,36 @@ class PlayerData(TypedDict):
     history: List[Tuple[datetime, float]]
     teammates: Dict[str, Dict[str, int]]
 
+class MatchData(TypedDict):
+    valid: bool
+    time: datetime
+    teams: Dict[str, PlayerInfo]
+    winning_team: str
+    avg_dlo: float
+    match_quality: float
+
 HistogramType = Dict[str, Dict[int, float]]
 
+def collect_fleet_files():
+    """store fleet files from people on the whitelist"""
+    fleet_file_dir = Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/Fleets/")
+    whitelist_file_path = (Path(__file__).parent).joinpath('fleet_dlo_whitelist.txt')
+    whitelist = []
+    with open(whitelist_file_path, 'r') as f:
+        for line in f:
+            steam_id = line.rstrip('\r\n')
+            if steam_id.isdigit():
+                whitelist.append(steam_id)
 
-def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInfo]], str]:
+    for fleet_file_path in fleet_file_dir.iterdir():
+        if any(steam_id in fleet_file_path.name for steam_id in whitelist):
+            print("INFO: saving fleet:", fleet_file_path.name)
+            shutil.copy(fleet_file_path, (Path(__file__).parent).joinpath('docs/fleets'))
+        else:
+            print("WARN: fleet not in whitelist", fleet_file_path.name)
+            continue
+
+def parse_battle_report(file_path: Path) -> MatchData:
     ANS_HULLKEYS = [
         'Stock/Sprinter Corvette',
         'Stock/Raines Frigate',
@@ -58,8 +85,11 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         'Stock/Container Hauler',
         'Stock/Container Hauler Refit']
 
+    game_time = parse_skirmish_report_datetime(Path(os.path.split(file_path)[1]))
+
     with open(file_path) as fp:
         xml_string = fp.read()
+        # handle edge cases where xml encoding format doesn't match or extra data is leftover after BR
         last_gt_index = xml_string.rfind('>')
         if last_gt_index != -1:
             xml_string = xml_string[:last_gt_index + 1]
@@ -68,7 +98,13 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
 
     # validate basic params about game. if start timestamp is 0 game didn't start. If game duration is super long or super short something probably went wrong
     if int(root.find('GameStartTimestamp').text) == 0 or int(root.find('GameDuration').text) > 7000 or int(root.find('GameDuration').text) < 200 or not bool(root.find('GameFinished').text):
-        return False, {}, ''
+        return {
+            "valid": False,
+            "time": game_time,
+            "teams": {},
+            "winning_team": 'None',
+            "avg_dlo": 0.0,
+            "match_quality": 0.0}
 
     teams_data: Dict[str, List[PlayerInfo]] = {}
     
@@ -78,7 +114,7 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
         players: List[PlayerInfo] = []
 
         team_faction = ''
-        
+
         for player_element in team_element.findall('./Players/*'):
             player_name_element = player_element.find('PlayerName')
             account_id_element = player_element.find('AccountId/Value')
@@ -89,9 +125,6 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
             # find out if the player was ANS or OSP. This then updates the team_faction which gets applied after all players are parsed
             # This ensures even if one player DCs and loses all ships, we still report their original faction correctly
             player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
-            print(player_name)
-            for hk in player_hullkeys:
-                print(hk.text)
             is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
             is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
 
@@ -117,18 +150,32 @@ def parse_battle_report(file_path: Path) -> Tuple[bool, Dict[str, List[PlayerInf
 
     winner_element = root.find('WinningTeam')
     winner = winner_element.text if winner_element is not None else ''
-    return True, teams_data, winner
+    return {
+            "valid": True,
+            "time": game_time,
+            "teams": teams_data,
+            "winning_team": winner,
+            "avg_dlo": 0.0,
+            "match_quality": 0.0
+            }
 
-def update_database_and_teams(
-    teams_data: Dict[str, List[PlayerInfo]],
-    winner: str,
+def process_match_result(
+    match_data: MatchData,
+    match_history: List[MatchData],
     database: Dict[str, PlayerData],
     model: PlackettLuce,
 ) -> Dict[str, List[PlackettLuceRating]]:
     """updates database with all non DLO info, and returns lists of rating objects for later DLO scoring"""
     updated_teams: Dict[str, List[PlackettLuceRating]] = {}
 
-    for team_id, players in teams_data.items():
+    winner = match_data["winning_team"]
+
+    if not match_data['valid'] or winner not in match_data['teams']:
+        print(f"ERROR: invalid report found at {match_data['time']}")
+        return
+
+    # create teams of rating objects for ranking, and store match data to DB
+    for team_id, players in match_data['teams'].items():
         team_players: List[PlackettLuceRating] = []
         
         for player in players:
@@ -180,24 +227,13 @@ def update_database_and_teams(
                     db[teammate_id]["wins"] += 1
         updated_teams[team_id] = team_players 
 
-    return updated_teams
-
-def process_match_result(
-    winner: str,
-    updated_teams: Dict[str, List[PlackettLuceRating]],
-    model: PlackettLuce,
-    database: Dict[str, PlayerData],
-    game_time: datetime
-) -> None:
-    teams = updated_teams.copy()
-   
-    winner_team = teams.pop(winner)
-    other_team = teams[next(iter(teams))]
+    winner_team = updated_teams.pop(winner)
+    other_team = updated_teams[next(iter(updated_teams))]
 
     for player_rating in winner_team + other_team:
         player_id = player_rating.name
         database[player_id]['history'].append((
-            game_time,
+            match_data["time"],
             database[player_id]['rating_data'].ordinal()
         ))
 
@@ -226,8 +262,18 @@ def process_match_result(
                 sigma=average_sigma
             ))
 
+    # grab dlo metrics for match before scoring
+    average_mu = sum([p.mu for p in itertools.chain(winner_team, other_team)]) / (len(winner_team) + len(other_team))
+    average_sigma = sum([p.sigma for p in itertools.chain(winner_team, other_team)]) / (len(winner_team) + len(other_team))
+    average_dlo = average_mu - 3.0 * average_sigma
+    match_quality = model.predict_draw([winner_team, other_team])
+
+    match_data['avg_dlo'] = average_dlo
+    match_data['match_quality'] = match_quality
+
     rated_teams = model.rate([winner_team, other_team])
-    
+
+    # write ranking update back to database
     for team in rated_teams:
         for player in team:
             if player.name == 'TEST_PLAYER':
@@ -235,10 +281,12 @@ def process_match_result(
             player_id = player.name
             database[player_id]['rating_data'] = player
             database[player_id]['history'][-1] = (
-                game_time,
+                match_data['time'],
                 player.ordinal()
             )
 
+    # store match to match history
+    match_history.append(match_data)
 
 def update_histogram(
     histogram: HistogramType,
@@ -336,7 +384,9 @@ def render_leaderboard(
         <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
         <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
+        | <a href="index.html">DLO Player Leaderboard</a>
         | <a href="rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="match_history.html">DLO Match History</a>
     </div>
     
     <table>
@@ -717,6 +767,132 @@ def generate_dlo_plot(
         default_height='400px'
     )
 
+
+def render_match_history(
+    match_history: List[MatchData],
+) -> None:
+    """Display sorted leaderboard and generate static HTML"""
+    sorted_match_history = sorted(match_history, 
+                        key=lambda d: d["time"], 
+                        reverse=True)
+    
+    # match history HTML
+    html_content = f'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLO Leaderboard</title>
+    <style>
+        body {{
+            font-family: monospace;
+            margin: 2rem;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }}
+        .header {{
+            border-bottom: 2px solid #3a3a3a;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }}
+        th, td {{
+            padding: 0.75rem 1rem;
+            border: 1px solid #3a3a3a;
+            text-align: left;
+        }}
+        th {{
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
+        }}
+        tr:nth-child(even) {{
+            background-color: #262626;
+        }}
+        tr:hover {{
+            background-color: #363636;
+            transition: background-color 0.2s ease;
+        }}
+        a {{
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }}
+        a:hover {{
+            color: #00ffff;
+            text-decoration: underline;
+        }}
+        h1 {{
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="dlo.webp" alt="Logo" width="150">
+        <h1>Match History</h1>
+        <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
+        | <a href="index.html">Player Leaderboard</a>
+        | <a href="rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="match_history.html">Match History</a>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Average DLO</th>
+                <th>Match Quality</th>
+            </tr>
+        </thead>
+        <tbody>
+            {"".join(
+                f'<td><a href="player/{str(m["time"])}.html">{str(m["time"])}</a></td>'
+                f'<td>{m["avg_dlo"]:0.2f}</td>'
+                f'<td>{m["match_quality"]}</td>'
+                for m in sorted_match_history
+            )}
+        </tbody>
+    </table>
+</body>
+</html>
+        '''
+
+    output_path = Path('docs/match_history.html')
+    output_path.write_text(html_content)
+    print(f"\nGenerated match history")
+
+def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
+    teammates = []
+    for teammate_id, stats in player_data['teammates'].items():
+        # Skip teammates with zero wins
+        if stats['wins'] == 0:
+            continue
+            
+        if teammate_id in database:
+            win_rate = stats['wins'] / stats['games']
+            teammates.append({
+                'id': teammate_id,
+                'name': database[teammate_id]['steam_name'],
+                'games': stats['games'],
+                'wins': stats['wins'],
+                'win_rate': win_rate
+            })
+    
+    # Sort by win rate (descending), then games played (descending)
+    sorted_teammates = sorted(teammates, 
+                            key=lambda x: (-x['wins'], -x['win_rate']))
+    
+    return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
+
 def load_rank_adjustments(file_path: str = 'rank_adjustments.json') -> List[Dict[str, Any]]:
     """Load manual rating adjustments from JSON file"""
     try:
@@ -753,26 +929,36 @@ def apply_manual_adjustments(
         else:
             print(f"Warning: Player {adj['steam_name']} ({steam_id}) not found")
 
+def parse_skirmish_report_datetime(filename: Path) -> datetime:
+    formats = [
+        "%d-%b-%Y %H-%M-%S",    # For filenames like "14-Apr-2025 22-30-01"
+        "%Y-%m-%d %H:%M:%S.%f", # For strings like "2025-03-27 16:04:52.263218"
+    ]
+    datetime_str = filename.name.split(" - ")[-1].replace(".xml", "")
+
+    for fmt in formats:
+        try:
+            return datetime.strptime(datetime_str, fmt)
+        except ValueError:
+            continue
+    raise ValueError(f"Failed to parse datetime: {datetime_str}")
+
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     database: Dict[str, PlayerData] = {}
-    br_date_format = "%Y-%m-%d %H:%M:%S"
+    match_history: List[MatchData] = []
+    
+    # store new fleet files first
+    collect_fleet_files()
+
     battle_reports = sorted(
-        Path("/srv/BattleReports").iterdir(),
-        key=lambda p: datetime.strptime(p.with_suffix('').stem, br_date_format)
-    )
+        Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/").iterdir(),
+        key=parse_skirmish_report_datetime)
 
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
-        game_time = datetime.strptime(file.with_suffix('').stem, br_date_format)
-        
-        valid, teams_data, winner = parse_battle_report(file)
-        if not valid or winner not in teams_data:
-            print(f"ERROR: invalid report found at {file}")
-            continue
-        
-        updated_teams = update_database_and_teams(teams_data, winner, database, model)
-        process_match_result(winner, updated_teams, model, database, game_time)
+        match_data = parse_battle_report(file)
+        process_match_result(match_data, match_history, database, model)
 
     # Apply manual adjustments
     adjustments = load_rank_adjustments()
@@ -782,6 +968,7 @@ def main() -> None:
     
     plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)
+    render_match_history(match_history)
 
 if __name__ == "__main__":
     main()
