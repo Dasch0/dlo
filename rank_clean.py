@@ -384,9 +384,9 @@ def render_leaderboard(
         <img src="dlo.webp" alt="Logo" width="150">
         <h1>Player Leaderboard</h1>
         <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
-        | <a href="index.html">DLO Player Leaderboard</a>
+        | <a href="index.html">Player Leaderboard</a>
         | <a href="rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="match_history.html">DLO Match History</a>
+        | <a href="match_history.html">Match History</a>
     </div>
     
     <table>
@@ -552,7 +552,9 @@ def render_player_page(
         <img src="../dlo.webp" alt="Logo" width="150">
         <h1>{player_data['steam_name']} - Player Statistics</h1>
         <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
-        | <a href="../index.html">Back to Leaderboard</a>
+        | <a href="index.html">Player Leaderboard</a>
+        | <a href="rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="match_history.html">Match History</a>
     </div>
 
     <table class="stats-table">
@@ -855,9 +857,9 @@ def render_match_history(
         </thead>
         <tbody>
             {"".join(
-                f'<td><a href="player/{str(m["time"])}.html">{str(m["time"])}</a></td>'
+                f'<tr><td><a href="player/{str(m["time"])}.html">{str(m["time"])}</a></td>'
                 f'<td>{m["avg_dlo"]:0.2f}</td>'
-                f'<td>{m["match_quality"]}</td>'
+                f'<td>{m["match_quality"]}</td></tr>'
                 for m in sorted_match_history
             )}
         </tbody>
