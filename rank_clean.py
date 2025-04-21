@@ -939,8 +939,30 @@ def render_match_details(match_data: MatchData) -> None:
         }}
         
         /* Match details specific styles */
-        .match-info {{
-            margin-bottom: 2rem;
+        .stats-table {{
+            margin: 2rem 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }}
+        .stats-table td, .stats-table th {{
+            padding: 1rem;
+            border: 1px solid #3a3a3a;
+        }}
+        .stats-table th {{
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
+            width: 30%;
+        }}
+        .stats-table tr:nth-child(even) {{
+            background-color: #262626;
+        }}
+        .stats-table tr:hover {{
+            background-color: #363636;
+            transition: background-color 0.2s ease;
         }}
         .teams {{
             display: grid;
@@ -1001,13 +1023,21 @@ def render_match_details(match_data: MatchData) -> None:
         | <a href="../match_history.html">Match History</a>
     </div>
 
-    <div class="match-info">
-        <h2>Match Statistics</h2>
-        <p>Average DLO: {match_data["avg_dlo"]:0.2f}</p>
-        <p>Match Quality: {match_data["match_quality"]:0.2f}</p>
-        <p>Winning Team: {winning_team}</p>
-        <h3>Map: [Map Not Recorded]</h3>
-    </div>
+    <h2>Match Statistics</h2>
+    <table class="stats-table">
+        <tr>
+            <th>Average DLO</th>
+            <td>{match_data["avg_dlo"]:0.2f}</td>
+        </tr>
+        <tr>
+            <th>Match Quality</th>
+            <td>{match_data["match_quality"]:0.2f}</td>
+        </tr>
+        <tr>
+            <th>Map</th>
+            <td>Not Recorded</td>
+        </tr>
+    </table>
 
     <div class="teams">
         <!-- Team A -->

@@ -32,8 +32,30 @@
         }
         
         /* Match details specific styles */
-        .match-info {
-            margin-bottom: 2rem;
+        .stats-table {
+            margin: 2rem 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stats-table td, .stats-table th {
+            padding: 1rem;
+            border: 1px solid #3a3a3a;
+        }
+        .stats-table th {
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
+            width: 30%;
+        }
+        .stats-table tr:nth-child(even) {
+            background-color: #262626;
+        }
+        .stats-table tr:hover {
+            background-color: #363636;
+            transition: background-color 0.2s ease;
         }
         .teams {
             display: grid;
@@ -94,13 +116,21 @@
         | <a href="../match_history.html">Match History</a>
     </div>
 
-    <div class="match-info">
-        <h2>Match Statistics</h2>
-        <p>Average DLO: 2.16</p>
-        <p>Match Quality: 0.06</p>
-        <p>Winning Team: TeamA</p>
-        <h3>Map: [Map Not Recorded]</h3>
-    </div>
+    <h2>Match Statistics</h2>
+    <table class="stats-table">
+        <tr>
+            <th>Average DLO</th>
+            <td>2.16</td>
+        </tr>
+        <tr>
+            <th>Match Quality</th>
+            <td>0.06</td>
+        </tr>
+        <tr>
+            <th>Map</th>
+            <td>Not Recorded</td>
+        </tr>
+    </table>
 
     <div class="teams">
         <!-- Team A -->
