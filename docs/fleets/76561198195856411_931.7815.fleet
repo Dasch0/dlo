@@ -1,0 +1,1252 @@
+<?xml version="1.0"?>
+<Fleet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>The new real CLN</Name>
+  <Version>3</Version>
+  <TotalPoints>3000</TotalPoints>
+  <FactionKey>Stock/Protectorate</FactionKey>
+  <SortOverrideOrder xsi:nil="true" />
+  <Ships>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>02771d4e-13b3-4469-97c4-60ebe0c41160</Key>
+      <Name>Sensitive Femboy Shark</Name>
+      <Cost>3000</Cost>
+      <Callsign />
+      <Number>1391</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Stock/Container Hauler Refit</HullType>
+      <HullConfig xsi:type="RandomHullConfiguration">
+        <PrimaryStructure>
+          <SegmentConfiguration>
+            <Key>bb034299-84c2-456f-b271-c91249cd4375</Key>
+            <Dressing>
+              <int>1</int>
+            </Dressing>
+          </SegmentConfiguration>
+          <SegmentConfiguration>
+            <Key>09354e51-953c-451a-b415-3e3361812650</Key>
+            <Dressing>
+              <int>1</int>
+              <int>1</int>
+              <int>0</int>
+            </Dressing>
+          </SegmentConfiguration>
+          <SegmentConfiguration>
+            <Key>aff1eba2-048e-4477-956b-574f4d468f1d</Key>
+            <Dressing>
+              <int>1</int>
+            </Dressing>
+          </SegmentConfiguration>
+        </PrimaryStructure>
+        <SecondaryStructure>
+          <SecondaryStructureConfig>
+            <Key>42d07c1a-156b-4057-aaca-7a2024751423</Key>
+            <Segment>2</Segment>
+            <SnapPoint>0</SnapPoint>
+          </SecondaryStructureConfig>
+        </SecondaryStructure>
+        <HullTint>
+          <r>0.764815748</r>
+          <g>0.764815748</g>
+          <b>0.764815748</b>
+          <a>1</a>
+        </HullTint>
+        <TextureVariation>
+          <x>-497.3475</x>
+          <y>-818.2285</y>
+          <z>-73.91489</z>
+        </TextureVariation>
+      </HullConfig>
+      <SocketMap>
+        <HullSocket>
+          <Key>uLHDwjLFekuYaY3h0JwZoQ</Key>
+          <ComponentName>Stock/Container Bank Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>VPjVmrl4Y0CsZ8YTpHVz2g</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-421 Dead Sky</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Ndx_PO_e2E-Z927o-00WbQ</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-422 Wanderer</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>5zJl-kDvWE-cM0wF-B6MWQ</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-421 Dead Sky</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>44SMwZSbRkOQyQmJ458Y1Q</Key>
+          <ComponentName>Stock/Container Bank Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>wGs9fC0J7UyU52gPtJBDrQ</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-422 Wanderer</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>SAM6u3zwfEWvMq95KqBEAA</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-411 Last Gasp</MunitionKey>
+                <Quantity>12</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>trDu5HK3h0WcLM_cvnWUiw</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-432 Blind Hope</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>VkODw--0zk-K4FkajpPjwQ</Key>
+          <ComponentName>Stock/Container Bank Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>KGZffYCWcEG8NvQwBi__Cg</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-431 Shattered Hope</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>VD9nBBskRkeT-lcakdT1ag</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-431 Shattered Hope</MunitionKey>
+                <Quantity>24</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>F-nHNZm4Z0WZMJakJAwlPw</Key>
+          <ComponentName>Stock/Container Bank Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>AMnlrZf2YkOzF3vNEoSIuw</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-451 Death Rattle</MunitionKey>
+                <Quantity>8</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>VHVvfHEB50-WIGBF7uGIkg</MagazineKey>
+                <MunitionKey>$MODMIS$/CM-444 Veilbreaker</MunitionKey>
+                <Quantity>12</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>3WEnDKibY0-WJvtq9-tmuA</Key>
+          <ComponentName>Stock/C4 Mount Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RF-286 Sunfish</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>6HbbAtLFGUOi-kq06ErQdA</Key>
+          <ComponentName>Stock/C4 Mount Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RF-286 Sunfish</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>y70HHuLWd0uphO2H-hvZGQ</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>WScXuzgPkEabseT2bH91jQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-111 Broken Promise</MunitionKey>
+                <Quantity>8</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>iWiBr9uCyUCBub-IIW2bZg</Key>
+          <ComponentName>Stock/Citadel Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>wTkOWc7Z7kmPmC60tFVK3w</MagazineKey>
+                <MunitionKey>Stock/35mm Flechette</MunitionKey>
+                <Quantity>3000</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>9jPOgF-nC0aHVKrZkyPHaw</MagazineKey>
+                <MunitionKey>Stock/20mm Slug</MunitionKey>
+                <Quantity>10000</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>y1Cs8LR0KUyCKUAJBIOyOg</Key>
+          <ComponentName>Stock/Container Datalink Array</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>QhdtovcTk0WSpMAUsBIF6Q</Key>
+          <ComponentName>Stock/Bulk Internal Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RS-351 Thresher</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RS-351 Thresher</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RS-351 Thresher</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>hs-SaPpehUu8ZbwsuJSvXw</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>jhY0RlqxLkW69clFCGXELA</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>OE8qVccIYEGwfvJXsiFgoA</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>yxnQxeuUHUO22pm-LQu4Cg</Key>
+          <ComponentName>Stock/BW1500 Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>_uEQzHKRzEqqIqa1c8wJcw</Key>
+          <ComponentName>Stock/Civilian Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>OY726V7rAUKDR92MQM7gnQ</Key>
+          <ComponentName>Stock/Ithaca Bridgemaster</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>SmUC0Jc9FEuCeKc_ZJMxIg</Key>
+          <ComponentName>Stock/Missile Parallel Interface</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <Designation>CM-431</Designation>
+      <Nickname>Shattered Hope</Nickname>
+      <Description>CRUISE - ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[PSV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)]/SAH(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - HE SHAPED</Description>
+      <LongDescription>The &lt;noparse&gt;CM-431 Shattered Hope&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using an Active Radar seeker, validating that it is the correct target using a Passive Wake seeker  If the primary seeker does not find a target or is jammed, it can fall back on a Semi-Active Radar seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Validation Seeker: PASSIVE (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+Backup Seeker: SEMI-ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+Speed: 200 m/s
+Distance: 20,825 m
+Top Speed In: 2.4 s
+Turn Rate: 1.9 G
+Terminal Maneuvers: Weave
+(&lt;color=#D3D11F&gt;May decrease effective range&lt;/color&gt;)
+
+Warhead: Contact Fuze, High Explosive, Shaped
+Armor: 142cm
+Component: 6,720hp
+Blast Angle: 70 deg
+Damage Per Fragment: 50.0
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>7</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>cafa7c58-cedf-461d-84e5-18517ab45370</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.325442255</B>
+              <C>0.174240708</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>CM-421</Designation>
+      <Nickname>Dead Sky</Nickname>
+      <Description>CRUISE - SAH(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/ARAD(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - HE SHAPED</Description>
+      <LongDescription>The &lt;noparse&gt;CM-421 Dead Sky&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using a Semi-Active Radar seeker  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: SEMI-ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Backup Seeker: ANTI-RADIATION (All &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals)
+
+Speed: 200 m/s
+Distance: 20,825 m
+Top Speed In: 2.4 s
+Turn Rate: 1.9 G
+Terminal Maneuvers: Weave
+(&lt;color=#D3D11F&gt;May decrease effective range&lt;/color&gt;)
+
+Warhead: Contact Fuze, High Explosive, Shaped
+Armor: 142cm
+Component: 6,720hp
+Blast Angle: 70 deg
+Damage Per Fragment: 50.0
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>13</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>b035c990-13a0-4276-86c1-d1eb7434cafe</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>All</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.325442255</B>
+              <C>0.174240708</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>CM-432</Designation>
+      <Nickname>Blind Hope</Nickname>
+      <Description>CRUISE - SAH(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[PSV(&lt;color=#ED211D&gt;THERM&lt;/color&gt;)] - HE SHAPED</Description>
+      <LongDescription>The &lt;noparse&gt;CM-432 Blind Hope&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using a Semi-Active Radar seeker, validating that it is the correct target using a Passive Wake seeker  If the primary seeker does not find a target or is jammed, it can fall back on an Active Radar seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: SEMI-ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Backup Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Validation Seeker: PASSIVE (&lt;color=#ED211D&gt;THERM&lt;/color&gt;)
+
+Speed: 200 m/s
+Distance: 20,825 m
+Top Speed In: 2.4 s
+Turn Rate: 1.9 G
+Terminal Maneuvers: Weave
+(&lt;color=#D3D11F&gt;May decrease effective range&lt;/color&gt;)
+
+Warhead: Contact Fuze, High Explosive, Shaped
+Armor: 142cm
+Component: 6,720hp
+Blast Angle: 70 deg
+Damage Per Fragment: 50.0
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>9</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>48c03889-0a46-44f5-8e50-1423521f9785</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Extended Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.325442255</B>
+              <C>0.174240708</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Thermal Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>CM-422</Designation>
+      <Nickname>Wanderer</Nickname>
+      <Description>CRUISE - ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[ARAD(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)] - HE SHAPED</Description>
+      <LongDescription>The &lt;noparse&gt;CM-422 Wanderer&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using an Active Radar seeker, validating that it is the correct target using a Radar Anti-Radiation seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Validation Seeker: ANTI-RADIATION (All &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals)
+
+Speed: 200 m/s
+Distance: 20,825 m
+Top Speed In: 2.4 s
+Turn Rate: 1.9 G
+Terminal Maneuvers: Weave
+(&lt;color=#D3D11F&gt;May decrease effective range&lt;/color&gt;)
+
+Warhead: Contact Fuze, High Explosive, Shaped
+Armor: 142cm
+Component: 6,720hp
+Blast Angle: 70 deg
+Damage Per Fragment: 50.0
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>14</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>a9f75832-dd2a-4e87-981f-1dc2115ebda1</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Extended Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>All</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.325442255</B>
+              <C>0.174240708</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>CM-41 Emergency Anti-Torpedo</AssociatedTemplateName>
+      <Designation>CM-451</Designation>
+      <Nickname>Death Rattle</Nickname>
+      <Description>DIRECT - ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/HOJ(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - HE FRAG</Description>
+      <LongDescription>The &lt;noparse&gt;CM-451 Death Rattle&lt;/noparse&gt; is a size 4 direct guidance missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead.  It homes in on its target using an Active Radar seeker  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.
+
+Control Method: DIRECT
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Backup Seeker: HOME-ON-JAM (&lt;color=#3BC81E&gt;RADAR&lt;/color&gt; JAMMING Signals Only)
+
+Speed: 200 m/s
+Distance: 4,823 m
+Top Speed In: 1.6 s
+Turn Rate: 3.0 G
+Terminal Maneuvers: None
+
+Warhead: Proximity Fuze, High Explosive, Blast Fragmentation
+Armor: 0.95cm
+Component: 300.92hp
+Blast Radius: 215 m
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>5</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>97c40fe8-57a4-40c7-af5a-11232e7a6354</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>JammingOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>8</TargetSizeMask>
+              <TargetType>Conventional</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.49748674</A>
+              <B>0.01532758</B>
+              <C>0.4871857</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>SGM-111</Designation>
+      <Nickname>Broken Promise</Nickname>
+      <Description>DIRECT - &lt;color=#D3D11F&gt;CMD&lt;/color&gt; - HE SHAPED</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-111 Broken Promise&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using command guidance from its launching ship.
+
+Control Method: DIRECT
+Targeting Modes: &lt;b&gt;&lt;color=#D4211D&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: COMMAND (&lt;color=#D3D11F&gt;Requires COMMS Enabled&lt;/color&gt;)
+
+Speed: 365 m/s
+Distance: 3,529 m
+Top Speed In: 1.0 s
+Turn Rate: 4.8 G
+Terminal Maneuvers: None
+
+Warhead: Contact Fuze, High Explosive, Shaped
+Armor: 31cm
+Component: 317hp
+Blast Angle: 70 deg
+Damage Per Fragment: 50.0
+
+Body Integrity: 10 
+Wall Thickness: 0.05
+Programming Time: 6 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>4</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>9eb953e1-1ff7-43e9-8928-33eee7c5c449</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>0.4862745</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.254901975</r>
+        <g>0.254901975</g>
+        <b>0.254901975</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.767340243</A>
+              <B>0.232659772</B>
+              <C>-1.49011612E-08</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>CM-444</Designation>
+      <Nickname>Veilbreaker</Nickname>
+      <Description>CRUISE - ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - SUBMN</Description>
+      <LongDescription>The &lt;noparse&gt;CM-444 Veilbreaker&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Submunition Delivery warhead.  It homes in on its target using an Active Radar seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+Speed: 200 m/s
+Distance: 20,825 m
+Top Speed In: 2.4 s
+Turn Rate: 1.9 G
+Terminal Maneuvers: None
+
+Warhead: Submunition Delivery
+Submunition Type: R-2 'Piranha' Rocket
+Submunition Count: 4
+Total Volume: 38.00 m&lt;sup&gt;2&lt;/sup&gt;
+Spread Angle: NARROW CONE
+Release Time: SINGLE BURST
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>8</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>c2310c83-912c-44f9-babc-cf43a96d6d4c</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Extended Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="SelectableSubmunitionWarheadSettings">
+            <ComponentKey>Stock/Selectable Submunition</ComponentKey>
+            <Mode>TargetAcquisition</Mode>
+            <SpreadOption>0</SpreadOption>
+            <Range>700</Range>
+            <SubmunitionKey>Stock/S1 Rocket</SubmunitionKey>
+            <Interval>0</Interval>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.325442255</B>
+              <C>0.174240708</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>CM-411</Designation>
+      <Nickname>Last Gasp</Nickname>
+      <Description>CRUISE - ACT(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[PSV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)] - SUBMN</Description>
+      <LongDescription>The &lt;noparse&gt;CM-411 Last Gasp&lt;/noparse&gt; is a size 4 waypoint-capable cruise missile.  It is based on the CM-4 body, which is a heavy anti-ship torpedo.  This missile will deliver a Submunition Delivery warhead.  It homes in on its target using an Active Radar seeker, validating that it is the correct target using a Passive Wake seeker.
+
+Control Method: CRUISE (Waypoint Capable)
+Targeting Modes: &lt;b&gt;&lt;color=#3BC81E&gt;POSITION&lt;/color&gt;	&lt;color=#3BC81E&gt;TRACK[+TRP]&lt;/color&gt;&lt;/b&gt;
+
+Primary Seeker: ACTIVE &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+Validation Seeker: PASSIVE (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+Speed: 200 m/s
+Distance: 29,976 m
+Top Speed In: 2.3 s
+Turn Rate: 2.0 G
+Terminal Maneuvers: None
+
+Warhead: Submunition Delivery
+Submunition Type: KBU-22 Bomb
+Submunition Count: 1
+Total Volume: 16.00 m&lt;sup&gt;2&lt;/sup&gt;
+Spread Angle: NARROW CONE
+Release Time: SINGLE BURST
+
+Body Integrity: 150 
+Wall Thickness: 0.2
+Programming Time: 20 s
+Radar Signature Bonus: 100 %
+Boost-Phase Duration: 3 s
+Boost-Phase Strafe: 100 %
+Boost-Phase Turn Rate: 100 %
+Failure Rate: 0 %</LongDescription>
+      <Cost>10</Cost>
+      <BodyKey>Stock/CM-4 Body</BodyKey>
+      <TemplateKey>e11190bb-b6df-46ad-9fca-4cd002b59cf7</TemplateKey>
+      <BaseColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="SelectableSubmunitionWarheadSettings">
+            <ComponentKey>Stock/Selectable Submunition</ComponentKey>
+            <Mode>TargetAcquisition</Mode>
+            <SpreadOption>0</SpreadOption>
+            <Range>100</Range>
+            <SubmunitionKey>Stock/S2 Glide Bomb</SubmunitionKey>
+            <Interval>0</Interval>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>11</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.500317037</A>
+              <B>0.28985852</B>
+              <C>0.209824443</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+  </MissileTypes>
+  <CraftTypes>
+    <CraftTemplate>
+      <AssociatedTemplateName>1 Thresher</AssociatedTemplateName>
+      <DesignationSuffix>1</DesignationSuffix>
+      <Nickname>Thresher</Nickname>
+      <LongDescription>Frame Model: Halberd
+Frame Class: Skiff
+Base Cost: 15
+Storage Size: 1
+Pad Size: 6 x 6
+PD Threat Size: 1
+Frame Integrity: 130
+Skin Thickness: 0.30
+
+Idle Speed: 20 m/s
+Cruise Speed: 45 m/s
+Cruise (HBRN) Speed: 68 m/s
+Combat Speed: 68 m/s
+
+Fuel Capacity: 1,200
+Loiter Time: 33:20
+Cruise Range: 36 km
+
+Thruster Power: 188
+Frame Mass: 30.00
+Loadout Mass: -
+Total Mass: 30.00
+
+&lt;b&gt;Components:&lt;/b&gt;
+Nose: 35mm Gun
+Mission Package: Wake Sensor
+
+&lt;b&gt;Loadouts:&lt;/b&gt;
+Scout: 1,000x &lt;noparse&gt;35mm Flechette&lt;/noparse&gt;</LongDescription>
+      <Cost>30</Cost>
+      <FrameKey>Stock/OSP Skiff</FrameKey>
+      <TemplateKey>c54857b8-130c-41c4-97ca-c155ac690fbe</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>nose</SocketKey>
+          <ComponentKey>nose_gun50mm</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>mission</SocketKey>
+          <ComponentKey>mission_wake</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>Scout</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+    <CraftTemplate>
+      <AssociatedTemplateName> Sunfish</AssociatedTemplateName>
+      <DesignationSuffix />
+      <Nickname>Sunfish</Nickname>
+      <LongDescription>Frame Model: Pike
+Frame Class: Scout
+Base Cost: 8
+Storage Size: 1
+Pad Size: 6 x 6
+PD Threat Size: 1
+Frame Integrity: 40
+Skin Thickness: 0.10
+
+Idle Speed: 40 m/s
+Cruise Speed: 85 m/s
+Cruise (HBRN) Speed: 128 m/s
+Combat Speed: 128 m/s
+
+Fuel Capacity: 500
+Loiter Time: 11:07
+Cruise Range: 43 km
+
+Thruster Power: 150
+Frame Mass: 5.00
+Loadout Mass: -
+Total Mass: 5.00
+
+&lt;b&gt;Components:&lt;/b&gt;
+Nose: 20mm Gun
+Top: EO Targeting Ball
+
+&lt;b&gt;Loadouts:&lt;/b&gt;
+Target Designator: 1,000x &lt;noparse&gt;20mm Slug&lt;/noparse&gt;
+Loitering Scout: 1,000x &lt;noparse&gt;20mm Slug&lt;/noparse&gt;</LongDescription>
+      <Cost>20</Cost>
+      <FrameKey>Stock/OSP Scout</FrameKey>
+      <TemplateKey>7102b3de-855f-4371-9472-47946a98f009</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>nose</SocketKey>
+          <ComponentKey>nose_gun20mm</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>top</SocketKey>
+          <ComponentKey>top_targeting</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>Target Designator</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/20mm Slug</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>outboard</SocketKey>
+              <ComponentKey>outboard_illuminator</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Loitering Scout</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/20mm Slug</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>outboard</SocketKey>
+              <ComponentKey>outboard_fuelpods</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+  </CraftTypes>
+</Fleet>
