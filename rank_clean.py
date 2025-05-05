@@ -1,8 +1,10 @@
 from openskill.models import PlackettLuce, PlackettLuceRating
 from typing import TypedDict, Any, Dict, List, Tuple, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 import shutil
 import os
+import sys
+import time
 import xml.etree.ElementTree as ET
 import glob
 import itertools
@@ -15,12 +17,19 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from nfcli import determine_output_png, init_logger, load_path, nfc_theme
+from nfcli.parsers import parse_any, parse_mods
+
+class FleetEntry(TypedDict):
+    time: datetime
+    fleet_file: Path
+    fleet_image: Path
 
 class PlayerInfo(TypedDict):
     player_id: str
     steam_name: str
     faction: str
-    fleet_file_path: Path
+    fleet: FleetEntry
 
 class PlayerData(TypedDict):
     steam_name: str
@@ -38,7 +47,7 @@ class PlayerData(TypedDict):
 class MatchData(TypedDict):
     valid: bool
     time: datetime
-    teams: Dict[str, PlayerInfo]
+    teams: Dict[str, List[PlayerInfo]]
     winning_team: str
     avg_dlo: float
     match_quality: float
@@ -57,15 +66,35 @@ def collect_fleet_files():
                 whitelist.append(steam_id)
 
     for fleet_file_path in fleet_file_dir.iterdir():
+        if not fleet_file_path.name.endswith('.fleet'):
+            continue
         if any(steam_id in fleet_file_path.name for steam_id in whitelist):
-            print("INFO: saving fleet:", fleet_file_path.name)
+            print("INFO: saving fleet file:", fleet_file_path.name)
             shutil.copy(fleet_file_path, (Path(__file__).parent).joinpath('docs/fleets'))
+            # rename the copied file so it has a proper timestamp to associate with skirmish reports later
+            original_creation_time = os.path.getctime(fleet_file_path)
+            new_name = f"{fleet_file_path.name.split('_')[0]}_{original_creation_time}.fleet"
+            dirpath = (Path(__file__).parent).joinpath('docs/fleets')
+            os.rename(os.path.join(dirpath, fleet_file_path.name), os.path.join(dirpath, new_name))
         else:
             print("WARN: fleet not in whitelist", fleet_file_path.name)
             continue
 
+def generate_fleet_images():
+    fleet_file_dir = (Path(__file__).parent).joinpath('docs/fleets')
+    for fleet_file_path in fleet_file_dir.iterdir():
+        if not fleet_file_path.name.endswith('.fleet'):
+            continue
+        output_file = determine_output_png(str(fleet_file_path))
+        if os.path.exists(os.path.join(fleet_file_dir, output_file)):
+            continue
+        print("INFO: generating fleet fleet image for", fleet_file_path)
+        xml_data = load_path(str(fleet_file_path))
+        entity = parse_any(str(fleet_file_path), xml_data)
+        if entity:
+            entity.write(os.path.join(fleet_file_dir, output_file))
 
-def parse_battle_report(file_path: Path) -> MatchData:
+def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]]) -> MatchData:
     ANS_HULLKEYS = [
         'Stock/Sprinter Corvette',
         'Stock/Raines Frigate',
@@ -87,6 +116,10 @@ def parse_battle_report(file_path: Path) -> MatchData:
         'Stock/Container Hauler Refit']
 
     game_time = parse_skirmish_report_datetime(Path(os.path.split(file_path)[1]))
+
+    test_time_str = "2025-04-26 05:58:07"
+    date_format = "%Y-%m-%d %H:%M:%S"
+    test_time = datetime.strptime(test_time_str, date_format)
 
     with open(file_path) as fp:
         xml_string = fp.read()
@@ -133,15 +166,16 @@ def parse_battle_report(file_path: Path) -> MatchData:
                 team_faction = 'ANS'
             if is_player_OSP and team_faction != 'ANS':
                 team_faction = 'OSP'
-            
-            players.append({
+
+            player = {
                 'player_id': player_id,
                 'steam_name': player_name,
-            })
+            }
+            player = find_player_fleet(game_time, player, fleet_lut)
+            players.append(player)
 
         # assign team faction at the end to catch any players who had zero ships in the battle report
         for p in players:
-            print(p)
             p['faction'] = team_faction
        
         for p in players:
@@ -159,6 +193,61 @@ def parse_battle_report(file_path: Path) -> MatchData:
             "avg_dlo": 0.0,
             "match_quality": 0.0
             }
+
+def build_fleet_lut() -> Dict[str, List[FleetEntry]]:
+    fleet_dir_path = (Path(__file__).parent).joinpath('docs/fleets')
+    fleets = os.listdir(fleet_dir_path)
+
+    fleet_lut = {}
+
+    for fleet in fleets:
+        if not fleet.endswith('.fleet'):
+            continue
+        tokens = fleet.split('_')
+        steam_id = tokens[0]
+        timestamp = datetime.fromtimestamp(float(tokens[-1].strip('.fleet')))
+        png_path = determine_output_png(fleet)
+        if steam_id not in fleet_lut:
+            fleet_lut[steam_id] = []
+        else:
+            fleet_lut[steam_id].append({"time": timestamp, "fleet_file": fleet, "fleet_image": png_path})
+
+    return fleet_lut
+
+def find_player_fleet(game_time: datetime, player: PlayerInfo, fleet_lut: Dict[str, List[FleetEntry]]) -> PlayerInfo:
+    ''' find associated player fleets and add them to match data'''
+
+    fleet_dir_path = (Path(__file__).parent).joinpath('docs/fleets')
+    fleets = os.listdir(fleet_dir_path)
+
+    candidate_fleets = fleet_lut.get(player["player_id"], [])
+
+    best_diff = None
+    best_idx = None
+    for idx, fleet in enumerate(candidate_fleets): 
+        # find the fleet with the closest timestamp to right before the game
+        diff = fleet['time'] - game_time 
+        if timedelta(minutes=-120) <= diff <= timedelta(minutes=0):
+            if best_diff is None:
+                best_diff = diff
+                best_idx = idx
+            if best_diff < diff: # since all diffs are negative, ideal diff is the largest one
+                best_dff = diff
+                best_idx = idx
+    
+    if best_idx is None:
+        print('INFO: no valid fleet found for', player['steam_name'], 'at', game_time)
+        return player
+    else:
+        # pop the fleet off the list so we don't end up with duplicates. Cooked way of trying to sorta handle multiboxing
+        fleet_list = fleet_lut.get(player['player_id'], [])
+        best_entry = fleet_list.pop(best_idx)
+        fleet_lut['player_id'] = fleet_list
+
+        print('INFO: found fleet file', best_entry, 'for', player['steam_name'], 'at', game_time)
+        player['fleet'] = best_entry
+
+        return player
 
 def process_match_result(
     match_data: MatchData,
@@ -272,7 +361,16 @@ def process_match_result(
     match_data['avg_dlo'] = average_dlo
     match_data['match_quality'] = match_quality
 
-    rated_teams = model.rate([winner_team, other_team])
+    #FIXME: temporary higher weighting of games played during events
+    # rank game
+    event_time = datetime(2025,5,3,8,0,0)
+    game_time_diff = match_data['time'] - event_time
+    weight_more = (timedelta(minutes=0) <= game_time_diff <= timedelta(minutes=240))
+    if weight_more:
+        weights = [[1.77 for _ in range(len(winner_team))] for _ in range(2)]
+        rated_teams = model.rate([winner_team, other_team], weights=weights)
+    else: 
+        rated_teams = model.rate([winner_team, other_team])
 
     # write ranking update back to database
     for team in rated_teams:
@@ -869,7 +967,6 @@ def render_match_history(
     <div class="header">
         <img src="dlo.webp" alt="Logo" width="150">
         <h1>Match History</h1>
-        <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
         | <a href="index.html">Player Leaderboard</a>
         | <a href="rank_distribution.html">DLO Rank Distributions</a>
         | <a href="match_history.html">Match History</a>
@@ -1013,6 +1110,13 @@ def render_match_details(match_data: MatchData) -> None:
             color: #e0e0e0;
             cursor: pointer;
         }}
+        .fleet-preview {{
+            max-width: 400px;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 0.5rem 0;
+            display: block;
+        }}
     </style>
 </head>
 <body>
@@ -1044,9 +1148,14 @@ def render_match_details(match_data: MatchData) -> None:
         <div class="team">
             <h2>{winning_team == "TeamA" and "Winning Team" or "Losing Team"}</h2>
             {"".join(
-            f'<div class="player">'f'<h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
-            f'Fleet: '
-            f'</div>'
+                f"""<div class="player">
+                    <h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>
+                    <div class="fleet-info">
+                        {f'<a href="../fleets/{player["fleet"]["fleet_image"]}"> <img src="../fleets/{player["fleet"]["fleet_image"]}" class="fleet-preview" alt="{player["steam_name"]}s Fleet Composition" title="{player["steam_name"]}s Fleet"></a> <a href="../fleets/{player["fleet"]["fleet_file"]}" download class="download-link"> Download Fleet File </a>'
+                         if 'fleet' in player else 
+                         '<div class="redacted">Fleet Composition: REDACTED</div>'}
+                    </div>
+                </div>"""
                 for player in teams["TeamA"]
             )}
         </div>
@@ -1055,9 +1164,14 @@ def render_match_details(match_data: MatchData) -> None:
         <div class="team">
             <h2>{winning_team == "TeamB" and "Winning Team" or "Losing Team"}</h2>
             {"".join(
-                f'<div class="player">'f'<h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>'
-                f'Fleet: '
-                f'</div>'
+                f"""<div class="player">
+                    <h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>
+                    <div class="fleet-info">
+                        {f'<a href="../fleets/{player["fleet"]["fleet_image"]}"> <img src="../fleets/{player["fleet"]["fleet_image"]}" class="fleet-preview" alt="{player["steam_name"]}"s Fleet Composition" title="{player["steam_name"]}"s Fleet"></a> <a href="../fleets/{player["fleet"]["fleet_file"]}" download class="download-link"> Download Fleet File </a>'
+                         if 'fleet' in player else 
+                         '<div class="redacted">Fleet Composition: REDACTED</div>'}
+                    </div>
+                </div>"""
                 for player in teams["TeamB"]
             )}
         </div>
@@ -1145,6 +1259,8 @@ def main() -> None:
     
     # store new fleet files first
     collect_fleet_files()
+    generate_fleet_images()
+    fleet_lut = build_fleet_lut()
 
     battle_reports = sorted(
         Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/").iterdir(),
@@ -1152,7 +1268,7 @@ def main() -> None:
 
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
-        match_data = parse_battle_report(file)
+        match_data = parse_battle_report(file, fleet_lut)
         process_match_result(match_data, match_history, database, model)
 
     # Apply manual adjustments
