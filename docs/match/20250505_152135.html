@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Details - 2025-05-05 15:21:35</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 2rem;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .header {
+            border-bottom: 2px solid #3a3a3a;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+        a {
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        h1, h2 {
+            color: #ffffff;
+            margin: 0.5rem 0;
+        }
+        
+        /* Match details specific styles */
+        .stats-table {
+            margin: 2rem 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stats-table td, .stats-table th {
+            padding: 1rem;
+            border: 1px solid #3a3a3a;
+        }
+        .stats-table th {
+            background-color: #333333;
+            color: #00cc99;
+            font-weight: 600;
+            width: 30%;
+        }
+        .stats-table tr:nth-child(even) {
+            background-color: #262626;
+        }
+        .stats-table tr:hover {
+            background-color: #363636;
+            transition: background-color 0.2s ease;
+        }
+        .teams {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .team {
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #3a3a3a;
+        }
+        .player {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #262626;
+            border-radius: 4px;
+        }
+        .fleet-image {
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            cursor: zoom-in;
+        }
+        .fleet-image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fleet-image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #e0e0e0;
+            cursor: pointer;
+        }
+        .fleet-preview {
+            max-width: 400px;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 0.5rem 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Match Details - 2025-05-05 15:21:35</h1>
+        <a href="../index.html">Player Leaderboard</a> 
+        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
+        | <a href="../match_history.html">Match History</a>
+    </div>
+
+    <h2>Match Statistics</h2>
+    <table class="stats-table">
+        <tr>
+            <th>Average DLO</th>
+            <td>4.43</td>
+        </tr>
+        <tr>
+            <th>Match Quality</th>
+            <td>0.06</td>
+        </tr>
+        <tr>
+            <th>Map</th>
+            <td>Not Recorded</td>
+        </tr>
+    </table>
+
+    <div class="teams">
+        <!-- Team A -->
+        <div class="team">
+            <h2>Winning Team</h2>
+            <div class="player">
+                    <h3><a href="../player/76561198799044855.html">Trojan_Shad0w (ANS)</a></h3>
+                    <div class="fleet-info">
+                        <a href="../fleets/76561198799044855_1746456329.6.png"> <img src="../fleets/76561198799044855_1746456329.6.png" class="fleet-preview" alt="Trojan_Shad0ws Fleet Composition" title="Trojan_Shad0ws Fleet"></a> <a href="../fleets/76561198799044855_1746456329.6.fleet" download class="download-link"> Download Fleet File </a>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561198102689306.html">nova28 (ANS)</a></h3>
+                    <div class="fleet-info">
+                        <div class="redacted">Fleet Composition: REDACTED</div>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561198261392099.html">Basil (ANS)</a></h3>
+                    <div class="fleet-info">
+                        <div class="redacted">Fleet Composition: REDACTED</div>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561198113365362.html">Rom (ANS)</a></h3>
+                    <div class="fleet-info">
+                        <a href="../fleets/76561198113365362_1746456329.58.png"> <img src="../fleets/76561198113365362_1746456329.58.png" class="fleet-preview" alt="Roms Fleet Composition" title="Roms Fleet"></a> <a href="../fleets/76561198113365362_1746456329.58.fleet" download class="download-link"> Download Fleet File </a>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Team B -->
+        <div class="team">
+            <h2>Losing Team</h2>
+            <div class="player">
+                    <h3><a href="../player/76561198895534238.html">Noek &#x27;Vessel&#x27; H. (OSP)</a></h3>
+                    <div class="fleet-info">
+                        <a href="../fleets/76561198895534238_1746456329.588.png"> <img src="../fleets/76561198895534238_1746456329.588.png" class="fleet-preview" alt="Noek &#x27;Vessel&#x27; H."s Fleet Composition" title="Noek &#x27;Vessel&#x27; H."s Fleet"></a> <a href="../fleets/76561198895534238_1746456329.588.fleet" download class="download-link"> Download Fleet File </a>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561199014984702.html">PocketScientist (OSP)</a></h3>
+                    <div class="fleet-info">
+                        <div class="redacted">Fleet Composition: REDACTED</div>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561198068437705.html">TheHooskiLord (OSP)</a></h3>
+                    <div class="fleet-info">
+                        <div class="redacted">Fleet Composition: REDACTED</div>
+                    </div>
+                </div><div class="player">
+                    <h3><a href="../player/76561199249928067.html">Clovie (OSP)</a></h3>
+                    <div class="fleet-info">
+                        <div class="redacted">Fleet Composition: REDACTED</div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Fleet Image Modal -->
+    <div id="fleetImageModal" class="fleet-image-modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <script>
+        function openImageModal(img) {
+            document.getElementById("fleetImageModal").style.display = "flex";
+            document.getElementById("modalImage").src = img.src;
+        }
+        
+        function closeImageModal() {
+            document.getElementById("fleetImageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
