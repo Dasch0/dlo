@@ -29,6 +29,9 @@ def datetime_format(value, fmt="%Y-%m-%d %H:%M:%S"):
 def float_round(value, precision=2):
     return round(value, precision)
 
+def float_to_percent(value, precision=2):
+    return f"{value * 100:.1f}%"
+
 def get_template_depth(output_path: Path) -> int:
     """Calculate depth relative to docs directory"""
     try:
@@ -44,6 +47,7 @@ jinja_env = Environment(
 
 jinja_env.filters["datetime_format"] = datetime_format
 jinja_env.filters["float_round"] = float_round
+jinja_env.filters["float_to_percent"] = float_to_percent
 
 class FleetEntry(TypedDict):
     time: datetime
@@ -437,18 +441,76 @@ def render_leaderboard(database: Dict[str, PlayerData]) -> None:
     
     output_path.write_text(html_content)
 
+    for player_id, data in database.items():
+        render_player_page(player_id, data, database)
+        render_rating_json(player_id, data)
 
-def render_player_page(player_id: str, player_data: PlayerData, database: Dict[str, PlayerData]) -> None:
-    template = jinja_env.get_template("player.html")
-    output_path = Path(f"docs/player/{player_id}.html")
+def render_player_page(
+    player_id: str,
+    player_data: PlayerData,
+    database: Dict[str, PlayerData]
+) -> None:
+    """Generate individual player page using template"""
+    # Create plot
+    plot_dir = Path('docs/player/images')
+    plot_dir.mkdir(exist_ok=True, parents=True)
+    plot_path = plot_dir / f'{player_id}_history.html'
+    generate_dlo_plot(player_data, plot_path)
     
-    html_content = template.render(
-        player_data=player_data,
-        best_friends=get_best_friends(player_data, database),
-        history_plot=open(plot_path).read(),
-        depth=get_template_depth(output_path)
-    )
-    output_path.write_text(html_content)
+    # Calculate derived values
+    total_games = player_data['games_played']
+    losses = total_games - player_data['wins']
+    win_rate = player_data['wins'] / total_games if total_games > 0 else 0
+    
+    ans_losses = player_data['ans_games'] - player_data['ans_wins']
+    ans_win_rate = (player_data['ans_wins'] / player_data['ans_games'] 
+                   if player_data['ans_games'] > 0 else 0)
+    
+    osp_losses = player_data['osp_games'] - player_data['osp_wins']
+    osp_win_rate = (player_data['osp_wins'] / player_data['osp_games'] 
+                   if player_data['osp_games'] > 0 else 0)
+
+    # Prepare template context
+    context = {
+        'player_id': player_id,
+        'player_data': player_data,
+        'losses': losses,
+        'win_rate': win_rate,
+        'ans_losses': ans_losses,
+        'ans_win_rate': ans_win_rate,
+        'osp_losses': osp_losses,
+        'osp_win_rate': osp_win_rate,
+        'best_friends': get_best_friends(player_data, database),
+        'history_plot': open(plot_path).read(),
+        'depth': get_template_depth(Path(f'docs/player/{player_id}.html'))
+    }
+
+    # Render template
+    template = jinja_env.get_template("player.html")
+    output_path = Path(f'docs/player/{player_id}.html')
+    output_path.write_text(template.render(**context))
+
+def render_rating_json(player_id: str, player_data: PlayerData) -> None:
+    output_path = Path(f"docs/rating/{player_id}.json")
+    
+    json_template = {
+        "version": 1,  # Version for schema changes
+        "dlo": 0.0,
+        "mu": 0.0,
+        "sigma": 0.0,
+        "last_updated": None
+    }
+    
+    rating_data = json_template.copy()
+    rating_data.update({
+        "dlo": player_data['rating_data'].ordinal(),
+        "mu": player_data['rating_data'].mu,
+        "sigma": player_data['rating_data'].sigma,
+        "last_updated": datetime.now().isoformat()
+    })
+        
+    with open(output_path, 'w') as f:
+        json.dump(rating_data, f, indent=2)
 
 def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
     teammates = []
@@ -661,6 +723,9 @@ def render_match_history(match_history: List[MatchData]) -> None:
         depth=get_template_depth(output_path)
     )
     output_path.write_text(html_content)
+
+    for match in sorted_matches:
+        render_match_details(match)
 
 def render_match_details(match_data: MatchData) -> None:
     template = jinja_env.get_template("match_details.html")

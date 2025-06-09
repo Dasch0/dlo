@@ -1,129 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Details - 2025-04-21 23:39:25</title>
-    <style>
-        body {
-            font-family: monospace;
-            margin: 2rem;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }
-        .header {
-            border-bottom: 2px solid #3a3a3a;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-        }
-        a {
-            color: #00ccff; 
-            text-decoration: none;
-            font-weight: 500;
-        }
-        a:hover {
-            color: #00ffff;
-            text-decoration: underline;
-        }
-        h1, h2 {
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }
-        
-        /* Match details specific styles */
-        .stats-table {
-            margin: 2rem 0;
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #2d2d2d;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .stats-table td, .stats-table th {
-            padding: 1rem;
-            border: 1px solid #3a3a3a;
-        }
-        .stats-table th {
-            background-color: #333333;
-            color: #00cc99;
-            font-weight: 600;
-            width: 30%;
-        }
-        .stats-table tr:nth-child(even) {
-            background-color: #262626;
-        }
-        .stats-table tr:hover {
-            background-color: #363636;
-            transition: background-color 0.2s ease;
-        }
-        .teams {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        .team {
-            background-color: #2d2d2d;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #3a3a3a;
-        }
-        .player {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: #262626;
-            border-radius: 4px;
-        }
-        .fleet-image {
-            max-width: 200px;
-            height: auto;
-            border: 1px solid #3a3a3a;
-            border-radius: 4px;
-            cursor: zoom-in;
-        }
-        .fleet-image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .fleet-image-modal img {
-            max-width: 90%;
-            max-height: 90%;
-            height: auto;
-            border-radius: 4px;
-        }
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: #e0e0e0;
-            cursor: pointer;
-        }
-        .fleet-preview {
-            max-width: 400px;
-            height: auto;
-            border: 1px solid #ddd;
-            margin: 0.5rem 0;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <div class="header">
+	<img src="../dlo.webp" alt="Logo" width="150">
         <h1>Match Details - 2025-04-21 23:39:25</h1>
-        <a href="../index.html">Player Leaderboard</a> 
-        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="../match_history.html">Match History</a>
+	<div class="nav">
+	    <a href="../index.html">Player Leaderboard</a>
+	    <a href="../rank_distribution.html">Rank Distributions</a>
+	    <a href="../match_history.html">Match History</a>
+        </div>
     </div>
-
-    <h2>Match Statistics</h2>
+    
+<div class="match-stats">
     <table class="stats-table">
         <tr>
             <th>Average DLO</th>
@@ -133,81 +27,158 @@
             <th>Match Quality</th>
             <td>0.07</td>
         </tr>
-        <tr>
-            <th>Map</th>
-            <td>Not Recorded</td>
-        </tr>
     </table>
+</div>
 
-    <div class="teams">
-        <!-- Team A -->
-        <div class="team">
-            <h2>Losing Team</h2>
-            <div class="player">
-                    <h3><a href="../player/76561198113365362.html">Rom (ANS)</a></h3>
-                    <div class="fleet-info">
-                        <a href="../fleets/76561198113365362_1745276498.356.png"> <img src="../fleets/76561198113365362_1745276498.356.png" class="fleet-preview" alt="Roms Fleet Composition" title="Roms Fleet"></a> <a href="../fleets/76561198113365362_1745276498.356.fleet" download class="download-link"> Download Fleet File </a>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561198950963392.html">_bell (ANS)</a></h3>
-                    <div class="fleet-info">
-                        <div class="redacted">Fleet Composition: REDACTED</div>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561198322952798.html">luca.cecco (ANS)</a></h3>
-                    <div class="fleet-info">
-                        <div class="redacted">Fleet Composition: REDACTED</div>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561198007984095.html">das (ANS)</a></h3>
-                    <div class="fleet-info">
-                        <div class="redacted">Fleet Composition: REDACTED</div>
-                    </div>
-                </div>
-        </div>
-
-        <!-- Team B -->
-        <div class="team">
-            <h2>Winning Team</h2>
-            <div class="player">
-                    <h3><a href="../player/76561198039882405.html">pronetomadnes (OSP)</a></h3>
-                    <div class="fleet-info">
-                        <a href="../fleets/76561198039882405_1745276498.376.png"> <img src="../fleets/76561198039882405_1745276498.376.png" class="fleet-preview" alt="pronetomadnes"s Fleet Composition" title="pronetomadnes"s Fleet"></a> <a href="../fleets/76561198039882405_1745276498.376.fleet" download class="download-link"> Download Fleet File </a>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561198206866291.html">bonggyy (OSP)</a></h3>
-                    <div class="fleet-info">
-                        <a href="../fleets/76561198206866291_1745276498.38.png"> <img src="../fleets/76561198206866291_1745276498.38.png" class="fleet-preview" alt="bonggyy"s Fleet Composition" title="bonggyy"s Fleet"></a> <a href="../fleets/76561198206866291_1745276498.38.fleet" download class="download-link"> Download Fleet File </a>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561199037470545.html">Notes (OSP)</a></h3>
-                    <div class="fleet-info">
-                        <a href="../fleets/76561199037470545_1745276498.388.png"> <img src="../fleets/76561199037470545_1745276498.388.png" class="fleet-preview" alt="Notes"s Fleet Composition" title="Notes"s Fleet"></a> <a href="../fleets/76561199037470545_1745276498.388.fleet" download class="download-link"> Download Fleet File </a>
-                    </div>
-                </div><div class="player">
-                    <h3><a href="../player/76561198106110012.html">Crosser (OSP)</a></h3>
-                    <div class="fleet-info">
-                        <div class="redacted">Fleet Composition: REDACTED</div>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-    <!-- Fleet Image Modal -->
-    <div id="fleetImageModal" class="fleet-image-modal">
-        <span class="close" onclick="closeImageModal()">&times;</span>
-        <img id="modalImage" src="">
-    </div>
-
-    <script>
-        function openImageModal(img) {
-            document.getElementById("fleetImageModal").style.display = "flex";
-            document.getElementById("modalImage").src = img.src;
-        }
+<div class="teams-container">
+    
+    <div class="team loser">
+        <h2>Losing Team</h2>
         
-        function closeImageModal() {
-            document.getElementById("fleetImageModal").style.display = "none";
-        }
-    </script>
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198113365362.html">
+                    Rom (ANS)
+                </a>
+            </h3>
+            
+            <div class="fleet-info">
+                <a href="../fleets/76561198113365362_1745276498.356.png">
+                    <img src="../fleets/76561198113365362_1745276498.356.png" 
+                         class="fleet-preview" 
+                         alt="Rom's Fleet">
+                </a>
+                <a href="../fleets/76561198113365362_1745276498.356.fleet" download 
+                   class="download-link">
+                    Download Fleet File
+                </a>
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198950963392.html">
+                    _bell (ANS)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198322952798.html">
+                    luca.cecco (ANS)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198007984095.html">
+                    das (ANS)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <div class="team winner">
+        <h2>Winning Team</h2>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198039882405.html">
+                    pronetomadnes (OSP)
+                </a>
+            </h3>
+            
+            <div class="fleet-info">
+                <a href="../fleets/76561198039882405_1745276498.376.png">
+                    <img src="../fleets/76561198039882405_1745276498.376.png" 
+                         class="fleet-preview" 
+                         alt="pronetomadnes's Fleet">
+                </a>
+                <a href="../fleets/76561198039882405_1745276498.376.fleet" download 
+                   class="download-link">
+                    Download Fleet File
+                </a>
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198206866291.html">
+                    bonggyy (OSP)
+                </a>
+            </h3>
+            
+            <div class="fleet-info">
+                <a href="../fleets/76561198206866291_1745276498.38.png">
+                    <img src="../fleets/76561198206866291_1745276498.38.png" 
+                         class="fleet-preview" 
+                         alt="bonggyy's Fleet">
+                </a>
+                <a href="../fleets/76561198206866291_1745276498.38.fleet" download 
+                   class="download-link">
+                    Download Fleet File
+                </a>
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561199037470545.html">
+                    Notes (OSP)
+                </a>
+            </h3>
+            
+            <div class="fleet-info">
+                <a href="../fleets/76561199037470545_1745276498.388.png">
+                    <img src="../fleets/76561199037470545_1745276498.388.png" 
+                         class="fleet-preview" 
+                         alt="Notes's Fleet">
+                </a>
+                <a href="../fleets/76561199037470545_1745276498.388.fleet" download 
+                   class="download-link">
+                    Download Fleet File
+                </a>
+            </div>
+            
+        </div>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/76561198106110012.html">
+                    Crosser (OSP)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
 </body>
 </html>

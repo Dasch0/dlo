@@ -4,23 +4,72 @@
 {% block header %}{{ player_data.steam_name }} - Player Statistics{% endblock %}
 
 {% block content %}
-<div class="stats-container">
-    <!-- Player stats table -->
-    <table class="stats-table">
-        <!-- Table rows using player_data -->
-    </table>
+<table class="stats-table">
+    <tr>
+        <th>Steam Name</th>
+        <td>{{ player_data.steam_name }}</td>
+    </tr>
+    <tr>
+        <th>Player ID</th>
+        <td>{{ player_id }}</td>
+    </tr>
+    <tr>
+        <th>Wins/Losses</th>
+        <td>{{ player_data.wins }} / {{ losses }} ({{ win_rate|float_to_percent }})</td>
+    </tr>
+    <tr>
+        <th>Current DLO</th>
+        <td>{{ player_data.rating_data.ordinal()|float_round(2) }}</td>
+    </tr>
+    <tr>
+        <th>Mu (μ)</th>
+        <td>{{ player_data.rating_data.mu|float_round(2) }}</td>
+    </tr>
+    <tr>
+        <th>Sigma (σ)</th>
+        <td>{{ player_data.rating_data.sigma|float_round(2) }}</td>
+    </tr>
+    <tr>
+        <th>ANS Wins/Losses</th>
+        <td>
+            {{ player_data.ans_wins }} / {{ ans_losses }} 
+            ({{ ans_win_rate|float_to_percent if player_data.ans_games > 0 else 'N/A' }})
+        </td>
+    </tr>
+    <tr>
+        <th>OSP Wins/Losses</th>
+        <td>
+            {{ player_data.osp_wins }} / {{ osp_losses }} 
+            ({{ osp_win_rate|float_to_percent if player_data.osp_games > 0 else 'N/A' }})
+        </td>
+    </tr>
+</table>
 
-    <!-- Teammates section -->
-    {% if best_friends %}
-    <div class="teammates-section">
-        <h2>Top Teammates</h2>
-        <!-- Teammates table -->
-    </div>
-    {% endif %}
+{% if best_friends %}
+<h2>Top Teammates</h2>
+<table class="stats-table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Teammate</th>
+            <th>Win Rate</th>
+            <th>Record</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for friend in best_friends %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td><a href="{{ '../' * depth }}player/{{ friend.id }}.html">{{ friend.name }}</a></td>
+            <td>{{ friend.win_rate|float_to_percent }}</td>
+            <td>{{ friend.wins }}/{{ friend.games }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 
-    <!-- History plot -->
-    <div class="plot-container">
-        {{ history_plot|safe }}
-    </div>
+<div class="plot-container">
+    {{ history_plot|safe }}
 </div>
 {% endblock %}
