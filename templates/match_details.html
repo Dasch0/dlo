@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Match Details - {{ match.time|datetime_format }}{% endblock %}
+{% block header %}Match Details - {{ match.time|datetime_format }}{% endblock %}
+
+{% block content %}
+<div class="match-stats">
+    <table class="stats-table">
+        <tr>
+            <th>Average DLO</th>
+            <td>{{ match.avg_dlo|float_round(2) }}</td>
+        </tr>
+        <tr>
+            <th>Match Quality</th>
+            <td>{{ match.match_quality|float_round(2) }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="teams-container">
+    {% for team_id, players in match.teams.items() %}
+    <div class="team {{ 'winner' if team_id == match.winning_team else 'loser' }}">
+        <h2>{{ 'Winning Team' if team_id == match.winning_team else 'Losing Team' }}</h2>
+        {% for player in players %}
+        <div class="player-card">
+            <h3>
+                <a href="../player/{{ player.player_id }}.html">
+                    {{ player.steam_name }} ({{ player.faction }})
+                </a>
+            </h3>
+            {% if player.fleet is defined %}
+            <div class="fleet-info">
+                <a href="../fleets/{{ player.fleet.fleet_image }}">
+                    <img src="../fleets/{{ player.fleet.fleet_image }}" 
+                         class="fleet-preview" 
+                         alt="{{ player.steam_name }}'s Fleet">
+                </a>
+                <a href="../fleets/{{ player.fleet.fleet_file }}" download 
+                   class="download-link">
+                    Download Fleet File
+                </a>
+            </div>
+            {% else %}
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

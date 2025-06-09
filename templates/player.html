@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ player_data.steam_name }} - Player Stats{% endblock %}
+{% block header %}{{ player_data.steam_name }} - Player Statistics{% endblock %}
+
+{% block content %}
+<div class="stats-container">
+    <!-- Player stats table -->
+    <table class="stats-table">
+        <!-- Table rows using player_data -->
+    </table>
+
+    <!-- Teammates section -->
+    {% if best_friends %}
+    <div class="teammates-section">
+        <h2>Top Teammates</h2>
+        <!-- Teammates table -->
+    </div>
+    {% endif %}
+
+    <!-- History plot -->
+    <div class="plot-container">
+        {{ history_plot|safe }}
+    </div>
+</div>
+{% endblock %}

@@ -1,3 +1,5 @@
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
 from openskill.models import PlackettLuce, PlackettLuceRating
 from typing import TypedDict, Any, Dict, List, Tuple, Optional
 from datetime import datetime, timedelta
@@ -19,6 +21,29 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from nfcli import determine_output_png, init_logger, load_path, nfc_theme
 from nfcli.parsers import parse_any, parse_mods
+
+# jinja setup
+def datetime_format(value, fmt="%Y-%m-%d %H:%M:%S"):
+    return value.strftime(fmt)
+
+def float_round(value, precision=2):
+    return round(value, precision)
+
+def get_template_depth(output_path: Path) -> int:
+    """Calculate depth relative to docs directory"""
+    try:
+        rel_path = output_path.relative_to(Path("docs"))
+        return len(rel_path.parent.parts)
+    except ValueError:
+        return 0
+
+jinja_env = Environment(
+    loader=FileSystemLoader("templates"),
+    autoescape=select_autoescape(["html", "xml"])
+)
+
+jinja_env.filters["datetime_format"] = datetime_format
+jinja_env.filters["float_round"] = float_round
 
 class FleetEntry(TypedDict):
     time: datetime
@@ -397,125 +422,33 @@ def update_histogram(
             # Changed to use player_id as key
             histogram[player_id][game_index] = data['rating_data'].ordinal()
 
-def render_leaderboard(
-    database: Dict[str, PlayerData],
-    output_html: bool = True
-) -> None:
-    """Display sorted leaderboard and generate static HTML"""
+def render_leaderboard(database: Dict[str, PlayerData]) -> None:
     leaderboard = sorted(database.values(), 
-                        key=lambda d: d["rating_data"].ordinal(), 
-                        reverse=True)
+                       key=lambda d: d["rating_data"].ordinal(), 
+                       reverse=True)
+
+    output_path = Path('docs/index.html')
     
-    print("\nLEADERBOARD:")
-    for p in leaderboard:
-        print(f"{p['steam_name']:20} DLO = {p['rating_data'].ordinal():6.2f} "
-              f"Matches: {p['games_played']}")
-
-    if output_html:
-        player_dir = Path('docs/player')
-        player_dir.mkdir(exist_ok=True, parents=True)
-        
-        # Generate individual player pages
-        for player_id, data in database.items():
-            render_player_page(player_id, data, database)
-
-        # Main leaderboard HTML
-        html_content = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DLO Leaderboard</title>
-    <style>
-        body {{
-            font-family: monospace;
-            margin: 2rem;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }}
-        .header {{
-            border-bottom: 2px solid #3a3a3a;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-        }}
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #2d2d2d;
-            border-radius: 8px;
-            overflow: hidden;
-        }}
-        th, td {{
-            padding: 0.75rem 1rem;
-            border: 1px solid #3a3a3a;
-            text-align: left;
-        }}
-        th {{
-            background-color: #333333;
-            color: #00cc99;
-            font-weight: 600;
-        }}
-        tr:nth-child(even) {{
-            background-color: #262626;
-        }}
-        tr:hover {{
-            background-color: #363636;
-            transition: background-color 0.2s ease;
-        }}
-        a {{
-            color: #00ccff; 
-            text-decoration: none;
-            font-weight: 500;
-        }}
-        a:hover {{
-            color: #00ffff;
-            text-decoration: underline;
-        }}
-        h1 {{
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <img src="dlo.webp" alt="Logo" width="150">
-        <h1>Player Leaderboard</h1>
-        <a href="https://openskill.me/en/stable/manual.html">Ranking System Info</a> 
-        | <a href="index.html">Player Leaderboard</a>
-        | <a href="rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="match_history.html">Match History</a>
-    </div>
+    template = jinja_env.get_template("leaderboard.html")
+    html_content = template.render(
+            leaderboard=leaderboard,
+            depth=get_template_depth(output_path)
+            )
     
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>DLO</th>
-                <th>Matches Played</th>
-                <th>μ ± σ</th>
-            </tr>
-        </thead>
-        <tbody>
-            {"".join(
-                f'<tr><td>{i+1}</td>'
-                f'<td><a href="player/{p["rating_data"].name}.html">{p["steam_name"]}</a></td>'
-                f'<td>{p["rating_data"].ordinal():0.2f}</td>'
-                f'<td>{p["games_played"]}</td>'
-                f'<td>{p["rating_data"].mu:0.2F} ± {p["rating_data"].sigma:0.2f}</td></tr>'
-                for i, p in enumerate(leaderboard)
-            )}
-        </tbody>
-    </table>
-</body>
-</html>
-        '''
+    output_path.write_text(html_content)
 
-        output_path = Path('docs/index.html')
-        output_path.write_text(html_content)
-        print(f"\nGenerated static site at: {output_path.absolute()}")
+
+def render_player_page(player_id: str, player_data: PlayerData, database: Dict[str, PlayerData]) -> None:
+    template = jinja_env.get_template("player.html")
+    output_path = Path(f"docs/player/{player_id}.html")
+    
+    html_content = template.render(
+        player_data=player_data,
+        best_friends=get_best_friends(player_data, database),
+        history_plot=open(plot_path).read(),
+        depth=get_template_depth(output_path)
+    )
+    output_path.write_text(html_content)
 
 def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -> List[Dict[str, Any]]:
     teammates = []
@@ -539,181 +472,6 @@ def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -
                             key=lambda x: (-x['wins'], -x['win_rate']))
     
     return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
-
-def render_player_page(
-    player_id: str,
-    player_data: PlayerData,
-    database: Dict[str, PlayerData]
-) -> None:
-    """Generate individual player page with stats and history graph"""
-
-    plot_dir = Path('docs/player/images')
-    plot_dir.mkdir(exist_ok=True, parents=True)
-    
-    #plot_path = img_dir / f'{player_id}_history.webp'
-    plot_path = plot_dir / f'{player_id}_history.html'
-    generate_dlo_plot(player_data, plot_path)
-    
-    total_games = player_data['games_played']
-    losses = total_games - player_data['wins']
-    win_rate = player_data['wins'] / total_games if total_games > 0 else 0
-
-    ans_losses = player_data['ans_games'] - player_data['ans_wins']
-    ans_win_rate = player_data['ans_wins'] / player_data['ans_games'] if player_data['ans_games'] > 0 else 0
-
-    osp_losses = player_data['osp_games'] - player_data['osp_wins']
-    osp_win_rate = player_data['osp_wins'] / player_data['osp_games'] if player_data['osp_games'] > 0 else 0
-
-    best_friends = get_best_friends(player_data, database)
-    best_friends_html = []
-    for idx, friend in enumerate(best_friends, 1):
-        best_friends_html.append(
-            f'<tr>'
-            f'<td>{idx}</td>'
-            f'<td><a href="{friend["id"]}.html">{friend["name"]}</a></td>'
-            f'<td>{friend["win_rate"]:.1%}</td>'
-            f'<td>{friend["wins"]}/{friend["games"]}</td>'
-            f'</tr>'
-        )
-    
-    html_content = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{player_data['steam_name']} - Player Stats</title>
-    <style>
-        body {{ 
-            font-family: monospace;
-            margin: 2rem;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }}
-        .header {{
-            border-bottom: 2px solid #3a3a3a;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-        }}
-        .stats-table {{
-            margin: 2rem 0;
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #2d2d2d;
-            border-radius: 8px;
-            overflow: hidden;
-        }}
-        .stats-table td, .stats-table th {{
-            padding: 1rem;
-            border: 1px solid #3a3a3a;
-        }}
-        .stats-table th {{
-            background-color: #333333;
-            color: #00cc99;
-            font-weight: 600;
-            width: 30%;
-        }}
-        .stats-table tr:nth-child(even) {{
-            background-color: #262626;
-        }}
-        .stats-table tr:hover {{
-            background-color: #363636;
-            transition: background-color 0.2s ease;
-        }}
-        img {{
-            max-width: 800px;
-            margin: 2rem 0;
-            border-radius: 4px;
-        }}
-        a {{
-            color: #00ccff; 
-            text-decoration: none;
-            font-weight: 500;
-        }}
-        a:hover {{
-            color: #00ffff;
-            text-decoration: underline;
-        }}
-        h1, h2 {{
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }}
-        .plot-container {{
-            background-color: #2d2d2d;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <img src="../dlo.webp" alt="Logo" width="150">
-        <h1>{player_data['steam_name']} - Player Statistics</h1>
-        <a href="https://openskill.me/en/stable/manual.html">ranking system info</a> 
-        | <a href="../index.html">Player Leaderboard</a>
-        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="../match_history.html">Match History</a>
-    </div>
-
-    <table class="stats-table">
-        <tr>
-            <th>Steam Name</th>
-            <td>{player_data['steam_name']}</td>
-        </tr>
-        <tr>
-            <th>Player ID</th>
-            <td>{player_id}</td>
-        </tr>
-        <tr>
-            <th>Wins/Losses</th>
-            <td>{player_data['wins']} / {losses} ({win_rate:.1%})</td>
-        </tr>
-        <tr>
-            <th>Current DLO</th>
-            <td>{player_data['rating_data'].ordinal():.2f}</td>
-        </tr>
-        <tr>
-            <th>Mu (μ)</th>
-            <td>{player_data['rating_data'].mu:.2f}</td>
-        </tr>
-        <tr>
-            <th>Sigma (σ)</th>
-            <td>{player_data['rating_data'].sigma:.2f}</td>
-        </tr>
-        <tr>
-            <th>ANS Wins/Losses</th>
-            <td>{player_data['ans_wins']} / {ans_losses} ({ans_win_rate:.1%})</td>
-        </tr>
-        <tr>
-            <th>OSP Wins/Losses</th>
-            <td>{player_data['osp_wins']} / {osp_losses} ({osp_win_rate:.1%})</td>
-        </tr>
-    </table>
-
-    <h2>Top Teammates</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Teammate</th>
-                <th>Win Rate</th>
-                <th>Record</th>
-            </tr>
-        </thead>
-        <tbody>
-            {"".join(best_friends_html)}
-        </tbody>
-    </table>
-
-    <div class="plot-container">
-        {open(plot_path).read()}
-    </div>
-</html>
-    '''
-
-    output_path = Path(f'docs/player/{player_id}.html')
-    output_path.write_text(html_content)
 
 def plot_rank_distribution(database: Dict[str, PlayerData], output_path: Path) -> None:
     ordinals = [p['rating_data'].ordinal() for p in database.values() if p['player']]
@@ -892,315 +650,28 @@ def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -
     
     return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
 
-def render_match_history(
-    match_history: List[MatchData],
-) -> None:
-    """Display sorted leaderboard and generate static HTML"""
-    sorted_match_history = sorted(match_history, 
-                        key=lambda d: d["time"], 
-                        reverse=True)
+def render_match_history(match_history: List[MatchData]) -> None:
+    template = jinja_env.get_template("match_history.html")
+    output_path = Path("docs/match_history.html")
 
-    # Generate individual match pages
-    for match_data in sorted_match_history:
-        render_match_details(match_data)
+    sorted_matches = sorted(match_history, key=lambda m: m["time"], reverse=True)
     
-    # match history HTML
-    html_content = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DLO Leaderboard</title>
-    <style>
-        body {{
-            font-family: monospace;
-            margin: 2rem;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }}
-        .header {{
-            border-bottom: 2px solid #3a3a3a;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-        }}
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #2d2d2d;
-            border-radius: 8px;
-            overflow: hidden;
-        }}
-        th, td {{
-            padding: 0.75rem 1rem;
-            border: 1px solid #3a3a3a;
-            text-align: left;
-        }}
-        th {{
-            background-color: #333333;
-            color: #00cc99;
-            font-weight: 600;
-        }}
-        tr:nth-child(even) {{
-            background-color: #262626;
-        }}
-        tr:hover {{
-            background-color: #363636;
-            transition: background-color 0.2s ease;
-        }}
-        a {{
-            color: #00ccff; 
-            text-decoration: none;
-            font-weight: 500;
-        }}
-        a:hover {{
-            color: #00ffff;
-            text-decoration: underline;
-        }}
-        h1 {{
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <img src="dlo.webp" alt="Logo" width="150">
-        <h1>Match History</h1>
-        | <a href="index.html">Player Leaderboard</a>
-        | <a href="rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="match_history.html">Match History</a>
-    </div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Average DLO</th>
-                <th>Match Quality</th>
-            </tr>
-        </thead>
-        <tbody>
-            {"".join(
-                f'<tr><td><a href="match/{m["time"].strftime("%Y%m%d_%H%M%S")}.html">{str(m["time"])}</a></td>'
-                f'<td>{m["avg_dlo"]:0.2f}</td>'
-                f'<td>{m["match_quality"]:0.2f}</td></tr>'
-                for m in sorted_match_history
-            )}
-        </tbody>
-    </table>
-</body>
-</html>
-        '''
-
-    output_path = Path('docs/match_history.html')
+    html_content = template.render(
+        matches=sorted_matches,
+        depth=get_template_depth(output_path)
+    )
     output_path.write_text(html_content)
-    print(f"\nGenerated match history")
 
 def render_match_details(match_data: MatchData) -> None:
-    """Generate an HTML page with detailed match information"""
-    teams = match_data["teams"]
-    winning_team = match_data["winning_team"]
+    template = jinja_env.get_template("match_details.html")
+    filename = match_data["time"].strftime("%Y%m%d_%H%M%S") + ".html"
+    output_path = Path(f"docs/match/{filename}")
     
-    html_content = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Details - {match_data["time"]}</title>
-    <style>
-        body {{
-            font-family: monospace;
-            margin: 2rem;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }}
-        .header {{
-            border-bottom: 2px solid #3a3a3a;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-        }}
-        a {{
-            color: #00ccff; 
-            text-decoration: none;
-            font-weight: 500;
-        }}
-        a:hover {{
-            color: #00ffff;
-            text-decoration: underline;
-        }}
-        h1, h2 {{
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }}
-        
-        /* Match details specific styles */
-        .stats-table {{
-            margin: 2rem 0;
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #2d2d2d;
-            border-radius: 8px;
-            overflow: hidden;
-        }}
-        .stats-table td, .stats-table th {{
-            padding: 1rem;
-            border: 1px solid #3a3a3a;
-        }}
-        .stats-table th {{
-            background-color: #333333;
-            color: #00cc99;
-            font-weight: 600;
-            width: 30%;
-        }}
-        .stats-table tr:nth-child(even) {{
-            background-color: #262626;
-        }}
-        .stats-table tr:hover {{
-            background-color: #363636;
-            transition: background-color 0.2s ease;
-        }}
-        .teams {{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }}
-        .team {{
-            background-color: #2d2d2d;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #3a3a3a;
-        }}
-        .player {{
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: #262626;
-            border-radius: 4px;
-        }}
-        .fleet-image {{
-            max-width: 200px;
-            height: auto;
-            border: 1px solid #3a3a3a;
-            border-radius: 4px;
-            cursor: zoom-in;
-        }}
-        .fleet-image-modal {{
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }}
-        .fleet-image-modal img {{
-            max-width: 90%;
-            max-height: 90%;
-            height: auto;
-            border-radius: 4px;
-        }}
-        .close {{
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: #e0e0e0;
-            cursor: pointer;
-        }}
-        .fleet-preview {{
-            max-width: 400px;
-            height: auto;
-            border: 1px solid #ddd;
-            margin: 0.5rem 0;
-            display: block;
-        }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Match Details - {match_data["time"]}</h1>
-        <a href="../index.html">Player Leaderboard</a> 
-        | <a href="../rank_distribution.html">DLO Rank Distributions</a>
-        | <a href="../match_history.html">Match History</a>
-    </div>
-
-    <h2>Match Statistics</h2>
-    <table class="stats-table">
-        <tr>
-            <th>Average DLO</th>
-            <td>{match_data["avg_dlo"]:0.2f}</td>
-        </tr>
-        <tr>
-            <th>Match Quality</th>
-            <td>{match_data["match_quality"]:0.2f}</td>
-        </tr>
-        <tr>
-            <th>Map</th>
-            <td>Not Recorded</td>
-        </tr>
-    </table>
-
-    <div class="teams">
-        <!-- Team A -->
-        <div class="team">
-            <h2>{winning_team == "TeamA" and "Winning Team" or "Losing Team"}</h2>
-            {"".join(
-                f"""<div class="player">
-                    <h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>
-                    <div class="fleet-info">
-                        {f'<a href="../fleets/{player["fleet"]["fleet_image"]}"> <img src="../fleets/{player["fleet"]["fleet_image"]}" class="fleet-preview" alt="{player["steam_name"]}s Fleet Composition" title="{player["steam_name"]}s Fleet"></a> <a href="../fleets/{player["fleet"]["fleet_file"]}" download class="download-link"> Download Fleet File </a>'
-                         if 'fleet' in player else 
-                         '<div class="redacted">Fleet Composition: REDACTED</div>'}
-                    </div>
-                </div>"""
-                for player in teams["TeamA"]
-            )}
-        </div>
-
-        <!-- Team B -->
-        <div class="team">
-            <h2>{winning_team == "TeamB" and "Winning Team" or "Losing Team"}</h2>
-            {"".join(
-                f"""<div class="player">
-                    <h3><a href="../player/{player["player_id"]}.html">{player["steam_name"]} ({player["faction"]})</a></h3>
-                    <div class="fleet-info">
-                        {f'<a href="../fleets/{player["fleet"]["fleet_image"]}"> <img src="../fleets/{player["fleet"]["fleet_image"]}" class="fleet-preview" alt="{player["steam_name"]}"s Fleet Composition" title="{player["steam_name"]}"s Fleet"></a> <a href="../fleets/{player["fleet"]["fleet_file"]}" download class="download-link"> Download Fleet File </a>'
-                         if 'fleet' in player else 
-                         '<div class="redacted">Fleet Composition: REDACTED</div>'}
-                    </div>
-                </div>"""
-                for player in teams["TeamB"]
-            )}
-        </div>
-    </div>
-
-    <!-- Fleet Image Modal -->
-    <div id="fleetImageModal" class="fleet-image-modal">
-        <span class="close" onclick="closeImageModal()">&times;</span>
-        <img id="modalImage" src="">
-    </div>
-
-    <script>
-        function openImageModal(img) {{
-            document.getElementById("fleetImageModal").style.display = "flex";
-            document.getElementById("modalImage").src = img.src;
-        }}
-        
-        function closeImageModal() {{
-            document.getElementById("fleetImageModal").style.display = "none";
-        }}
-    </script>
-</body>
-</html>
-'''
-
-    output_path = Path(f'docs/match/{match_data["time"].strftime("%Y%m%d_%H%M%S")}.html')
-    output_path.parent.mkdir(exist_ok=True)
+    html_content = template.render(
+        match=match_data,
+        depth=get_template_depth(output_path)
+    )
     output_path.write_text(html_content)
-    print(f"Generated match details for {match_data['time']}")
 
 def load_rank_adjustments(file_path: str = 'rank_adjustments.json') -> List[Dict[str, Any]]:
     """Load manual rating adjustments from JSON file"""

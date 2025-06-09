@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DLO Leaderboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ '../' * depth }}static/style.css">
+</head>
+<body>
+    <div class="header">
+	<img src="{{ '../' * depth }}dlo.webp" alt="Logo" width="150">
+        <h1>{% block header %}Player Leaderboard{% endblock %}</h1>
+	<div class="nav">
+	    <a href="{{ '../' * depth }}index.html">Player Leaderboard</a>
+	    <a href="{{ '../' * depth }}rank_distribution.html">Rank Distributions</a>
+	    <a href="{{ '../' * depth }}match_history.html">Match History</a>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>

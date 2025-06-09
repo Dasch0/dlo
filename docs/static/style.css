@@ -1,0 +1,120 @@
+body {
+    font-family: monospace;
+    margin: 2rem;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+a {
+    color: #00ccff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #00ffff;
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: #ffffff;
+    margin: 0.5rem 0;
+}
+
+/* Header styles */
+.header {
+    border-bottom: 2px solid #3a3a3a;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.nav {
+    margin-top: 1rem;
+}
+
+.nav a {
+    margin-right: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #3a3a3a;
+    text-align: left;
+}
+
+th {
+    background-color: #333333;
+    color: #00cc99;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #262626;
+}
+
+tr:hover {
+    background-color: #363636;
+    transition: background-color 0.2s ease;
+}
+
+.plot-container {
+    background-color: #2d2d2d;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.teams {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team {
+    background-color: #2d2d2d;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #3a3a3a;
+}
+
+.team.winner {
+    border-color: #00cc99;
+}
+
+.player-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #262626;
+    border-radius: 4px;
+}
+
+.fleet-preview {
+    max-width: 400px;
+    height: auto;
+    border: 1px solid #3a3a3a;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+}
+
+.fleet-image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+

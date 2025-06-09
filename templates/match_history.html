@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Match History{% endblock %}
+{% block header %}Match History{% endblock %}
+
+{% block content %}
+<table class="match-list">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Average DLO</th>
+            <th>Match Quality</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matches %}
+        <tr>
+            <td>
+                <a href="match/{{ match.time|datetime_format('%Y%m%d_%H%M%S') }}.html">
+                    {{ match.time|datetime_format }}
+                </a>
+            </td>
+            <td>{{ match.avg_dlo|float_round(2) }}</td>
+            <td>{{ match.match_quality|float_round(2) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
