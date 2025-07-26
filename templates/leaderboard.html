@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}DLO Leaderboard{% endblock %}
-{% block header %}Player Leaderboard{% endblock %}
+{% block header %}Season 2 Leaderboard{% endblock %}
 
 {% block content %}
 <table>
@@ -11,7 +11,6 @@
             <th>Player</th>
             <th>DLO</th>
             <th>Matches Played</th>
-            <th>μ ± σ</th>
         </tr>
     </thead>
     <tbody>
@@ -19,9 +18,8 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td><a href="player/{{ player.rating_data.name }}.html">{{ player.steam_name }}</a></td>
-            <td>{{ player.rating_data.ordinal()|round(2) }}</td>
+            <td>{{ player.score|round(2) }}</td>
             <td>{{ player.games_played }}</td>
-            <td>{{ "%0.2f ± %0.2f"|format(player.rating_data.mu, player.rating_data.sigma) }}</td>
         </tr>
         {% endfor %}
     </tbody>

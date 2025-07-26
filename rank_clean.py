@@ -21,6 +21,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from nfcli import determine_output_png, init_logger, load_path, nfc_theme
 from nfcli.parsers import parse_any, parse_mods
+import math
+import pickle
 
 # jinja setup
 def datetime_format(value, fmt="%Y-%m-%d %H:%M:%S"):
@@ -63,6 +65,7 @@ class PlayerInfo(TypedDict):
 class PlayerData(TypedDict):
     steam_name: str
     rating_data: PlackettLuceRating
+    score: float
     player: bool
     games_played: int
     wins: int
@@ -306,6 +309,7 @@ def process_match_result(
                 database[player_id] = {
                     "steam_name": steam_name,
                     "rating_data": model.rating(name=player_id),
+                    "score": 0.0,
                     "player": True,
                     "games_played": 0,
                     "wins": 0,
@@ -349,13 +353,6 @@ def process_match_result(
     winner_team = updated_teams.pop(winner)
     other_team = updated_teams[next(iter(updated_teams))]
 
-    for player_rating in winner_team + other_team:
-        player_id = player_rating.name
-        database[player_id]['history'].append((
-            match_data["time"],
-            database[player_id]['rating_data'].ordinal()
-        ))
-
     # add synthetic players to balance team sizes
     largest_team = max(len(winner_team), len(other_team))
 
@@ -382,16 +379,21 @@ def process_match_result(
             ))
 
     # grab dlo metrics for match before scoring
-    average_mu = sum([p.mu for p in itertools.chain(winner_team, other_team)]) / (len(winner_team) + len(other_team))
-    average_sigma = sum([p.sigma for p in itertools.chain(winner_team, other_team)]) / (len(winner_team) + len(other_team))
-    average_dlo = average_mu - 3.0 * average_sigma
-    match_quality = model.predict_draw([winner_team, other_team])
+    # TODO: implement scoring based avg_dlo
+    match_quality = math.exp(-(model.predict_win([winner_team, other_team])[0] - 0.5)** 2)
 
-    match_data['avg_dlo'] = average_dlo
+    match_data['avg_dlo'] = 0.0
     match_data['match_quality'] = match_quality
 
+    # update scores based on predicted winner
+    base_score_per_game = 25.0
+    predictions = model.predict_win([winner_team, other_team])
+    score_for_winners = max(1.0 - predictions[0], 0.5) * base_score_per_game
+    score_for_losers = (0.9005363*math.exp(-(predictions[1] - -0.2118891) ** 2/(2*0.1952401 ** 2))) * base_score_per_game
+    score_updates = [score_for_winners, score_for_losers]
+
     #FIXME: temporary higher weighting of games played during events
-    # rank game
+    # rank game with OS
     event_time = datetime(2025,5,3,8,0,0)
     game_time_diff = match_data['time'] - event_time
     weight_more = (timedelta(minutes=0) <= game_time_diff <= timedelta(minutes=240))
@@ -401,17 +403,19 @@ def process_match_result(
     else: 
         rated_teams = model.rate([winner_team, other_team])
 
+
     # write ranking update back to database
-    for team in rated_teams:
+    for idx, team in enumerate(rated_teams):
         for player in team:
             if player.name == 'TEST_PLAYER':
                 continue
             player_id = player.name
             database[player_id]['rating_data'] = player
-            database[player_id]['history'][-1] = (
+            database[player_id]['score'] += score_updates[idx]
+            database[player_id]['history'].append((
                 match_data['time'],
-                player.ordinal()
-            )
+                database[player_id]['score']
+            ))
 
     # store match to match history
     match_history.append(match_data)
@@ -424,11 +428,11 @@ def update_histogram(
     for player_id, data in database.items():
         if data['player']:
             # Changed to use player_id as key
-            histogram[player_id][game_index] = data['rating_data'].ordinal()
+            histogram[player_id][game_index] = data['score']
 
 def render_leaderboard(database: Dict[str, PlayerData]) -> None:
     leaderboard = sorted(database.values(), 
-                       key=lambda d: d["rating_data"].ordinal(), 
+                       key=lambda d: d['score'], 
                        reverse=True)
 
     output_path = Path('docs/index.html')
@@ -496,16 +500,12 @@ def render_rating_json(player_id: str, player_data: PlayerData) -> None:
     json_template = {
         "version": 1,  # Version for schema changes
         "dlo": 0.0,
-        "mu": 0.0,
-        "sigma": 0.0,
         "last_updated": None
     }
     
     rating_data = json_template.copy()
     rating_data.update({
-        "dlo": player_data['rating_data'].ordinal(),
-        "mu": player_data['rating_data'].mu,
-        "sigma": player_data['rating_data'].sigma,
+        "dlo": player_data['score'],
         "last_updated": datetime.now().isoformat()
     })
         
@@ -536,7 +536,7 @@ def get_best_friends(player_data: PlayerData, database: Dict[str, PlayerData]) -
     return sorted_teammates[:3]  # Return top 3 (or fewer if less available)
 
 def plot_rank_distribution(database: Dict[str, PlayerData], output_path: Path) -> None:
-    ordinals = [p['rating_data'].ordinal() for p in database.values() if p['player']]
+    ordinals = [p['score'] for p in database.values() if p['player']]
     
     if not ordinals:
         print("No player data available for rank distribution")
@@ -759,7 +759,7 @@ def apply_manual_adjustments(
     for adj in adjustments:
         steam_id = adj['steam_id']
         if steam_id in database:
-            original = database[steam_id]['rating_data']
+            original = database[steam_id]['score']
             
             adjusted_rating = model.rating(
                 name = original.name,
@@ -767,7 +767,7 @@ def apply_manual_adjustments(
                 sigma=original.sigma
             )
             
-            database[steam_id]['rating_data'] = adjusted_rating
+            database[steam_id]['score'] = adjusted_rating
             print(f"Adjusted {adj['steam_name']} ({steam_id}): "
                   f"μ {original.mu:.2f} → {adjusted_rating.mu:.2f} "
                   f"({adj['mu_adjustment']:+.2f}) - {adj['reason_for_adjustment']}")
@@ -790,8 +790,14 @@ def parse_skirmish_report_datetime(filename: Path) -> datetime:
 
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
-    database: Dict[str, PlayerData] = {}
-    match_history: List[MatchData] = []
+    with open('season1_database.pkl', 'rb') as file:
+        database: Dict[str, PlayerData] = pickle.load(file)
+    # reset scores but keep other stats
+    for player_id, player_data in database.items():
+        database[player_id]['score'] = 0.0;
+    
+    with open('season1_match_history.pkl', 'rb') as file:
+        match_history: List[MatchData] = pickle.load(file)
     
     # store new fleet files first
     collect_fleet_files()
@@ -811,7 +817,8 @@ def main() -> None:
     adjustments = load_rank_adjustments()
     if adjustments:
         print("\nApplying manual adjustments:")
-        apply_manual_adjustments(model, database, adjustments)
+        # TODO: manual adjustments deprecated after season 1, no longer applies
+        # apply_manual_adjustments(model, database, adjustments)
     
     plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)

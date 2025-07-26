@@ -19,15 +19,7 @@
     </tr>
     <tr>
         <th>Current DLO</th>
-        <td>{{ player_data.rating_data.ordinal()|float_round(2) }}</td>
-    </tr>
-    <tr>
-        <th>Mu (μ)</th>
-        <td>{{ player_data.rating_data.mu|float_round(2) }}</td>
-    </tr>
-    <tr>
-        <th>Sigma (σ)</th>
-        <td>{{ player_data.rating_data.sigma|float_round(2) }}</td>
+        <td>{{ player_data.score|float_round(2) }}</td>
     </tr>
     <tr>
         <th>ANS Wins/Losses</th>
