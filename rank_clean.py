@@ -792,9 +792,17 @@ def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     with open('season1_database.pkl', 'rb') as file:
         database: Dict[str, PlayerData] = pickle.load(file)
-    # reset scores but keep other stats
+    # reset per-season stats
     for player_id, player_data in database.items():
-        database[player_id]['score'] = 0.0;
+        database[player_id]['score'] = 0.0
+        database[player_id]["games_played"] = 0
+        database[player_id]["wins"] = 0
+        database[player_id]["ans_games"] = 0
+        database[player_id]["ans_wins"] = 0
+        database[player_id]["osp_games"] = 0
+        database[player_id]["osp_wins"] = 0
+        database[player_id]["history"] = []
+        database[player_id]["teammates"] = {}
     
     with open('season1_match_history.pkl', 'rb') as file:
         match_history: List[MatchData] = pickle.load(file)
