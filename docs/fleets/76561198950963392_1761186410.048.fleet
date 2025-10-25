@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<Fleet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>fortuna capfleet</Name>
+  <Version>3</Version>
+  <TotalPoints>3000</TotalPoints>
+  <FactionKey>Escalation - Lachesis Atoll/Fortuna Regime</FactionKey>
+  <SortOverrideOrder xsi:nil="true" />
+  <ModDependencies>
+    <unsignedLong>3487024423</unsignedLong>
+  </ModDependencies>
+  <Ships>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>f63f6ac8-404e-476d-9724-96ff06d2b4f2</Key>
+      <Name>Even Drew</Name>
+      <Cost>1062</Cost>
+      <Number>597</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/CR_Wulver</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-550 Helical Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-5000 Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 5</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 6</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 7</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 8</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-700 'Kingslayer' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 9</Key>
+          <ComponentName>Stock/Track Correlator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 4</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>HrTaX8r47UGcFJ5LHg3Htw</MagazineKey>
+                <MunitionKey>Stock/20mm Slug</MunitionKey>
+                <Quantity>10000</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 6</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 8</Key>
+          <ComponentName>Stock/Auxiliary Steering</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 9</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XE-2790 Electrolaser</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/FJ700 'Shroud' Jammer' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/IE700 'Skylight' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/LR-300 'Opticon' FCR</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 5</Key>
+          <ComponentName>Stock/E70 'Interruption' Jammer</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 6</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 7</Key>
+          <ComponentName>Stock/VLS-1-23 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>50MxKZ5Q3UKOvu9HWqz94w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>4Y4E2QBZZUewxI-0c3C05w</MagazineKey>
+                <MunitionKey>Stock/EA14 Chaff Decoy</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 8</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Laser">
+          <MemberKeys>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="ILUM WIDE PORT">
+          <MemberKeys>
+            <string>Mount 3</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="RAD JAM STAR">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="FCR DECK">
+          <MemberKeys>
+            <string>Mount 4</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="COMM JAM OMNI">
+          <MemberKeys>
+            <string>Mount 5</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>1067e420-4e46-48c4-ac49-b953f3a124fa</Key>
+      <Name>Land of Fyodor</Name>
+      <Cost>1062</Cost>
+      <Number>757</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/CR_Wulver</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-550 Helical Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-5000 Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 5</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 6</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 7</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 8</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-700 'Kingslayer' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 9</Key>
+          <ComponentName>Stock/Track Correlator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 4</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>HrTaX8r47UGcFJ5LHg3Htw</MagazineKey>
+                <MunitionKey>Stock/20mm Slug</MunitionKey>
+                <Quantity>10000</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 6</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 8</Key>
+          <ComponentName>Stock/Auxiliary Steering</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 9</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XE-2790 Electrolaser</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/FJ700 'Shroud' Jammer' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/IE700 'Skylight' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/LR-300 'Opticon' FCR</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 5</Key>
+          <ComponentName>Stock/E70 'Interruption' Jammer</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 6</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 7</Key>
+          <ComponentName>Stock/VLS-1-23 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>50MxKZ5Q3UKOvu9HWqz94w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>4Y4E2QBZZUewxI-0c3C05w</MagazineKey>
+                <MunitionKey>Stock/EA14 Chaff Decoy</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 8</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Laser">
+          <MemberKeys>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="ILUM WIDE PORT">
+          <MemberKeys>
+            <string>Mount 3</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="RAD JAM STAR">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="FCR DECK">
+          <MemberKeys>
+            <string>Mount 4</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="COMM JAM OMNI">
+          <MemberKeys>
+            <string>Mount 5</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>4b7076cf-c614-42bc-9449-a03ab5da7387</Key>
+      <Name>Suite Good</Name>
+      <Cost>219</Cost>
+      <Number>1246</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>NLx4U5YUNkiz4MNQLj11Uw</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>D5_-Bgc34U-i3X4KNo1Bug</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>OihxuwkqFk2NUbMFSZ-3vA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>UkNsN1ZTwEWtM8BtY0HoTA</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>9</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>m7xRK9NHnEmeclc0naqn9Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Firewhistle [6.3.d]</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>6MxTQ5yp4kuxfBu7a4k28w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Rectifier [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>ngwn1Fr5uEK6Rs2Gmb9ADQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Ember [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Turret Keel">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>de77cb34-0724-408d-93c0-2928dd43b187</Key>
+      <Name>Gene of Libbi</Name>
+      <Cost>219</Cost>
+      <Number>980</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>NLx4U5YUNkiz4MNQLj11Uw</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>D5_-Bgc34U-i3X4KNo1Bug</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>OihxuwkqFk2NUbMFSZ-3vA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>UkNsN1ZTwEWtM8BtY0HoTA</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>9</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>m7xRK9NHnEmeclc0naqn9Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Firewhistle [6.3.d]</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>6MxTQ5yp4kuxfBu7a4k28w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Rectifier [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>ngwn1Fr5uEK6Rs2Gmb9ADQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Ember [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Turret Keel">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>453307c6-0534-4671-8409-1d476dac845b</Key>
+      <Name>Quick Lip</Name>
+      <Cost>219</Cost>
+      <Number>702</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>NLx4U5YUNkiz4MNQLj11Uw</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>D5_-Bgc34U-i3X4KNo1Bug</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>OihxuwkqFk2NUbMFSZ-3vA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>UkNsN1ZTwEWtM8BtY0HoTA</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>9</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>m7xRK9NHnEmeclc0naqn9Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Firewhistle [6.3.d]</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>6MxTQ5yp4kuxfBu7a4k28w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Rectifier [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>ngwn1Fr5uEK6Rs2Gmb9ADQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Ember [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Turret Keel">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>b0b70372-8306-4fa9-974d-7cec4848d9da</Key>
+      <Name>Alto Fizz</Name>
+      <Cost>219</Cost>
+      <Number>888</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>NLx4U5YUNkiz4MNQLj11Uw</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>D5_-Bgc34U-i3X4KNo1Bug</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>OihxuwkqFk2NUbMFSZ-3vA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 </MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>UkNsN1ZTwEWtM8BtY0HoTA</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>9</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>m7xRK9NHnEmeclc0naqn9Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Firewhistle [6.3.d]</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>6MxTQ5yp4kuxfBu7a4k28w</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Rectifier [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>ngwn1Fr5uEK6Rs2Gmb9ADQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Ember [1.1.d]</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Turret Keel">
+          <MemberKeys>
+            <string>Mount 2</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1 </AssociatedTemplateName>
+      <Designation>SGM-1</Designation>
+      <Nickname />
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESTAT_NONE - $MISSILESTAT_NONE</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 &lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver no payload.  It has no on-board targeting capability or seekers..
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,507 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 7.7 $UNIT_GS
+$MISSILESTAT_TERMINALS: None
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>1</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>e8acda72-5e93-44fb-9856-d1e60af361db</TemplateKey>
+      <BaseColor>
+        <r>0.427450985</r>
+        <g>0.427450985</g>
+        <b>0.427450985</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.9999999</r>
+        <g>0.9999998</g>
+        <b>0.9999998</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>0</ConvSalvo>
+              <HybridSalvo>0</HybridSalvo>
+              <CraftSalvo>0</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.333333343</A>
+              <B>0.333333343</B>
+              <C>0.333333343</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1 Firewhistle [6.3.d]</AssociatedTemplateName>
+      <Designation>SGM-1</Designation>
+      <Nickname>Firewhistle [6.3.d]</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 Firewhistle [6.3.d]&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a $MISSILEWARHEAD_DETAIL_BLASTFRAG warhead.  It homes in on its target using an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+$MISSILESTAT_SPEED: 250 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 2,958 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.3 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 13.3 $UNIT_GS
+$MISSILESTAT_TERMINALS: None
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.15$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 32.67$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 30 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>3</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>322fcfd5-29d9-4576-9920-16f0ea5f24d3</TemplateKey>
+      <BaseColor>
+        <r>0.427450985</r>
+        <g>0.427450985</g>
+        <b>0.427450985</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.9337841</r>
+        <g>0.406392932</g>
+        <b>0.2587396</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Matrix</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>Conventional</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>1</SalvoSize>
+              <ConvSalvo>256</ConvSalvo>
+              <HybridSalvo>131328</HybridSalvo>
+              <CraftSalvo>0</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation EL</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>2.66680757E-08</A>
+              <B>0</B>
+              <C>1</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1 Rectifier [1.1.d]</AssociatedTemplateName>
+      <Designation>SGM-1</Designation>
+      <Nickname>Rectifier [1.1.d]</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 Rectifier [1.1.d]&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a $MISSILEWARHEAD_DETAIL_HEIMPACT warhead.  It homes in on its target using an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+$MISSILESTAT_SPEED: 250 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 5,000 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 5.7 $UNIT_GS
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 31$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 317$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>3</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>ebed0c9f-5ac5-4c9b-967b-df20d4703c86</TemplateKey>
+      <BaseColor>
+        <r>0.427450985</r>
+        <g>0.427450985</g>
+        <b>0.427450985</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.5302776</r>
+        <g>0.9456042</g>
+        <b>0.445305824</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>0</ConvSalvo>
+              <HybridSalvo>0</HybridSalvo>
+              <CraftSalvo>0</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>0.793843</B>
+              <C>0.206157029</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1 Ember [1.1.d]</AssociatedTemplateName>
+      <Designation>SGM-1</Designation>
+      <Nickname>Ember [1.1.d]</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt; - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 Ember [1.1.d]&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a $MISSILEWARHEAD_DETAIL_HEIMPACT warhead.  It homes in on its target using command guidance from its launching ship.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#D4211D&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 250 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 5,000 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 5.7 $UNIT_GS
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 31$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 317$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>5</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>f3a20f4d-d9a8-4dbb-8275-93d4ec3a7d26</TemplateKey>
+      <BaseColor>
+        <r>0.427450985</r>
+        <g>0.427450985</g>
+        <b>0.427450985</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.9456042</r>
+        <g>0.561207235</g>
+        <b>0.445305824</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>0</ConvSalvo>
+              <HybridSalvo>0</HybridSalvo>
+              <CraftSalvo>0</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>0.793843</B>
+              <C>0.206157029</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+  </MissileTypes>
+  <CraftTypes />
+</Fleet>

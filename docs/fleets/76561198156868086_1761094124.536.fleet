@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<Fleet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Fortuna Halfcap</Name>
+  <Version>3</Version>
+  <TotalPoints>3000</TotalPoints>
+  <FactionKey>Escalation - Lachesis Atoll/Fortuna Regime</FactionKey>
+  <SortOverrideOrder xsi:nil="true" />
+  <ModDependencies>
+    <unsignedLong>3487024423</unsignedLong>
+  </ModDependencies>
+  <Ships>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>ae7da2dd-da31-4041-8927-8f1f78ed2a25</Key>
+      <Name>Bur of Juanita</Name>
+      <Cost>1215</Cost>
+      <Number>1295</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/CR_Wulver</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-540 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-5000 Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 5</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 6</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 7</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 8</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 9</Key>
+          <ComponentName>Stock/Fire Suppression System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>gA9SAyzppkyHcVJjiJXzmA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>400</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>pkhPomTZ_kWh2aVQWKAieQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>400</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/Machine Shop</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 5</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 6</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 7</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 8</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 9</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XE-2790 Electrolaser</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XDS-14 'Resonator' PDG</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XDS-14 'Resonator' PDG</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 5</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 6</Key>
+          <ComponentName>Escalation - Lachesis Atoll/S-71L 'Grapnel' FCR</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 7</Key>
+          <ComponentName>Stock/CR10 Antenna</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 8</Key>
+          <ComponentName>Stock/VLS-1-23 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>oD3JtMNmHk6-ktmFYpKgOw</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>12</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>EgzLv3kUkEGL3nM0yBAYBw</MagazineKey>
+                <MunitionKey>Stock/EA20 Flare Decoy</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="5in Turrets">
+          <MemberKeys>
+            <string>Mount 4</string>
+            <string>Mount 5</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="Spinal Electrolaser">
+          <MemberKeys>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>a4ce9adb-ff78-4848-bcb3-81bd74578f5d</Key>
+      <Name>Hull</Name>
+      <Cost>1215</Cost>
+      <Number>128</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/CR_Wulver</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-540 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-5000 Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 5</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 6</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 7</Key>
+          <ComponentName>Stock/Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 8</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 9</Key>
+          <ComponentName>Stock/Fire Suppression System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>gA9SAyzppkyHcVJjiJXzmA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>400</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>pkhPomTZ_kWh2aVQWKAieQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>400</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/Machine Shop</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 5</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 6</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 7</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 8</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 9</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XE-2790 Electrolaser</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XDS-14 'Resonator' PDG</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/XDS-14 'Resonator' PDG</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 5</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 6</Key>
+          <ComponentName>Escalation - Lachesis Atoll/S-71L 'Grapnel' FCR</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 7</Key>
+          <ComponentName>Stock/CR10 Antenna</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 8</Key>
+          <ComponentName>Stock/VLS-1-23 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>oD3JtMNmHk6-ktmFYpKgOw</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>12</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>EgzLv3kUkEGL3nM0yBAYBw</MagazineKey>
+                <MunitionKey>Stock/EA20 Flare Decoy</MunitionKey>
+                <Quantity>6</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="5in Turrets">
+          <MemberKeys>
+            <string>Mount 4</string>
+            <string>Mount 5</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="Spinal Electrolaser">
+          <MemberKeys>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <InitialFormation>
+        <GuideKey>ae7da2dd-da31-4041-8927-8f1f78ed2a25</GuideKey>
+        <RelativePosition>
+          <x>39.63822</x>
+          <y>21.2791176</y>
+          <z>0.01696968</z>
+        </RelativePosition>
+      </InitialFormation>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>b020889b-543a-4f1a-bfb4-aa07334c2117</Key>
+      <Name>Godly Angus</Name>
+      <Cost>190</Cost>
+      <Number>1192</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Fire Suppression System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>1TyT2YYHUEe2iB3urbnKWQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Dart</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>-R4YzsT7okeZ-O0MU1MyLA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Flechette</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="3in Turrets">
+          <MemberKeys>
+            <string>Mount 2</string>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>d6b30f95-c3d4-4eb1-82ef-20d687da11f6</Key>
+      <Name>Shank of Gui</Name>
+      <Cost>190</Cost>
+      <Number>316</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Fire Suppression System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>1TyT2YYHUEe2iB3urbnKWQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Dart</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>-R4YzsT7okeZ-O0MU1MyLA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Flechette</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="3in Turrets">
+          <MemberKeys>
+            <string>Mount 2</string>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>56447bc7-fffc-4da1-9256-881c471e3595</Key>
+      <Name>Award Showy</Name>
+      <Cost>190</Cost>
+      <Number>436</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Fire Suppression System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>1TyT2YYHUEe2iB3urbnKWQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Dart</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>-R4YzsT7okeZ-O0MU1MyLA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Flechette</MunitionKey>
+                <Quantity>700</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="3in Turrets">
+          <MemberKeys>
+            <string>Mount 2</string>
+            <string>Mount 1</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes />
+  <CraftTypes />
+</Fleet>
