@@ -35,6 +35,13 @@
             ({{ osp_win_rate|float_to_percent if player_data.osp_games > 0 else 'N/A' }})
         </td>
     </tr>
+    <tr>
+        <th>Fortuna Wins/Losses</th>
+        <td>
+            {{ player_data.fortuna_wins }} / {{ fortuna_losses }} 
+            ({{ fortuna_win_rate|float_to_percent if player_data.fortuna_games > 0 else 'N/A' }})
+        </td>
+    </tr>
 </table>
 
 {% if best_friends %}

@@ -87,30 +87,19 @@ class MatchData(TypedDict):
 HistogramType = Dict[str, Dict[int, float]]
 
 def collect_fleet_files():
-    """store fleet files from people on the whitelist"""
+    """store fleet files from server"""
     fleet_file_dir = Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/Fleets/")
-    whitelist_file_path = (Path(__file__).parent).joinpath('fleet_dlo_whitelist.txt')
-    whitelist = []
-    with open(whitelist_file_path, 'r') as f:
-        for line in f:
-            steam_id = line.rstrip('\r\n')
-            if steam_id.isdigit():
-                whitelist.append(steam_id)
 
     for fleet_file_path in fleet_file_dir.iterdir():
         if not fleet_file_path.name.endswith('.fleet'):
             continue
-        if any(steam_id in fleet_file_path.name for steam_id in whitelist):
-            print("INFO: saving fleet file:", fleet_file_path.name)
-            shutil.copy(fleet_file_path, (Path(__file__).parent).joinpath('docs/fleets'))
-            # rename the copied file so it has a proper timestamp to associate with skirmish reports later
-            original_creation_time = os.path.getctime(fleet_file_path)
-            new_name = f"{fleet_file_path.name.split('_')[0]}_{original_creation_time}.fleet"
-            dirpath = (Path(__file__).parent).joinpath('docs/fleets')
-            os.rename(os.path.join(dirpath, fleet_file_path.name), os.path.join(dirpath, new_name))
-        else:
-            print("WARN: fleet not in whitelist", fleet_file_path.name)
-            continue
+        print("INFO: saving fleet file:", fleet_file_path.name)
+        shutil.copy(fleet_file_path, (Path(__file__).parent).joinpath('docs/fleets'))
+        # rename the copied file so it has a proper timestamp to associate with skirmish reports later
+        original_creation_time = os.path.getctime(fleet_file_path)
+        new_name = f"{fleet_file_path.name.split('_')[0]}_{original_creation_time}.fleet"
+        dirpath = (Path(__file__).parent).joinpath('docs/fleets')
+        os.rename(os.path.join(dirpath, fleet_file_path.name), os.path.join(dirpath, new_name))
 
 def generate_fleet_images():
     fleet_file_dir = (Path(__file__).parent).joinpath('docs/fleets')
@@ -146,6 +135,14 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
         'Stock/Bulk Hauler',
         'Stock/Container Hauler',
         'Stock/Container Hauler Refit']
+
+    FORTUNA_HULLKEYS = [
+        'Escalation - Lachesis Atoll/MW_Lyvitan',
+        'Escalation - Lachesis Atoll/CR_Wulver',
+        'Escalation - Lachesis Atoll/SR_Hylander',
+        'Escalation - Lachesis Atoll/SL_Akkogan',
+        'Escalation - Lachesis Atoll/PGB_Skelligan',
+    ]
 
     game_time = parse_skirmish_report_datetime(Path(os.path.split(file_path)[1]))
 
@@ -188,16 +185,19 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
             player_name = html.escape(player_name_element.text) if player_name_element is not None else ''
             player_id = html.escape(account_id_element.text) if account_id_element is not None else ''
 
-            # find out if the player was ANS or OSP. This then updates the team_faction which gets applied after all players are parsed
+            # find out what team the player was on. This then updates the team_faction which gets applied after all players are parsed
             # This ensures even if one player DCs and loses all ships, we still report their original faction correctly
             player_hullkeys = player_element.findall('./Ships/ShipBattleReport/HullKey')
             is_player_ANS = all(k.text in ANS_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
             is_player_OSP = all(k.text in OSP_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
+            is_player_FORTUNA = all(k.text in FORTUNA_HULLKEYS for k in player_hullkeys) and len(player_hullkeys)
 
-            if is_player_ANS and team_faction != 'OSP':
+            if is_player_ANS and team_faction not in ['OSP', 'FORTUNA']:
                 team_faction = 'ANS'
-            if is_player_OSP and team_faction != 'ANS':
+            if is_player_OSP and team_faction not in ['ANS', 'FORTUNA']:
                 team_faction = 'OSP'
+            if is_player_FORTUNA and team_faction not in ['ANS', 'OSP']:
+                team_faction = 'FORTUNA'
 
             player = {
                 'player_id': player_id,
@@ -211,7 +211,7 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
             p['faction'] = team_faction
        
         for p in players:
-            assert p['faction'] in ['ANS', 'OSP']
+            assert p['faction'] in ['ANS', 'OSP', 'FORTUNA']
 
         teams_data[team_id] = players
 
@@ -287,7 +287,6 @@ def process_match_result(
     database: Dict[str, PlayerData],
     model: PlackettLuce,
 ) -> Dict[str, List[PlackettLuceRating]]:
-    """updates database with all non DLO info, and returns lists of rating objects for later DLO scoring"""
     updated_teams: Dict[str, List[PlackettLuceRating]] = {}
 
     winner = match_data["winning_team"]
@@ -317,6 +316,8 @@ def process_match_result(
                     "ans_wins": 0,
                     "osp_games": 0, 
                     "osp_wins": 0, 
+                    "fortuna_games": 0, 
+                    "fortuna_wins": 0, 
                     "history": [],
                     "teammates": {}
                 }
@@ -328,7 +329,7 @@ def process_match_result(
                 database[player_id]['wins'] += 1
 
             # update faction games played and wins
-            assert(player['faction'] in ['ANS', 'OSP'])
+            assert(player['faction'] in ['ANS', 'OSP', 'FORTUNA'])
             if player['faction'] == 'ANS':
                 database[player_id]['ans_games'] += 1
                 if team_id == winner:
@@ -337,6 +338,10 @@ def process_match_result(
                 database[player_id]['osp_games'] += 1
                 if team_id == winner:
                     database[player_id]['osp_wins'] += 1
+            if player['faction'] == 'FORTUNA':
+                database[player_id]['fortuna_games'] += 1
+                if team_id == winner:
+                    database[player_id]['fortuna_wins'] += 1
 
             for teammate in players:
                 teammate_id = teammate['player_id']
@@ -388,21 +393,11 @@ def process_match_result(
     # update scores based on predicted winner
     base_score_per_game = 25.0
     predictions = model.predict_win([winner_team, other_team])
-    score_for_winners = max(1.0 - predictions[0], 0.5) * base_score_per_game
+    score_for_winners = max(1.0 - predictions[0], 0.7) * base_score_per_game
     score_for_losers = (0.9005363*math.exp(-(predictions[1] - -0.2118891) ** 2/(2*0.1952401 ** 2))) * base_score_per_game
     score_updates = [score_for_winners, score_for_losers]
 
-    #FIXME: temporary higher weighting of games played during events
-    # rank game with OS
-    event_time = datetime(2025,5,3,8,0,0)
-    game_time_diff = match_data['time'] - event_time
-    weight_more = (timedelta(minutes=0) <= game_time_diff <= timedelta(minutes=240))
-    if weight_more:
-        weights = [[1.77 for _ in range(len(winner_team))] for _ in range(2)]
-        rated_teams = model.rate([winner_team, other_team], weights=weights)
-    else: 
-        rated_teams = model.rate([winner_team, other_team])
-
+    rated_teams = model.rate([winner_team, other_team])
 
     # write ranking update back to database
     for idx, team in enumerate(rated_teams):
@@ -434,6 +429,8 @@ def render_leaderboard(database: Dict[str, PlayerData]) -> None:
     leaderboard = sorted(database.values(), 
                        key=lambda d: d['score'], 
                        reverse=True)
+
+    leaderboard = [p for p in leaderboard if p['games_played'] > 0]
 
     output_path = Path('docs/index.html')
     
@@ -474,6 +471,10 @@ def render_player_page(
     osp_win_rate = (player_data['osp_wins'] / player_data['osp_games'] 
                    if player_data['osp_games'] > 0 else 0)
 
+    fortuna_losses = player_data['fortuna_games'] - player_data['fortuna_wins']
+    fortuna_win_rate = (player_data['fortuna_wins'] / player_data['fortuna_games'] 
+                   if player_data['fortuna_games'] > 0 else 0)
+
     # Prepare template context
     context = {
         'player_id': player_id,
@@ -484,6 +485,8 @@ def render_player_page(
         'ans_win_rate': ans_win_rate,
         'osp_losses': osp_losses,
         'osp_win_rate': osp_win_rate,
+        'fortuna_losses': fortuna_losses,
+        'fortuna_win_rate': fortuna_win_rate,
         'best_friends': get_best_friends(player_data, database),
         'history_plot': open(plot_path).read(),
         'depth': get_template_depth(Path(f'docs/player/{player_id}.html'))
@@ -801,6 +804,8 @@ def main() -> None:
         database[player_id]["ans_wins"] = 0
         database[player_id]["osp_games"] = 0
         database[player_id]["osp_wins"] = 0
+        database[player_id]["fortuna_games"] = 0
+        database[player_id]["fortuna_wins"] = 0
         database[player_id]["history"] = []
         database[player_id]["teammates"] = {}
     
