@@ -1,0 +1,1535 @@
+<?xml version="1.0"?>
+<Fleet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>CLN Halfcap</Name>
+  <Version>3</Version>
+  <TotalPoints>3000</TotalPoints>
+  <FactionKey>Escalation - Lachesis Atoll/Fortuna Regime</FactionKey>
+  <SortOverrideOrder xsi:nil="true" />
+  <ModDependencies>
+    <unsignedLong>3487024423</unsignedLong>
+  </ModDependencies>
+  <Ships>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>cbd8d94f-0737-459d-8f7a-f8ae9a497bf7</Key>
+      <Name>The Cosy Pity</Name>
+      <Cost>1657</Cost>
+      <Callsign>Temu CLN</Callsign>
+      <Number>239</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/SR_Hylander</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-5000 Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 7</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Intelligence Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 4</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 5</Key>
+          <ComponentName>Escalation - Lachesis Atoll/Machine Shop</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 7</Key>
+          <ComponentName>Escalation - Lachesis Atoll/Arsenal</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>iKAw0yxoQEqExE1TjT8sbA</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Dart</MunitionKey>
+                <Quantity>750</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>h73cHjfLoE6Ez0RDT4nHqQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/3in Flechette</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 8</Key>
+          <ComponentName>Stock/Auxiliary Steering</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Stock/VLS-3 Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>A45Vtc1hG0GJbDNfTYu5EQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-3 Those Who Throw</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>92OnnrfD6UGcRR0Z-r0j7g</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-31 Slopfest A</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>QL6j6-mGv0W4Aoo4mAso9A</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-300 When's The Last Time Something Happened</MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Stock/VLS-3 Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>IdcYYVBZqEGqcN7GJ2ryKg</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-3 Those Who Throw</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>d0r_C8ytqkGXwqCQ86Thmw</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-32 Slopfest B</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>En71JXf8IEuYdCrVMHtqsw</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-300 When's The Last Time Something Happened</MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 3</Key>
+          <ComponentName>Stock/VLS-3 Launcher</ComponentName>
+          <ComponentData xsi:type="ResizableCellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>9UP7AjXRqEGmi8kwZKucaQ</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-3 Those Who Throw</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>y9pjuvj85kucvKLg3FDx4Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-32 Slopfest C</MunitionKey>
+                <Quantity>2</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>GmfIskqJEkyaJrMcl08D8Q</MagazineKey>
+                <MunitionKey>$MODMIS$/SM-300 When's The Last Time Something Happened</MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 4</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 5</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 6</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.13T 3in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 7</Key>
+          <ComponentName>Stock/VLS-1-23 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>Zv80gi-WjEWlBqtopJ-TjQ</MagazineKey>
+                <MunitionKey>Stock/EA12 Chaff Decoy</MunitionKey>
+                <Quantity>9</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>c38UyOObsUuRuu1kA3JRbA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 F'xbat II</MunitionKey>
+                <Quantity>13</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Ui9-42zS7keIc0zLWN82Kw</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1-0 Technicality</MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Sidearms">
+          <MemberKeys>
+            <string>Mount 4</string>
+            <string>Mount 5</string>
+            <string>Mount 6</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>04f5ce9d-7722-4911-ad06-b146f3128df0</Key>
+      <Name>Aura</Name>
+      <Cost>299</Cost>
+      <Callsign>Torpvette</Callsign>
+      <Number>403</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>XTgF5_D7Oku6AqmLFd9IWg</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>up3fxZg--UyVpSoNkNqCzQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/S4T Launcher Array</ComponentName>
+          <ComponentData xsi:type="TurretedLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>c7WqCsnkbEiFDCHUctbrZQ</MagazineKey>
+                <MunitionKey>$MODMIS$/HAShT-4 Beefy Supreme</MunitionKey>
+                <Quantity>3</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+            <FireOutsideLimits>false</FireOutsideLimits>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>e4fe0fb5-32bb-43c7-b1e5-4cbebb0f89de</Key>
+      <Name>Posed Chest</Name>
+      <Cost>299</Cost>
+      <Callsign>Torpvette</Callsign>
+      <Number>1345</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>XTgF5_D7Oku6AqmLFd9IWg</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>up3fxZg--UyVpSoNkNqCzQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/S4T Launcher Array</ComponentName>
+          <ComponentData xsi:type="TurretedLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>c7WqCsnkbEiFDCHUctbrZQ</MagazineKey>
+                <MunitionKey>$MODMIS$/HAShT-4 Beefy Supreme</MunitionKey>
+                <Quantity>3</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+            <FireOutsideLimits>false</FireOutsideLimits>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>8b6f6c4e-20c8-49b8-b050-ac63b1d1c49e</Key>
+      <Name>Toll and Lapel</Name>
+      <Cost>299</Cost>
+      <Callsign>Torpvette</Callsign>
+      <Number>1471</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>XTgF5_D7Oku6AqmLFd9IWg</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>100</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>up3fxZg--UyVpSoNkNqCzQ</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/S4T Launcher Array</ComponentName>
+          <ComponentData xsi:type="TurretedLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>c7WqCsnkbEiFDCHUctbrZQ</MagazineKey>
+                <MunitionKey>$MODMIS$/HAShT-4 Beefy Supreme</MunitionKey>
+                <Quantity>3</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+            <FireOutsideLimits>false</FireOutsideLimits>
+          </ComponentData>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>7aeecb47-d6c8-43d5-99a3-012876fc8c83</Key>
+      <Name>Wait and Couch</Name>
+      <Cost>223</Cost>
+      <Callsign>Gunvette</Callsign>
+      <Number>338</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Ammunition Elevators</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>Iz3bYz92yU2zaAGAxTFA6Q</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>XtpqLG-u3ECKH9102KpZhg</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+    <Ship>
+      <SaveID xsi:nil="true" />
+      <Key>308e92ba-e0da-4fc8-9095-58201ec7e130</Key>
+      <Name>Sugar and Clang</Name>
+      <Cost>223</Cost>
+      <Callsign>Gunvette</Callsign>
+      <Number>675</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Escalation - Lachesis Atoll/PGB_Skelligan</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>Module 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/SD-140 Inline Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/NSR-1000 Micro Generator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 3</Key>
+          <ComponentName>Escalation - Lachesis Atoll/RST-50 'Rook' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Module 4</Key>
+          <ComponentName>Stock/Ammunition Elevators</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 1</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 2</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>Iz3bYz92yU2zaAGAxTFA6Q</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Dart</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>XtpqLG-u3ECKH9102KpZhg</MagazineKey>
+                <MunitionKey>Escalation - Lachesis Atoll/5in Flechette</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>Compartment 3</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 1</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Mount 2</Key>
+          <ComponentName>Escalation - Lachesis Atoll/G.23T 5in Autocannon</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <Designation>SM-3</Designation>
+      <Nickname>Those Who Throw</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - $MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/$MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[$MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)] - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SM-3 Those Who Throw&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SM-3 body, which is a Heavy Lift Multi-Use Missile Body.  This missile will deliver a $MISSILEWARHEAD_DETAIL_HEIMPACT warhead.  It homes in on its target using a Radar Anti-Radiation seeker, validating that it is the correct target using a Passive Wake seeker  If the primary seeker does not find a target or is jammed, it can fall back on an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: ANTI_RADIATION (Pulsed &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals Only)
+$MISSILESTAT_BACKUPSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+$MISSILESTAT_VALIDATOR: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+&lt;b&gt;First Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 250 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 22,188 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.5 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.3 $UNIT_GS
+
+&lt;b&gt;Second Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 450 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,000 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.5 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 25.3 $UNIT_GS
+
+: $MISSILEENGINE_STAGE_TRIGGER_DETECTION $MISSILEENGINE_STAGE_TRIGGER_BURNOUT (&lt;color=#D3D11F&gt;$MISSILEENGINE_STAGE_DIRECTIONONLY&lt;/color&gt;)
+
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 89$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 2,640$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 40 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 12 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>14</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/SM-3</BodyKey>
+      <TemplateKey>28e09ad7-cc75-48f0-985c-8f1c4e29a9ae</TemplateKey>
+      <BaseColor>
+        <r>0.272952944</r>
+        <g>0.272952944</g>
+        <b>0.272952944</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.4708025</r>
+        <g>0.104078889</g>
+        <b>0.7601979</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>SensorsOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>5</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.39917165</A>
+              <B>0.209972918</B>
+              <C>0.390855432</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>1</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1 F'xbat II</AssociatedTemplateName>
+      <Designation>SGM-1</Designation>
+      <Nickname>F'xbat II</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 F'xbat II&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a $MISSILEWARHEAD_DETAIL_BLASTFRAG warhead.  It homes in on its target using an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+$MISSILESTAT_SPEED: 275 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,255 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.4 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 12.5 $UNIT_GS
+$MISSILESTAT_TERMINALS: None
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.15$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 32.67$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 30 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>3</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>5637bca3-33d6-4743-a87d-43bf6671ff0f</TemplateKey>
+      <BaseColor>
+        <r>0.6658101</r>
+        <g>0.6658101</g>
+        <b>0.6658101</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.187221318</r>
+        <g>0.5663203</g>
+        <b>0.116541833</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Matrix</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16777472</ConvSalvo>
+              <HybridSalvo>16908544</HybridSalvo>
+              <CraftSalvo>16777216</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation EL</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.169354737</A>
+              <B>0.0005480074</B>
+              <C>0.830097258</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <AssociatedTemplateName>SGM-1-0 Technicality</AssociatedTemplateName>
+      <Designation>SGM-1-0</Designation>
+      <Nickname>Technicality</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1-0 Technicality&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a $MISSILEWARHEAD_DETAIL_HEIMPACT warhead.  It homes in on its target using a Passive Wake seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,507 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 7.7 $UNIT_GS
+$MISSILESTAT_TERMINALS: None
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 31$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 317$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>1</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>45fb28a6-a762-49a4-81ec-7078ba511a28</TemplateKey>
+      <BaseColor>
+        <r>0.272952944</r>
+        <g>0.272952944</g>
+        <b>0.272952944</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.436218262</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.333333343</A>
+              <B>0.333333343</B>
+              <C>0.333333343</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>SM-300</Designation>
+      <Nickname>When's The Last Time Something Happened</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SM-300 When's The Last Time Something Happened&lt;/noparse&gt; is a size 3 direct guidance missile.  It is based on the SM-3 body, which is a Heavy Lift Multi-Use Missile Body.  This missile will deliver a $MISSILEWARHEAD_DETAIL_BLASTFRAG warhead.  It homes in on its target using command guidance from its launching ship  If the primary seeker does not find a target or is jammed, it can fall back on an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+&lt;b&gt;First Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 350 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 10,375 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 3.5 $UNIT_GS
+
+&lt;b&gt;Second Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 450 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 1,573 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 3.0 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 7.8 $UNIT_GS
+
+: Stage Trigger at 1,780m from Target or On Burnout
+
+$MISSILESTAT_TERMINALS: None
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.70$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 223.17$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 159 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 40 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 12 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 250 % (&lt;color=#3BC81E&gt;+150%&lt;/color&gt;)
+$MISSILESTAT_BOOSTTURN: 200 % (&lt;color=#3BC81E&gt;+100%&lt;/color&gt;)
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>12</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/SM-3</BodyKey>
+      <TemplateKey>c556f0c6-0f80-4d18-939a-25128681ef3b</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>1</r>
+        <g>0.565472662</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Cold Gas Bottle</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>0</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>false</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.4009853</A>
+              <B>0.5990147</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.664031446</A>
+              <B>0.0106962156</B>
+              <C>0.325272352</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>HAShT-4</Designation>
+      <Nickname>Beefy Supreme</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt; - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;HAShT-4 Beefy Supreme&lt;/noparse&gt; is a size 4 direct guidance missile.  It is based on the HAShT-4 body, which is a Subsonic Heavy Torpedo.  This missile will deliver a $MISSILEWARHEAD_DETAIL_HEIMPACT warhead.  It homes in on its target using command guidance from its launching ship.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#D4211D&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 296 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,500 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.4 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 2.3 $UNIT_GS
+$MISSILESTAT_TERMINALS: Corkscrew
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 143$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 3,840$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 60 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 400 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 5 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>39</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/HAShT-4</BodyKey>
+      <TemplateKey>0b92cd1b-65dc-4546-99b7-e1ebe1a8636e</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>1</r>
+        <g>0.565472662</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Boosted Self-Screening Jammer</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Corkscrew</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey />
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.9611515</A>
+              <B>0.0196229387</B>
+              <C>0.01922558</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>SM-31</Designation>
+      <Nickname>Slopfest A</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_SUBM</Description>
+      <LongDescription>The &lt;noparse&gt;SM-31 Slopfest A&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SM-3 body, which is a Heavy Lift Multi-Use Missile Body.  This missile will deliver a $MISSILEWARHEAD_DETAIL_SUBM warhead.  It homes in on its target using command guidance from its launching ship  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: ANTI_RADIATION (Pulsed &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals Only)
+
+&lt;b&gt;First Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 20,003 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.5 $UNIT_GS
+
+&lt;b&gt;Second Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 540 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,223 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 3.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 8.1 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target or On Burnout
+
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_SUBM
+$MISSILESTAT_SUMBTYPE: CB-1 Bomblet
+$MISSILESTAT_SUBMCOUNT: 16
+$MISSILESTAT_SUBMTOTALVOLUME: 33.00 $UNIT_SQUAREMETERS
+$MISSILESTAT_SUBMSPREAD: TIGHT CONE
+$MISSILESTAT_SUBMTIME: BURST (3s)
+
+$MISSILESTAT_HEALTH: 40 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 12 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>60</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/SM-3</BodyKey>
+      <TemplateKey>9a6432f7-0eff-4a42-b7b3-485a3ebdffed</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>1</r>
+        <g>0.565472662</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>SensorsOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>5</Size>
+          <InstalledComponent xsi:type="SelectableSubmunitionWarheadSettings">
+            <ComponentKey>Escalation - Lachesis Atoll/Clusterbomb</ComponentKey>
+            <Mode>TargetAcquisition</Mode>
+            <SpreadOption>0</SpreadOption>
+            <Range>250</Range>
+            <SubmunitionKey>Escalation - Lachesis Atoll/CB-1 Bomblet</SubmunitionKey>
+            <Interval>0</Interval>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.7585677</A>
+              <B>0.2409312</B>
+              <C>0.00050111115</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.3333344</A>
+              <B>0.634436</B>
+              <C>0.0322296023</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>SM-32</Designation>
+      <Nickname>Slopfest B</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_SUBM</Description>
+      <LongDescription>The &lt;noparse&gt;SM-32 Slopfest B&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SM-3 body, which is a Heavy Lift Multi-Use Missile Body.  This missile will deliver a $MISSILEWARHEAD_DETAIL_SUBM warhead.  It homes in on its target using command guidance from its launching ship  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: ANTI_RADIATION (Pulsed &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals Only)
+
+&lt;b&gt;First Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 20,003 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.5 $UNIT_GS
+
+&lt;b&gt;Second Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 539 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,225 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 3.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 8.0 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target or On Burnout
+
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_SUBM
+$MISSILESTAT_SUMBTYPE: CB-1 Bomblet
+$MISSILESTAT_SUBMCOUNT: 16
+$MISSILESTAT_SUBMTOTALVOLUME: 33.00 $UNIT_SQUAREMETERS
+$MISSILESTAT_SUBMSPREAD: TIGHT CONE
+$MISSILESTAT_SUBMTIME: BURST (3s)
+
+$MISSILESTAT_HEALTH: 40 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 12 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>58</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/SM-3</BodyKey>
+      <TemplateKey>1f78201e-d368-4816-8113-e67e38212b0a</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>1</r>
+        <g>0.565472662</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>SensorsOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Boosted Self-Screening Jammer</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>5</Size>
+          <InstalledComponent xsi:type="SelectableSubmunitionWarheadSettings">
+            <ComponentKey>Escalation - Lachesis Atoll/Clusterbomb</ComponentKey>
+            <Mode>TargetAcquisition</Mode>
+            <SpreadOption>0</SpreadOption>
+            <Range>250</Range>
+            <SubmunitionKey>Escalation - Lachesis Atoll/CB-1 Bomblet</SubmunitionKey>
+            <Interval>0</Interval>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.75797683</A>
+              <B>0.242023185</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.3333344</A>
+              <B>0.634436</B>
+              <C>0.0322296023</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+    <MissileTemplate>
+      <Designation>SM-32</Designation>
+      <Nickname>Slopfest C</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_SUBM</Description>
+      <LongDescription>The &lt;noparse&gt;SM-32 Slopfest C&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SM-3 body, which is a Heavy Lift Multi-Use Missile Body.  This missile will deliver a $MISSILEWARHEAD_DETAIL_SUBM warhead.  It homes in on its target using command guidance from its launching ship  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: ANTI_RADIATION (Pulsed &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals Only)
+
+&lt;b&gt;First Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 20,003 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.5 $UNIT_GS
+
+&lt;b&gt;Second Stage&lt;/b&gt;
+$MISSILESTAT_SPEED: 539 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,232 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 3.5 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 8.1 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target or On Burnout
+
+$MISSILESTAT_TERMINALS: Weave
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_SUBM
+$MISSILESTAT_SUMBTYPE: CB-1 Bomblet
+$MISSILESTAT_SUBMCOUNT: 16
+$MISSILESTAT_SUBMTOTALVOLUME: 33.00 $UNIT_SQUAREMETERS
+$MISSILESTAT_SUBMSPREAD: TIGHT CONE
+$MISSILESTAT_SUBMTIME: BURST (3s)
+
+$MISSILESTAT_HEALTH: 40 
+$MISSILESTAT_WALLTHICKNESS: 0.1
+$MISSILESTAT_PROGTIME: 12 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>53</Cost>
+      <BodyKey>Escalation - Lachesis Atoll/SM-3</BodyKey>
+      <TemplateKey>16ab5c63-471e-4f26-aec2-d9f30a3cd002</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>1</r>
+        <g>0.565472662</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>SensorsOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Self-Screening Jammer</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>5</Size>
+          <InstalledComponent xsi:type="SelectableSubmunitionWarheadSettings">
+            <ComponentKey>Escalation - Lachesis Atoll/Clusterbomb</ComponentKey>
+            <Mode>TargetAcquisition</Mode>
+            <SpreadOption>0</SpreadOption>
+            <Range>250</Range>
+            <SubmunitionKey>Escalation - Lachesis Atoll/CB-1 Bomblet</SubmunitionKey>
+            <Interval>0</Interval>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.7576223</A>
+              <B>0.241155609</B>
+              <C>0.00122208893</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.3333344</A>
+              <B>0.634436</B>
+              <C>0.0322296023</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies>
+        <unsignedLong>3487024423</unsignedLong>
+      </ModDependencies>
+    </MissileTemplate>
+  </MissileTypes>
+  <CraftTypes />
+</Fleet>
