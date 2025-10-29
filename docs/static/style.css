@@ -120,3 +120,24 @@ tr:hover {
     margin-top: 1rem;
 }
 
+.replay-viewer {
+    width: 100%;
+    max-width: 1200px; /* Adjust as you like */
+    margin: 20px auto; /* Centers the block and adds vertical spacing */
+  
+    aspect-ratio: 16 / 9;
+  
+    border-radius: 8px;
+    overflow: hidden; /* Ensures the canvas corners are also rounded */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #111;
+}
+  
+.replay-viewer canvas {
+    width: 100%;
+    height: 100%;
+    
+    display: block;
+}
+
+

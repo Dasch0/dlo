@@ -737,6 +737,7 @@ def render_match_details(match_data: MatchData) -> None:
     
     html_content = template.render(
         match=match_data,
+        replay_name=get_replay_name_from_datetime(match_data['time']),
         depth=get_template_depth(output_path)
     )
     output_path.write_text(html_content)
@@ -791,6 +792,10 @@ def parse_skirmish_report_datetime(filename: Path) -> datetime:
             continue
     raise ValueError(f"Failed to parse datetime: {datetime_str}")
 
+def get_replay_name_from_datetime(dt: datetime) -> str:
+    return dt.strfname("%d-%b-%Y %H-%M-%S")
+
+
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     with open('season1_database.pkl', 'rb') as file:
@@ -818,8 +823,9 @@ def main() -> None:
     fleet_lut = build_fleet_lut()
 
     battle_reports = sorted(
-        Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/").iterdir(),
-        key=parse_skirmish_report_datetime)
+        filter(lambda x: x.suffix == '.xml', Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/").iterdir()),
+        key=parse_skirmish_report_datetime
+    )
 
     for index, file in enumerate(battle_reports):
         print(f"\nPROCESSING FILE: {file}")
