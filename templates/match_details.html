@@ -4,6 +4,11 @@
 {% block header %}Match Details - {{ match.time|datetime_format }}{% endblock %}
 
 {% block content %}
+<div class="replay-viewer">
+    <canvas id="renderCanvas" data-report-path="../replays/{{ replay_name }}.bbr"></canvas>
+    <script type="module" src="../bbr/index.8af4629a.js"></script>
+</div>
+
 <div class="match-stats">
     <table class="stats-table">
         <tr>
