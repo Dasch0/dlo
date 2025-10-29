@@ -793,7 +793,7 @@ def parse_skirmish_report_datetime(filename: Path) -> datetime:
     raise ValueError(f"Failed to parse datetime: {datetime_str}")
 
 def get_replay_name_from_datetime(dt: datetime) -> str:
-    return dt.strfname("%d-%b-%Y %H-%M-%S")
+    return f"Skirmish Report - MP - {dt.strftime('%d-%b-%Y %H-%M-%S')}"
 
 
 def main() -> None:
