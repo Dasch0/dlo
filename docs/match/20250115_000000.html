@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Details - 2025-01-15 00:00:00</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="header">
+	<img src="../dlo.webp" alt="Logo" width="150">
+        <h1>Match Details - 2025-01-15 00:00:00</h1>
+	<div class="nav">
+	    <a href="../index.html">Player Leaderboard</a>
+	    <a href="../rank_distribution.html">Rank Distributions</a>
+	    <a href="../match_history.html">Match History</a>
+	    <a href="../faction_statistics.html">Faction Statistics</a>
+        </div>
+    </div>
+    
+<div class="replay-viewer">
+    <div id="load-replay-container">
+        <button id="load-replay-btn" class="load-button" onclick="loadReplayViewer()">
+            Load Replay Viewer
+        </button>
+        <p class="load-note">Click to load the replay viewer for detailed match analysis</p>
+    </div>
+    <div id="replay-container" style="display: none;">
+        <canvas id="renderCanvas" data-report-path="../replays/Skirmish Report - MP - 15-Jan-2025 00-00-00.bbr"></canvas>
+        <script type="module" src="../bbr/index.8af4629a.js"></script>
+    </div>
+</div>
+
+<script>
+function loadReplayViewer() {
+    const container = document.getElementById('replay-container');
+    const button = document.getElementById('load-replay-btn');
+    const loadContainer = document.getElementById('load-replay-container');
+    
+    // Show replay viewer
+    container.style.display = 'block';
+    
+    // Hide load button and note
+    loadContainer.style.display = 'none';
+    
+    // Scroll to replay viewer
+    container.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+<div class="credit">
+    Replays powered by <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2923199303">Better Battle Report</a>
+</div>
+
+<div class="match-stats">
+     <table class="stats-table">
+         <tr>
+             <th>Map</th>
+             <td>Test Map</td>
+         </tr>
+         <tr>
+             <th>Average DLO</th>
+             <td>1500.0</td>
+         </tr>
+         <tr>
+             <th>Match Quality</th>
+             <td>0.85</td>
+         </tr>
+     </table>
+ </div>
+
+<div class="teams-container">
+    
+    <div class="team winner">
+        <h2>Winning Team</h2>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/1.html">
+                    Test Player (ANS)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <div class="team loser">
+        <h2>Losing Team</h2>
+        
+        <div class="player-card">
+            <h3>
+                <a href="../player/2.html">
+                    Test Player 2 (OSP)
+                </a>
+            </h3>
+            
+            <div class="fleet-missing">
+                Fleet Composition: REDACTED
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    </div>
+</div>
+
+<div class="battle-report-section">
+    <h3>Battle Report Download</h3>
+    <div class="download-info">
+        <p><strong>Note:</strong> Original battle report files (.xml) are stored on the NEBULOUS dedicated server and not automatically copied to this website. Download the Better Battle Report (.bbr) file for full replay functionality.</p>
+        <a href="../replays/Skirmish Report - MP - 15-Jan-2025 00-00-00.bbr" download class="download-button">
+            Download Better Battle Report (.bbr)
+        </a>
+    </div>
+</div>
+
+<style>
+.battle-report-section {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.battle-report-section h3 {
+    color: #e0e0e0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.download-info {
+    color: #bdc3c7;
+    margin-bottom: 10px;
+}
+
+.download-button {
+    display: inline-block;
+    background: #3498db;
+    color: #e0e0e0;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background: #2980b9;
+}
+
+.load-button {
+    display: inline-block;
+    background: #e67e22;
+    color: #e0e0e0;
+    padding: 15px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: 2px solid #d35400;
+}
+
+.load-button:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+.load-note {
+    color: #bdc3c7;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#replay-container {
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#load-replay-container {
+    text-align: center;
+    padding: 30px 0;
+    border: 2px dashed #3a3a3a;
+    border-radius: 8px;
+    background: #252525;
+    margin-bottom: 30px;
+}
+</style>
+
+
+</body>
+</html>
