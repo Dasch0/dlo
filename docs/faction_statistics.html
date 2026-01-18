@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faction Statistics</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="header">
+	<img src="dlo.webp" alt="Logo" width="150">
+        <h1>Faction Statistics</h1>
+	<div class="nav">
+	    <a href="index.html">Player Leaderboard</a>
+	    <a href="rank_distribution.html">Rank Distributions</a>
+	    <a href="match_history.html">Match History</a>
+	    <a href="faction_statistics.html">Faction Statistics</a>
+        </div>
+    </div>
+    
+<div class="faction-stats">
+    <div class="section">
+        <h2>Monthly Faction Winrates</h2>
+        <div class="chart-container">
+            <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>                <div id="3cabbc58-2468-4f1e-b785-19bc197c8531" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("3cabbc58-2468-4f1e-b785-19bc197c8531")) {                    Plotly.newPlot(                        "3cabbc58-2468-4f1e-b785-19bc197c8531",                        [{"line":{"color":"#2ecc71","width":3},"marker":{"color":"#2ecc71","size":8},"mode":"lines+markers","name":"ANS","x":["2025-03","2025-04","2025-05","2025-06","2025-07","2025-09","2025-10","2025-11","2025-12","2026-01"],"y":[48.9051094890511,46.63551401869159,45.85635359116022,80.0,43.07692307692308,0.0,55.55555555555556,38.15789473684211,56.00000000000001,55.91397849462365],"type":"scatter"},{"line":{"color":"#3498db","width":3},"marker":{"color":"#3498db","size":8},"mode":"lines+markers","name":"OSP","x":["2025-03","2025-04","2025-05","2025-06","2025-07","2025-09","2025-10","2025-11","2025-12","2026-01"],"y":[51.515151515151516,54.03377110694184,55.319148936170215,20.0,56.92307692307692,100.0,49.122807017543856,64.1025641025641,43.56435643564357,44.086021505376344],"type":"scatter"},{"line":{"color":"#e67e22","width":3},"marker":{"color":"#e67e22","size":8},"mode":"lines+markers","name":"FORTUNA","x":["2025-03","2025-04","2025-05","2025-06","2025-07","2025-09","2025-10","2025-11","2025-12","2026-01"],"y":[0,0,0,0,0,0,28.57142857142857,50.0,0,0],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"yaxis":{"title":{"text":"Win Rate (%)"},"range":[0,100]},"font":{"family":"monospace","color":"#e0e0e0","size":14},"title":{"text":"Monthly Faction Winrates (%)","font":{"size":18}},"margin":{"l":60,"r":30,"t":80,"b":60},"xaxis":{"tickfont":{"color":"#e0e0e0"},"title":{"text":"Month"},"showgrid":true,"gridcolor":"#3a3a3a","linecolor":"#3a3a3a","zeroline":false},"hoverlabel":{"font":{"size":12,"family":"monospace","color":"#e0e0e0"},"bgcolor":"#333333"},"legend":{"font":{"color":"#e0e0e0"},"bgcolor":"#2d2d2d"},"paper_bgcolor":"#1a1a1a","hovermode":"x unified"},                        {"responsive": true}                    )                };            </script>        </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Per-Map Faction Balance</h2>
+        <div class="map-balance-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Map Name</th>
+                        <th>ANS Factor</th>
+                        <th>OSP Factor</th>
+                        <th>FORTUNA Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>Arroyo</td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Barbie House</td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                        <td class="positive">
+                            +
+                            3.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Bloodmoon Remastered</td>
+                        <td class="positive">
+                            +
+                            1.33
+                        </td>
+                        <td class="positive">
+                            +
+                            1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -2.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Breach</td>
+                        <td class="positive">
+                            +
+                            9.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -6.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Bulwark Naval Yards 5-3</td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -5.33
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Gold Rush</td>
+                        <td class="positive">
+                            +
+                            4.0
+                        </td>
+                        <td class="neutral">
+                            0
+                            0.0
+                        </td>
+                        <td class="negative">
+                            -
+                            -4.0
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Heartstones</td>
+                        <td class="neutral">
+                            0
+                            0.0
+                        </td>
+                        <td class="positive">
+                            +
+                            4.0
+                        </td>
+                        <td class="negative">
+                            -
+                            -4.0
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Honeycomb</td>
+                        <td class="positive">
+                            +
+                            1.33
+                        </td>
+                        <td class="positive">
+                            +
+                            1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -2.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Lavender</td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Nyx&#39;s Eye</td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                        <td class="positive">
+                            +
+                            3.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Ruby Shelf Large</td>
+                        <td class="positive">
+                            +
+                            3.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Side 7</td>
+                        <td class="negative">
+                            -
+                            -2.67
+                        </td>
+                        <td class="positive">
+                            +
+                            5.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -2.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Side 7 Large</td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Small Testing Range</td>
+                        <td class="negative">
+                            -
+                            -0.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -0.33
+                        </td>
+                        <td class="positive">
+                            +
+                            0.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Synapse</td>
+                        <td class="positive">
+                            +
+                            2.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -1.33
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>The Cliff</td>
+                        <td class="positive">
+                            +
+                            1.33
+                        </td>
+                        <td class="negative">
+                            -
+                            -0.67
+                        </td>
+                        <td class="negative">
+                            -
+                            -0.67
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Tumbleweed</td>
+                        <td class="positive">
+                            +
+                            8.0
+                        </td>
+                        <td class="neutral">
+                            0
+                            0.0
+                        </td>
+                        <td class="negative">
+                            -
+                            -8.0
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Yukon</td>
+                        <td class="positive">
+                            +
+                            12.0
+                        </td>
+                        <td class="positive">
+                            +
+                            8.0
+                        </td>
+                        <td class="negative">
+                            -
+                            -20.0
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="balance-legend">
+            <h3>Balance Factor Legend</h3>
+            <ul>
+                <li><span class="positive">+X.XX</span> - Faction performs above expected average on this map</li>
+                <li><span class="negative">-X.XX</span> - Faction performs below expected average on this map</li>
+                <li><span class="neutral">0.00</span> - Faction performs at expected average on this map</li>
+            </ul>
+            <p><em>Note: Factors are calculated as wins minus expected wins (equal distribution). Higher values indicate stronger performance.</em></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.faction-stats {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.map-balance-table {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.map-balance-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: monospace;
+}
+
+.map-balance-table th,
+.map-balance-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #3a3a3a;
+}
+
+.map-balance-table th {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+.map-balance-table tbody tr:nth-child(even) {
+    background: #252525;
+}
+
+.balance-legend {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.balance-legend h3 {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.balance-legend ul {
+    list-style: none;
+    padding: 0;
+}
+
+.balance-legend li {
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+
+.positive {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.negative {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.neutral {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+h2 {
+    color: #e0e0e0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+</style>
+
+</body>
+</html>
