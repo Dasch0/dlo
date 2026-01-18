@@ -29,15 +29,12 @@
                     <tr>
                         <td>{{ map_name }}</td>
                         <td class="{{ 'positive' if factions.ANS > 0 else 'negative' if factions.ANS < 0 else 'neutral' }}">
-                            {% if factions.ANS > 0 %}+{% elif factions.ANS < 0 %}-{% else %}0{% endif %}
                             {{ factions.ANS|float_round(2) }}
                         </td>
                         <td class="{{ 'positive' if factions.OSP > 0 else 'negative' if factions.OSP < 0 else 'neutral' }}">
-                            {% if factions.OSP > 0 %}+{% elif factions.OSP < 0 %}-{% else %}0{% endif %}
                             {{ factions.OSP|float_round(2) }}
                         </td>
                         <td class="{{ 'positive' if factions.FORTUNA > 0 else 'negative' if factions.FORTUNA < 0 else 'neutral' }}">
-                            {% if factions.FORTUNA > 0 %}+{% elif factions.FORTUNA < 0 %}-{% else %}0{% endif %}
                             {{ factions.FORTUNA|float_round(2) }}
                         </td>
                     </tr>
