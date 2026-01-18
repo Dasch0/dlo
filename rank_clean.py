@@ -847,6 +847,183 @@ def get_replay_name_from_datetime(dt: datetime) -> str:
     return f"Skirmish Report - MP - {dt.strftime('%d-%b-%Y %H-%M-%S')}"
 
 
+def calculate_monthly_faction_stats(match_history: List[MatchData]) -> Dict[str, Dict[str, float]]:
+    """Calculate monthly faction winrates from match history"""
+    monthly_stats = {}
+    
+    for match in match_history:
+        if not match['valid'] or match['winning_team'] == 'None':
+            continue
+            
+        month_key = match['time'].strftime('%Y-%m')  # YYYY-MM format
+        
+        if month_key not in monthly_stats:
+            monthly_stats[month_key] = {'ANS': {'games': 0, 'wins': 0}, 
+                                        'OSP': {'games': 0, 'wins': 0}, 
+                                        'FORTUNA': {'games': 0, 'wins': 0}}
+        
+        for team_id, players in match['teams'].items():
+            for player in players:
+                faction = player['faction']
+                if faction in monthly_stats[month_key]:
+                    monthly_stats[month_key][faction]['games'] += 1
+                    if team_id == match['winning_team']:
+                        monthly_stats[month_key][faction]['wins'] += 1
+    
+    return monthly_stats
+
+def calculate_map_balance_stats(match_history: List[MatchData]) -> Dict[str, Dict[str, float]]:
+    """Calculate faction balance factors per map"""
+    map_stats = {}
+    
+    for match in match_history:
+        if not match['valid'] or match['winning_team'] == 'None' or not match.get('map_name'):
+            continue
+            
+        map_name = match['map_name']
+        if map_name == 'REDACTED':
+            continue
+            
+        if map_name not in map_stats:
+            map_stats[map_name] = {'ANS': {'wins': 0}, 'OSP': {'wins': 0}, 'FORTUNA': {'wins': 0}}
+        
+        winning_team = match['winning_team']
+        for team_id, players in match['teams'].items():
+            for player in players:
+                faction = player['faction']
+                if team_id == winning_team:
+                    map_stats[map_name][faction]['wins'] += 1
+    
+    # Calculate balance factors
+    map_balance = {}
+    for map_name, factions in map_stats.items():
+        total_wins = sum(faction_data['wins'] for faction_data in factions.values())
+        
+        if total_wins == 0:
+            map_balance[map_name] = {'ANS': 0.0, 'OSP': 0.0, 'FORTUNA': 0.0}
+            continue
+            
+        # Simple balance factor: wins vs expected (equal distribution)
+        expected_wins = total_wins / 3
+        map_balance[map_name] = {}
+        for faction, faction_data in factions.items():
+            balance_factor = faction_data['wins'] - expected_wins
+            map_balance[map_name][faction] = round(balance_factor, 2)
+    
+    return map_balance
+
+def generate_monthly_winrate_plot(monthly_stats: Dict[str, Dict[str, float]]) -> str:
+    """Generate Plotly HTML for monthly faction winrates"""
+    months = sorted(monthly_stats.keys())
+    
+    # Prepare data for each faction
+    ans_data = []
+    osp_data = []
+    fortuna_data = []
+    
+    for month in months:
+        stats = monthly_stats[month]
+        
+        # Calculate winrates
+        ans_wr = (stats['ANS']['wins'] / stats['ANS']['games'] * 100) if stats['ANS']['games'] > 0 else 0
+        osp_wr = (stats['OSP']['wins'] / stats['OSP']['games'] * 100) if stats['OSP']['games'] > 0 else 0
+        fortuna_wr = (stats['FORTUNA']['wins'] / stats['FORTUNA']['games'] * 100) if stats['FORTUNA']['games'] > 0 else 0
+        
+        ans_data.append(ans_wr)
+        osp_data.append(osp_wr)
+        fortuna_data.append(fortuna_wr)
+    
+    # Create Plotly figure
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(
+        x=months,
+        y=ans_data,
+        mode='lines+markers',
+        name='ANS',
+        line=dict(color='#2ecc71', width=3),
+        marker=dict(color='#2ecc71', size=8)
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=months,
+        y=osp_data,
+        mode='lines+markers',
+        name='OSP',
+        line=dict(color='#3498db', width=3),
+        marker=dict(color='#3498db', size=8)
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=months,
+        y=fortuna_data,
+        mode='lines+markers',
+        name='FORTUNA',
+        line=dict(color='#e67e22', width=3),
+        marker=dict(color='#e67e22', size=8)
+    ))
+    
+    fig.update_layout(
+        title='Monthly Faction Winrates (%)',
+        xaxis_title='Month',
+        yaxis_title='Win Rate (%)',
+        yaxis=dict(range=[0, 100]),
+        paper_bgcolor='#1a1a1a',
+        font=dict(
+            family='monospace',
+            color='#e0e0e0',
+            size=14
+        ),
+        title_font_size=18,
+        hovermode='x unified',
+        margin=dict(l=60, r=30, t=80, b=60),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='#3a3a3a',
+            tickfont=dict(color='#e0e0e0'),
+            linecolor='#3a3a3a',
+            zeroline=False
+        ),
+        hoverlabel=dict(
+            bgcolor='#333333',
+            font_size=12,
+            font_family='monospace',
+            font_color='#e0e0e0'
+        ),
+        legend=dict(
+            bgcolor='#2d2d2d',
+            font=dict(color='#e0e0e0')
+        )
+    )
+    
+    return fig.to_html(
+        include_plotlyjs='cdn',
+        full_html=False,
+        default_width='100%',
+        default_height='500px'
+    )
+
+def render_faction_statistics(match_history: List[MatchData]) -> None:
+    """Generate faction statistics page"""
+    # Calculate statistics
+    monthly_stats = calculate_monthly_faction_stats(match_history)
+    map_balance = calculate_map_balance_stats(match_history)
+    
+    # Generate monthly winrate plot
+    monthly_plot_html = generate_monthly_winrate_plot(monthly_stats)
+    
+    # Prepare template context
+    context = {
+        'monthly_plot': monthly_plot_html,
+        'map_balance': map_balance,
+        'depth': get_template_depth(Path('docs/faction_statistics.html'))
+    }
+    
+    # Render template
+    template = jinja_env.get_template("faction_statistics.html")
+    output_path = Path('docs/faction_statistics.html')
+    output_path.write_text(template.render(**context))
+
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
     with open('season1_database.pkl', 'rb') as file:
@@ -893,6 +1070,7 @@ def main() -> None:
     plot_rank_distribution(database, Path("docs/rank_distribution.html"))
     render_leaderboard(database)
     render_match_history(match_history)
+    render_faction_statistics(match_history)
 
 if __name__ == "__main__":
     main()

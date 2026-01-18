@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Faction Statistics{% endblock %}
+{% block header %}Faction Statistics{% endblock %}
+
+{% block content %}
+<div class="faction-stats">
+    <div class="section">
+        <h2>Monthly Faction Winrates</h2>
+        <div class="chart-container">
+            {{ monthly_plot|safe }}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Per-Map Faction Balance</h2>
+        <div class="map-balance-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Map Name</th>
+                        <th>ANS Factor</th>
+                        <th>OSP Factor</th>
+                        <th>FORTUNA Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map_name, factions in map_balance.items()|sort('map_name') %}
+                    <tr>
+                        <td>{{ map_name }}</td>
+                        <td class="{{ 'positive' if factions.ANS > 0 else 'negative' if factions.ANS < 0 else 'neutral' }}">
+                            {% if factions.ANS > 0 %}+{% elif factions.ANS < 0 %}-{% else %}0{% endif %}
+                            {{ factions.ANS|float_round(2) }}
+                        </td>
+                        <td class="{{ 'positive' if factions.OSP > 0 else 'negative' if factions.OSP < 0 else 'neutral' }}">
+                            {% if factions.OSP > 0 %}+{% elif factions.OSP < 0 %}-{% else %}0{% endif %}
+                            {{ factions.OSP|float_round(2) }}
+                        </td>
+                        <td class="{{ 'positive' if factions.FORTUNA > 0 else 'negative' if factions.FORTUNA < 0 else 'neutral' }}">
+                            {% if factions.FORTUNA > 0 %}+{% elif factions.FORTUNA < 0 %}-{% else %}0{% endif %}
+                            {{ factions.FORTUNA|float_round(2) }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="balance-legend">
+            <h3>Balance Factor Legend</h3>
+            <ul>
+                <li><span class="positive">+X.XX</span> - Faction performs above expected average on this map</li>
+                <li><span class="negative">-X.XX</span> - Faction performs below expected average on this map</li>
+                <li><span class="neutral">0.00</span> - Faction performs at expected average on this map</li>
+            </ul>
+            <p><em>Note: Factors are calculated as wins minus expected wins (equal distribution). Higher values indicate stronger performance.</em></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.faction-stats {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.map-balance-table {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.map-balance-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: monospace;
+}
+
+.map-balance-table th,
+.map-balance-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #3a3a3a;
+}
+
+.map-balance-table th {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+.map-balance-table tbody tr:nth-child(even) {
+    background: #252525;
+}
+
+.balance-legend {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.balance-legend h3 {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.balance-legend ul {
+    list-style: none;
+    padding: 0;
+}
+
+.balance-legend li {
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+
+.positive {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.negative {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.neutral {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+h2 {
+    color: #e0e0e0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}
