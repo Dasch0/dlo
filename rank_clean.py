@@ -924,14 +924,15 @@ def generate_monthly_winrate_plot(monthly_stats: Dict[str, Dict[str, float]]) ->
     for month in months:
         stats = monthly_stats[month]
         
-        # Calculate winrates
-        ans_wr = (stats['ANS']['wins'] / stats['ANS']['games'] * 100) if stats['ANS']['games'] > 0 else 0
-        osp_wr = (stats['OSP']['wins'] / stats['OSP']['games'] * 100) if stats['OSP']['games'] > 0 else 0
-        fortuna_wr = (stats['FORTUNA']['wins'] / stats['FORTUNA']['games'] * 100) if stats['FORTUNA']['games'] > 0 else 0
+        # Calculate winrates with insufficient data check
+        MIN_GAMES = 10
+        ans_wr = (stats['ANS']['wins'] / stats['ANS']['games'] * 100) if stats['ANS']['games'] >= MIN_GAMES else -1
+        osp_wr = (stats['OSP']['wins'] / stats['OSP']['games'] * 100) if stats['OSP']['games'] >= MIN_GAMES else -1
+        fortuna_wr = (stats['FORTUNA']['wins'] / stats['FORTUNA']['games'] * 100) if stats['FORTUNA']['games'] >= MIN_GAMES else -1
         
-        ans_data.append(ans_wr)
-        osp_data.append(osp_wr)
-        fortuna_data.append(fortuna_wr)
+        ans_data.append("Insufficient Data" if ans_wr == -1 else ans_wr)
+        osp_data.append("Insufficient Data" if osp_wr == -1 else osp_wr)
+        fortuna_data.append("Insufficient Data" if fortuna_wr == -1 else fortuna_wr)
     
     # Create Plotly figure
     fig = go.Figure()
@@ -967,7 +968,7 @@ def generate_monthly_winrate_plot(monthly_stats: Dict[str, Dict[str, float]]) ->
         title='Monthly Faction Winrates (%)',
         xaxis_title='Month',
         yaxis_title='Win Rate (%)',
-        yaxis=dict(range=[0, 100]),
+        yaxis=dict(range=[-10, 100]),
         paper_bgcolor='#1a1a1a',
         font=dict(
             family='monospace',

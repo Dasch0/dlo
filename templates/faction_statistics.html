@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for map_name, factions in map_balance.items()|sort('map_name') %}
+                    {% for map_name, factions in map_balance.items()|sort %}
                     <tr>
                         <td>{{ map_name }}</td>
                         <td class="{{ 'positive' if factions.ANS > 0 else 'negative' if factions.ANS < 0 else 'neutral' }}">
@@ -46,14 +46,10 @@
             </table>
         </div>
         
-        <div class="balance-legend">
-            <h3>Balance Factor Legend</h3>
-            <ul>
-                <li><span class="positive">+X.XX</span> - Faction performs above expected average on this map</li>
-                <li><span class="negative">-X.XX</span> - Faction performs below expected average on this map</li>
-                <li><span class="neutral">0.00</span> - Faction performs at expected average on this map</li>
-            </ul>
-            <p><em>Note: Factors are calculated as wins minus expected wins (equal distribution). Higher values indicate stronger performance.</em></p>
+        <div class="balance-note">
+            <p><em>Note: Balance factors are calculated as faction wins minus expected wins (equal distribution). 
+            Positive values indicate above-average performance, negative values indicate below-average performance. 
+            Maps with fewer than 10 games total may show insufficient data for reliable statistics.</em></p>
         </div>
     </div>
 </div>
@@ -109,7 +105,7 @@
     background: #252525;
 }
 
-.balance-legend {
+.balance-note {
     background: #2d2d2d;
     border: 1px solid #3a3a3a;
     border-radius: 8px;
@@ -117,19 +113,10 @@
     margin-top: 20px;
 }
 
-.balance-legend h3 {
-    color: #e0e0e0;
-    margin-bottom: 15px;
-}
-
-.balance-legend ul {
-    list-style: none;
-    padding: 0;
-}
-
-.balance-legend li {
-    margin-bottom: 8px;
-    color: #e0e0e0;
+.balance-note p {
+    color: #bdc3c7;
+    font-style: italic;
+    line-height: 1.4;
 }
 
 .positive {
