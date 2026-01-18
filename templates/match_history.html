@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>Date</th>
+            <th>Map</th>
             <th>Average DLO</th>
             <th>Match Quality</th>
         </tr>
@@ -20,6 +21,7 @@
                     {{ match.time|datetime_format }}
                 </a>
             </td>
+            <td>{{ match.map_name }}</td>
             <td>{{ match.avg_dlo|float_round(2) }}</td>
             <td>{{ match.match_quality|float_round(2) }}</td>
         </tr>

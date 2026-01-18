@@ -23,6 +23,7 @@ from nfcli import determine_output_png, init_logger, load_path, nfc_theme
 from nfcli.parsers import parse_any, parse_mods
 import math
 import pickle
+import gzip
 
 # jinja setup
 def datetime_format(value, fmt="%Y-%m-%d %H:%M:%S"):
@@ -83,6 +84,7 @@ class MatchData(TypedDict):
     winning_team: str
     avg_dlo: float
     match_quality: float
+    map_name: str
 
 HistogramType = Dict[str, Dict[int, float]]
 
@@ -115,6 +117,38 @@ def generate_fleet_images():
         if entity:
             entity.write(os.path.join(fleet_file_dir, output_file))
 
+def extract_map_name_from_bbr(match_time: datetime) -> str:
+    """Extract map name from BBR file, fallback to 'REDACTED' if unavailable"""
+    bbr_filename = f"Skirmish Report - MP - {match_time.strftime('%d-%b-%Y %H-%M-%S')}.bbr"
+    bbr_path = (Path(__file__).parent).joinpath('docs/replays').joinpath(bbr_filename)
+    
+    if not bbr_path.exists():
+        print(f"INFO: BBR file not found for {match_time}, map marked as REDACTED")
+        return "REDACTED"
+    
+    try:
+        with gzip.open(bbr_path, 'rt', encoding='utf-8') as f:
+            bbr_data = json.load(f)
+        
+        map_info = bbr_data.get('MapInfo', {})
+        map_name = map_info.get('Name', 'REDACTED')
+        
+        # Handle Unicode escaping properly
+        try:
+            # Decode all unicode escapes in the string
+            map_name = map_name.encode().decode('unicode_escape')
+        except (UnicodeDecodeError, AttributeError):
+            # Log warning and fallback to REDACTED if unicode decoding fails
+            print(f"WARNING: Unicode decode failed for map name '{map_name}', marking as REDACTED")
+            map_name = "REDACTED"
+        
+        print(f"INFO: Extracted map name '{map_name}' from BBR file")
+        return map_name
+        
+    except Exception as e:
+        print(f"ERROR: Failed to parse BBR file {bbr_path}: {e}")
+        return "REDACTED"
+
 def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]]) -> MatchData:
     ANS_HULLKEYS = [
         'Stock/Sprinter Corvette',
@@ -146,6 +180,9 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
 
     game_time = parse_skirmish_report_datetime(Path(os.path.split(file_path)[1]))
 
+    # Extract map name from BBR file
+    map_name = extract_map_name_from_bbr(game_time)
+
     test_time_str = "2025-04-26 05:58:07"
     date_format = "%Y-%m-%d %H:%M:%S"
     test_time = datetime.strptime(test_time_str, date_format)
@@ -167,7 +204,8 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
             "teams": {},
             "winning_team": 'None',
             "avg_dlo": 0.0,
-            "match_quality": 0.0}
+            "match_quality": 0.0,
+            "map_name": map_name}
 
     teams_data: Dict[str, List[PlayerInfo]] = {}
     
@@ -223,7 +261,8 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
             "teams": teams_data,
             "winning_team": winner,
             "avg_dlo": 0.0,  # Will be calculated in process_match_result
-            "match_quality": 0.0
+            "match_quality": 0.0,
+            "map_name": map_name
             }
 
 def build_fleet_lut() -> Dict[str, List[FleetEntry]]:
