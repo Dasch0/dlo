@@ -222,7 +222,7 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
             "time": game_time,
             "teams": teams_data,
             "winning_team": winner,
-            "avg_dlo": 0.0,
+            "avg_dlo": 0.0,  # Will be calculated in process_match_result
             "match_quality": 0.0
             }
 
@@ -387,7 +387,6 @@ def process_match_result(
     # TODO: implement scoring based avg_dlo
     match_quality = math.exp(-(model.predict_win([winner_team, other_team])[0] - 0.5)** 2)
 
-    match_data['avg_dlo'] = 0.0
     match_data['match_quality'] = match_quality
 
     # update scores based on predicted winner
@@ -411,6 +410,19 @@ def process_match_result(
                 match_data['time'],
                 database[player_id]['score']
             ))
+
+    # calculate average DLO for this match
+    all_player_scores = []
+    for team_id, players in match_data['teams'].items():
+        for player in players:
+            player_id = player['player_id']
+            if player_id in database:
+                all_player_scores.append(database[player_id]['score'])
+    
+    if all_player_scores:
+        match_data['avg_dlo'] = sum(all_player_scores) / len(all_player_scores)
+    else:
+        match_data['avg_dlo'] = 0.0
 
     # store match to match history
     match_history.append(match_data)
