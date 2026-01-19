@@ -29,58 +29,34 @@
     </div>
 </div>
 
-<script>
-function loadReplayViewer() {
-    const container = document.getElementById('replay-container');
-    const button = document.getElementById('load-replay-btn');
-    const loadContainer = document.getElementById('load-replay-container');
-    
-    // Show replay viewer
-    container.style.display = 'block';
-    
-    // Hide load button and note
-    loadContainer.style.display = 'none';
-    
-    // Dynamically inject BBR script and canvas setup
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = '../bbr/index.8af4629a.js';
-    
-    const canvas = document.getElementById('renderCanvas');
-    const reportPath = canvas.getAttribute('data-report-path');
-    
-    // Insert script after canvas element
-    canvas.parentNode.insertBefore(script, canvas.nextSibling);
-    
-    // Scroll to replay viewer
-    container.scrollIntoView({ behavior: 'smooth' });
-    
-    // Update button state
-    button.textContent = 'Viewer Loaded';
-    button.disabled = true;
-}
-</script>
-
 <div class="credit">
     Replays powered by <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2923199303">Better Battle Report</a>
 </div>
 
+<div class="download-section">
+    <h3>Downloads</h3>
+    <div class="download-links">
+        <a href="../BattleReports/Skirmish Report - MP - 12-Apr-2025 20-18-38.xml" download>Download Skirmish Report (.xml)</a>
+        <a href="../replays/Skirmish Report - MP - 12-Apr-2025 20-18-38.bbr" download>Download Better Battle Report (.bbr)</a>
+    </div>
+</div>
+
 <div class="match-stats">
-     <table class="stats-table">
-         <tr>
-             <th>Map</th>
-             <td></td>
-         </tr>
-         <tr>
-             <th>Average DLO</th>
-             <td>0.0</td>
-         </tr>
-         <tr>
-             <th>Match Quality</th>
-             <td>1.0</td>
-         </tr>
-     </table>
- </div>
+    <table class="stats-table">
+        <tr>
+            <th>Map</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Average DLO</th>
+            <td>0.0</td>
+        </tr>
+        <tr>
+            <th>Match Quality</th>
+            <td>1.0</td>
+        </tr>
+    </table>
+</div>
 
 <div class="teams-container">
     
@@ -198,100 +174,41 @@ function loadReplayViewer() {
         
     </div>
     
-    </div>
 </div>
 
-<div class="battle-report-section">
-    <h3>Battle Report Download</h3>
-    <div class="download-info">
-        <p><strong>Note:</strong> Original battle report files (.xml) are stored on the NEBULOUS dedicated server and not automatically copied to this website. Download the Better Battle Report (.bbr) file for full replay functionality.</p>
-        <a href="../replays/Skirmish Report - MP - 12-Apr-2025 20-18-38.bbr" download class="download-button">
-            Download Better Battle Report (.bbr)
-        </a>
-    </div>
-</div>
+<a href="../replays/Skirmish Report - MP - 12-Apr-2025 20-18-38.bbr" download>Download Better Battle Report (.bbr)</a>
 
-<style>
-.battle-report-section {
-    background: #2d2d2d;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 30px;
+<script>
+function loadReplayViewer() {
+    const container = document.getElementById('replay-container');
+    const button = document.getElementById('load-replay-btn');
+    const loadContainer = document.getElementById('load-replay-container');
+    
+    // Show replay viewer
+    container.style.display = 'block';
+    
+    // Hide load button and note
+    loadContainer.style.display = 'none';
+    
+    // Dynamically inject BBR script and canvas setup
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = '../bbr/index.8af4629a.js';
+    
+    const canvas = document.getElementById('renderCanvas');
+    const reportPath = canvas.getAttribute('data-report-path');
+    
+    // Insert script after canvas element
+    canvas.parentNode.insertBefore(script, canvas.nextSibling);
+    
+    // Scroll to replay viewer
+    container.scrollIntoView({ behavior: 'smooth' });
+    
+    // Update button state
+    button.textContent = 'Viewer Loaded';
+    button.disabled = true;
 }
-
-.battle-report-section h3 {
-    color: #e0e0e0;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.download-info {
-    color: #bdc3c7;
-    margin-bottom: 10px;
-}
-
-.download-button {
-    display: inline-block;
-    background: #3498db;
-    color: #e0e0e0;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.download-button:hover {
-    background: #2980b9;
-}
-
-.load-button {
-    display: inline-block;
-    background: #e67e22;
-    color: #e0e0e0;
-    padding: 15px 25px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    border: 2px solid #d35400;
-}
-
-.load-button:hover {
-    background: #d35400;
-    transform: translateY(-2px);
-}
-
-.load-note {
-    color: #bdc3c7;
-    font-style: italic;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-#replay-container {
-    margin-top: 20px;
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#load-replay-container {
-    text-align: center;
-    padding: 30px 0;
-    border: 2px dashed #3a3a3a;
-    border-radius: 8px;
-    background: #252525;
-    margin-bottom: 30px;
-}
-</style>
-
+</script>
 
 </body>
 </html>
