@@ -147,4 +147,89 @@ tr:hover {
     text-align: center;
 }
 
+/* Match Details Download Section */
+.download-section {
+    background: #2d2d2d;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.download-section h3 {
+    color: #e0e0e0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.download-links {
+    color: #bdc3c7;
+}
+
+.download-links p {
+    margin-bottom: 10px;
+}
+
+.download-links a {
+    color: #00ccff;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.download-links a:hover {
+    color: #00ffff;
+    text-decoration: underline;
+    background-color: rgba(0, 204, 255, 0.1);
+}
+
+/* Replay Viewer Lazy Loading */
+.load-button {
+    display: inline-block;
+    background: #e67e22;
+    color: #e0e0e0;
+    padding: 15px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: 2px solid #d35400;
+}
+
+.load-button:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+.load-note {
+    color: #bdc3c7;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#replay-container {
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+#load-replay-container {
+    text-align: center;
+    padding: 30px 0;
+    border: 2px dashed #3a3a3a;
+    border-radius: 8px;
+    background: #252525;
+    margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
