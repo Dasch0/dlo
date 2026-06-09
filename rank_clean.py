@@ -444,7 +444,7 @@ def process_match_result(
                 continue
             player_id = player.name
             database[player_id]['rating_data'] = player
-            database[player_id]['score'] += score_updates[idx]
+            database[player_id]['score'] = player.mu 
             database[player_id]['history'].append((
                 match_data['time'],
                 database[player_id]['score']
