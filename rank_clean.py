@@ -197,7 +197,10 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
     root = tree.getroot()
 
     # validate basic params about game. if start timestamp is 0 game didn't start. If game duration is super long or super short something probably went wrong
-    if int(root.find('GameStartTimestamp').text) == 0 or int(root.find('GameDuration').text) > 7000 or int(root.find('GameDuration').text) < 200 or not bool(root.find('GameFinished').text):
+    # GameStartTimestamp was removed from skirmish reports starting ~Jun 2026 (replaced by <Time>); treat its absence as not-invalid
+    game_start_elem = root.find('GameStartTimestamp')
+    game_start_invalid = game_start_elem is not None and int(game_start_elem.text) == 0
+    if game_start_invalid or int(root.find('GameDuration').text) > 7000 or int(root.find('GameDuration').text) < 200 or not bool(root.find('GameFinished').text):
         return {
             "valid": False,
             "time": game_time,
@@ -255,6 +258,18 @@ def parse_battle_report(file_path: Path, fleet_lut: Dict[str, List[FleetEntry]])
 
     winner_element = root.find('WinningTeam')
     winner = winner_element.text if winner_element is not None else ''
+
+    # a team with no players (e.g. everyone disconnected before the match started) isn't a real match
+    if any(len(players) == 0 for players in teams_data.values()):
+        return {
+            "valid": False,
+            "time": game_time,
+            "teams": {},
+            "winning_team": 'None',
+            "avg_dlo": 0.0,
+            "match_quality": 0.0,
+            "map_name": map_name}
+
     return {
             "valid": True,
             "time": game_time,
@@ -872,46 +887,6 @@ def calculate_monthly_faction_stats(match_history: List[MatchData]) -> Dict[str,
     
     return monthly_stats
 
-def calculate_map_balance_stats(match_history: List[MatchData]) -> Dict[str, Dict[str, float]]:
-    """Calculate faction balance factors per map"""
-    map_stats = {}
-    
-    for match in match_history:
-        if not match['valid'] or match['winning_team'] == 'None' or not match.get('map_name'):
-            continue
-            
-        map_name = match['map_name']
-        if map_name == 'REDACTED':
-            continue
-            
-        if map_name not in map_stats:
-            map_stats[map_name] = {'ANS': {'wins': 0}, 'OSP': {'wins': 0}, 'FORTUNA': {'wins': 0}}
-        
-        winning_team = match['winning_team']
-        for team_id, players in match['teams'].items():
-            for player in players:
-                faction = player['faction']
-                if team_id == winning_team:
-                    map_stats[map_name][faction]['wins'] += 1
-    
-    # Calculate balance factors
-    map_balance = {}
-    for map_name, factions in map_stats.items():
-        total_wins = sum(faction_data['wins'] for faction_data in factions.values())
-        
-        if total_wins == 0:
-            map_balance[map_name] = {'ANS': 0.0, 'OSP': 0.0, 'FORTUNA': 0.0}
-            continue
-            
-        # Simple balance factor: wins vs expected (equal distribution)
-        expected_wins = total_wins / 3
-        map_balance[map_name] = {}
-        for faction, faction_data in factions.items():
-            balance_factor = faction_data['wins'] - expected_wins
-            map_balance[map_name][faction] = round(balance_factor, 2)
-    
-    return map_balance
-
 def generate_monthly_winrate_plot(monthly_stats: Dict[str, Dict[str, float]]) -> str:
     """Generate Plotly HTML for monthly faction winrates"""
     months = sorted(monthly_stats.keys())
@@ -1008,7 +983,6 @@ def render_faction_statistics(match_history: List[MatchData]) -> None:
     """Generate faction statistics page"""
     # Calculate statistics
     monthly_stats = calculate_monthly_faction_stats(match_history)
-    map_balance = calculate_map_balance_stats(match_history)
     
     # Generate monthly winrate plot
     monthly_plot_html = generate_monthly_winrate_plot(monthly_stats)
@@ -1016,7 +990,6 @@ def render_faction_statistics(match_history: List[MatchData]) -> None:
     # Prepare template context
     context = {
         'monthly_plot': monthly_plot_html,
-        'map_balance': map_balance,
         'depth': get_template_depth(Path('docs/faction_statistics.html'))
     }
     
@@ -1027,39 +1000,71 @@ def render_faction_statistics(match_history: List[MatchData]) -> None:
 
 def main() -> None:
     model: PlackettLuce = PlackettLuce(balance=False, limit_sigma=False)
-    with open('season1_database.pkl', 'rb') as file:
-        database: Dict[str, PlayerData] = pickle.load(file)
-    # reset per-season stats
-    for player_id, player_data in database.items():
-        database[player_id]['score'] = 0.0
-        database[player_id]["games_played"] = 0
-        database[player_id]["wins"] = 0
-        database[player_id]["ans_games"] = 0
-        database[player_id]["ans_wins"] = 0
-        database[player_id]["osp_games"] = 0
-        database[player_id]["osp_wins"] = 0
-        database[player_id]["fortuna_games"] = 0
-        database[player_id]["fortuna_wins"] = 0
-        database[player_id]["history"] = []
-        database[player_id]["teammates"] = {}
-    
-    with open('season1_match_history.pkl', 'rb') as file:
-        match_history: List[MatchData] = pickle.load(file)
-    
+
+    cache_database_path = 'cache_database.pkl'
+    cache_match_history_path = 'cache_match_history.pkl'
+
+    # load cached (already-processed) state if present, otherwise start from the season 1 baseline
+    if os.path.exists(cache_database_path) and os.path.exists(cache_match_history_path):
+        with open(cache_database_path, 'rb') as file:
+            database: Dict[str, PlayerData] = pickle.load(file)
+        with open(cache_match_history_path, 'rb') as file:
+            match_history: List[MatchData] = pickle.load(file)
+    else:
+        with open('season1_database.pkl', 'rb') as file:
+            database = pickle.load(file)
+        # reset per-season stats
+        for player_id, player_data in database.items():
+            database[player_id]['score'] = 0.0
+            database[player_id]["games_played"] = 0
+            database[player_id]["wins"] = 0
+            database[player_id]["ans_games"] = 0
+            database[player_id]["ans_wins"] = 0
+            database[player_id]["osp_games"] = 0
+            database[player_id]["osp_wins"] = 0
+            database[player_id]["fortuna_games"] = 0
+            database[player_id]["fortuna_wins"] = 0
+            database[player_id]["history"] = []
+            database[player_id]["teammates"] = {}
+
+        with open('season1_match_history.pkl', 'rb') as file:
+            match_history = pickle.load(file)
+
+    already_processed = {match['time'] for match in match_history}
+
     # store new fleet files first
     collect_fleet_files()
     generate_fleet_images()
     fleet_lut = build_fleet_lut()
 
+    skirmish_reports_dir = Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/")
+    invalid_reports_dir = Path("/srv/steam/invalid_reports/")
+    invalid_reports_dir.mkdir(exist_ok=True)
+
     battle_reports = sorted(
-        filter(lambda x: x.suffix == '.xml', Path("/srv/steam/.steam/steam/steamapps/common/NEBULOUS Dedicated Server/Saves/SkirmishReports/").iterdir()),
+        filter(lambda x: x.suffix == '.xml', skirmish_reports_dir.iterdir()),
         key=parse_skirmish_report_datetime
     )
+    new_reports = [file for file in battle_reports if parse_skirmish_report_datetime(file) not in already_processed]
+    print(f"{len(new_reports)} new report(s) to process ({len(battle_reports) - len(new_reports)} already cached)")
 
-    for index, file in enumerate(battle_reports):
+    for index, file in enumerate(new_reports):
         print(f"\nPROCESSING FILE: {file}")
         match_data = parse_battle_report(file, fleet_lut)
         process_match_result(match_data, match_history, database, model)
+
+        if not match_data['valid']:
+            # move aside rather than reprocess forever; keep for later investigation (e.g. a format change)
+            print(f"INFO: moving invalid report {file.name} to {invalid_reports_dir}")
+            shutil.move(str(file), str(invalid_reports_dir / file.name))
+            bbr_file = file.with_suffix('.bbr')
+            if bbr_file.exists():
+                shutil.move(str(bbr_file), str(invalid_reports_dir / bbr_file.name))
+
+    with open(cache_database_path, 'wb') as file:
+        pickle.dump(database, file)
+    with open(cache_match_history_path, 'wb') as file:
+        pickle.dump(match_history, file)
 
     # Apply manual adjustments
     adjustments = load_rank_adjustments()

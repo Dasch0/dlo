@@ -11,43 +11,6 @@
             {{ monthly_plot|safe }}
         </div>
     </div>
-    
-    <div class="section">
-        <h2>Per-Map Faction Balance</h2>
-        <div class="map-balance-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Map Name</th>
-                        <th>ANS Factor</th>
-                        <th>OSP Factor</th>
-                        <th>FORTUNA Factor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for map_name, factions in map_balance.items()|sort %}
-                    <tr>
-                        <td>{{ map_name }}</td>
-                        <td class="{{ 'positive' if factions.ANS > 0 else 'negative' if factions.ANS < 0 else 'neutral' }}">
-                            {{ factions.ANS|float_round(2) }}
-                        </td>
-                        <td class="{{ 'positive' if factions.OSP > 0 else 'negative' if factions.OSP < 0 else 'neutral' }}">
-                            {{ factions.OSP|float_round(2) }}
-                        </td>
-                        <td class="{{ 'positive' if factions.FORTUNA > 0 else 'negative' if factions.FORTUNA < 0 else 'neutral' }}">
-                            {{ factions.FORTUNA|float_round(2) }}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="balance-note">
-            <p><em>Note: Balance factors are calculated as faction wins minus expected wins (equal distribution). 
-            Positive values indicate above-average performance, negative values indicate below-average performance.</em></p>
-        </div>
-    </div>
 </div>
 
 <style>
@@ -67,67 +30,6 @@
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-}
-
-.map-balance-table {
-    background: #2d2d2d;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-.map-balance-table table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: monospace;
-}
-
-.map-balance-table th,
-.map-balance-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #3a3a3a;
-}
-
-.map-balance-table th {
-    background: #1a1a1a;
-    color: #e0e0e0;
-    font-weight: bold;
-}
-
-.map-balance-table tbody tr:nth-child(even) {
-    background: #252525;
-}
-
-.balance-note {
-    background: #2d2d2d;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.balance-note p {
-    color: #bdc3c7;
-    font-style: italic;
-    line-height: 1.4;
-}
-
-.positive {
-    color: #2ecc71;
-    font-weight: bold;
-}
-
-.negative {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-.neutral {
-    color: #f39c12;
-    font-weight: bold;
 }
 
 h2 {
